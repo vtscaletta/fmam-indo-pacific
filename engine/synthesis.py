@@ -64,6 +64,32 @@ def _sigmoid(x: float) -> float:
     return 1.0 / (1.0 + np.exp(-x))
 
 
+# Веса перцептивного давления по трём измерениям безопасности.
+# Восприятие угрозы, дефицит доверия, нормативный распад.
+PRESSURE_WEIGHTS = {"threat": 0.40, "distrust": 0.25, "erosion": 0.35}
+
+
+def perceptual_pressure(states: dict, weights: dict = None) -> float:
+    """
+    Быстрый контур напряжения. Сворачивает конфигурацию страха, недоверия и
+    нормативного распада системы в скаляр, минуя инерционные бюджеты. states
+    суть словарь код -> [z1, z2, z3]. Вес агента по силе влияния.
+
+    Этот контур есть конструктивистский слой поверх материального: напряжение
+    комплекса безопасности питается не только тем, что государства строят, но
+    и тем, насколько остра сама конфигурация угроз. Восприятие меняется
+    мгновенно, расходы медленно, оттого контур быстрый и без памяти.
+    """
+    w = weights or influence_weights()
+    pw = PRESSURE_WEIGHTS
+    return sum(
+        w[i] * (pw["threat"] * states[i][0]
+                + pw["distrust"] * (1.0 - states[i][1])
+                + pw["erosion"] * states[i][2])
+        for i in CODES
+    )
+
+
 class DifferentialMemory:
     """
     Оператор системной памяти H(t) с покомпонентным и асимметричным
@@ -119,14 +145,18 @@ class DifferentialMemory:
 
 
 # Веса синтеза. Смещение beta0 удерживает покоящуюся систему в низком
-# напряжении, прочие веса положительны. Милитаризация тяжелее риторики.
-DEFAULT_BETA = {"b0": -2.4, "milex": 2.0, "rhet": 1.2, "drift": 1.8}
+# напряжении. Контур действий есть материальный слой, контур давления есть
+# перцептивный слой. Милитаризация тяжелее риторики.
+DEFAULT_BETA = {"b0": -2.035, "milex": 0.7, "rhet": 0.4, "drift": 0.6, "pressure": 2.5}
 
 
 class LevelCoupling:
     """
-    Полная связка уровней. Принимает действия агентов, ведёт память и выдаёт
-    системное напряжение для марковского ядра.
+    Полная связка уровней. Принимает действия агентов и их состояния, ведёт
+    память материального контура и выдаёт системное напряжение для
+    марковского ядра. Напряжение есть сумма двух слоёв: медленного
+    материального через действия с памятью и быстрого перцептивного через
+    конфигурацию состояний.
     """
 
     def __init__(self, beta: dict = None, memory: DifferentialMemory = None, weights: dict = None):
@@ -134,38 +164,40 @@ class LevelCoupling:
         self.memory = memory or DifferentialMemory()
         self.weights = weights or influence_weights()
 
-    def _synthesize(self, smoothed: dict) -> float:
+    def _arg(self, smoothed: dict, states: dict) -> float:
         b = self.beta
-        arg = (b["b0"] + b["milex"] * smoothed["milex"]
-               + b["rhet"] * smoothed["rhet"] + b["drift"] * smoothed["drift"])
-        return _sigmoid(arg)
+        material = (b["milex"] * smoothed["milex"] + b["rhet"] * smoothed["rhet"]
+                    + b["drift"] * smoothed["drift"])
+        perceptual = b["pressure"] * perceptual_pressure(states, self.weights)
+        return b["b0"] + material + perceptual
 
-    def tension(self, actions: dict) -> float:
-        """Системное напряжение в [0, 1] с учётом памяти."""
+    def tension(self, actions: dict, states: dict) -> float:
+        """Системное напряжение в [0, 1] с учётом памяти и конфигурации состояний."""
         comps = aggregate(actions, self.weights)
         smoothed = self.memory.update(comps)
-        return self._synthesize(smoothed)
+        return _sigmoid(self._arg(smoothed, states))
 
-    def raw_tension(self, actions: dict) -> float:
-        """Напряжение без памяти, по мгновенному поведению."""
+    def raw_tension(self, actions: dict, states: dict) -> float:
+        """Напряжение без продвижения памяти, по мгновенному поведению."""
         comps = aggregate(actions, self.weights)
-        return self._synthesize(comps)
+        smoothed = self.memory.preview(comps)
+        return _sigmoid(self._arg(smoothed, states))
 
-    def explain(self, actions: dict) -> dict:
+    def explain(self, actions: dict, states: dict) -> dict:
         """
         Полный разбор одного шага для прозрачности вычислений. Память при
         этом не продвигается, разбор не имеет побочных эффектов.
         """
         comps = aggregate(actions, self.weights)
         smoothed = self.memory.preview(comps)
-        b = self.beta
-        arg = (b["b0"] + b["milex"] * smoothed["milex"]
-               + b["rhet"] * smoothed["rhet"] + b["drift"] * smoothed["drift"])
+        pressure = perceptual_pressure(states, self.weights)
+        arg = self._arg(smoothed, states)
         tau = _sigmoid(arg)
         return {
             "components": comps,
             "memory_prev": dict(self.memory.H),
             "smoothed": smoothed,
+            "perceptual_pressure": pressure,
             "sigmoid_arg": arg,
             "tension": tau,
         }
