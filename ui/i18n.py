@@ -89,7 +89,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "events_title": {"ru": "События сценария", "en": "Scenario events"},
     # Конструктор и классификация
     "mode_label": {"ru": "Режим", "en": "Mode"},
-    "mode_ready": {"ru": "Эталонные сценарии", "en": "Reference scenarios"},
+    "mode_ready": {"ru": "Базовые сценарии", "en": "Baseline scenarios"},
     "mode_custom": {"ru": "Авторский сценарий", "en": "Authored scenario"},
     "builder_title": {"ru": "Конструктор сценария", "en": "Scenario builder"},
     "builder_hint": {"ru": "Соберите мир из событий. Модель сама вычислит, как государства отреагируют.", "en": "Assemble a world from events. The model computes how states react."},
@@ -119,6 +119,15 @@ STRINGS: dict[str, dict[str, str]] = {
     "col_risk": {"ru": "Риск", "en": "Risk"},
     "col_peak": {"ru": "Пик", "en": "Peak"},
     "col_threat": {"ru": "Тип угрозы", "en": "Threat type"},
+    # Доработки 10.2
+    "reset_button": {"ru": "Сбросить", "en": "Reset"},
+    "regime_view": {"ru": "Вид графика", "en": "Chart view"},
+    "view_area": {"ru": "Площади", "en": "Areas"},
+    "view_lines": {"ru": "Линии", "en": "Lines"},
+    "agent_start": {"ru": "старт 2025", "en": "start 2025"},
+    "agent_final": {"ru": "финал сценария", "en": "scenario end"},
+    "agent_shift": {"ru": "сдвиг за сценарий", "en": "shift over scenario"},
+
 
 
 }
