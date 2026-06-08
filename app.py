@@ -29,7 +29,11 @@ st.markdown(f"<style>{build_css()}</style>", unsafe_allow_html=True)
 
 SCENARIO_LABELS = {"inertial": "scenario_inertial", "article9": "scenario_article9",
                    "taiwan": "scenario_taiwan", "alliance": "scenario_alliance"}
-PLOT_CFG = {"displayModeBar": False}
+PLOT_CFG = {
+    "displaylogo": False,
+    "scrollZoom": False,
+    "modeBarButtonsToRemove": ["lasso2d", "select2d", "autoScale2d"],
+}
 
 
 @st.cache_data(show_spinner=False)
