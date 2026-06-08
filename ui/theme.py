@@ -1,74 +1,71 @@
 """
-Визуальная тема. Тёмная инженерная база и японская палитра 和色.
+Визуальная тема. Светлый аналитический дашборд профессионального класса.
 
-Замысел. Фон есть тёплый почти чёрный цвета туши суми, на котором данные
-светятся, как на терминале аналитика. Смысловые цвета взяты из палитры
-традиционных японских тонов, что связывает оформление с предметом
-исследования и держит сдержанность, приглушённые тона вместо кричащих.
-
-Цвет несёт состояние, а не украшает. Три режима системы кодируются цветом,
-который считывается мгновенно, ещё до прочтения подписи. Зелёный вечнозелёный
-для устойчивого баланса, янтарь для холодной конфронтации, багряный для
-дестабилизации. Это логика светофора, опертая на доинтеллектуальное
-восприятие.
-
-Числа набраны моноширинным шрифтом с поддержкой кириллицы, цифры стоят строго
-друг под другом, что даёт вид точного прибора. Текст набран гротеском.
-Пустота между элементами намеренна, это значимый воздух ма, панель дышит.
+Эстетика делового интеллекта: светлый фон, белые карточки с мягкой тенью,
+насыщенная сетка показателей, крупная типографика. Цвет кодирует состояние
+по логике светофора и читается мгновенно. Палитра сине-циановая с тёплыми
+акцентами, нейтральная и профессиональная.
 """
 
 from __future__ import annotations
 
-
-# Палитра. Ключи семантические, значения из японских традиционных тонов.
 PALETTE = {
-    # Фон и поверхности, тёплый сумрак туши
-    "bg_base": "#14110F",       # 墨 суми, основа
-    "bg_panel": "#1E1A17",      # карточки
-    "bg_elevated": "#2B2522",   # приподнятые поверхности
-    "border": "#3A332E",        # тонкие границы
+    # Фон и поверхности
+    "bg_page": "#F4F6FA",
+    "bg_panel": "#FFFFFF",
+    "bg_subtle": "#F8FAFC",
+    "border": "#E2E8F0",
+    "border_strong": "#CBD5E1",
 
-    # Текст, небелёное полотно
-    "text_primary": "#F6F1D3",  # 生成り кинари
-    "text_secondary": "#B0B0B0",
-    "text_muted": "#6D6D6D",
+    # Текст
+    "text_primary": "#0F1B2D",
+    "text_secondary": "#475569",
+    "text_muted": "#94A3B8",
 
-    # Режимы системы, 和色
-    "s1": "#316745",            # 常磐 токива, вечнозелёный, баланс
-    "s1_glow": "#7BA05B",       # 若竹 вакатакэ, свечение
-    "s2": "#FFB11B",            # 山吹 ямабуки, янтарь, конфронтация
-    "s2_glow": "#FFC800",       # 黄金 коганэ
-    "s3": "#C3272B",            # 猩々緋 сёдзёхи, багряный, дестабилизация
-    "s3_glow": "#9D2933",       # 蘇芳 суо, тёмное свечение
+    # Акценты интерфейса
+    "accent": "#2563EB",
+    "accent_soft": "#DBEAFE",
+    "accent2": "#0891B2",
+    "accent2_soft": "#CFFAFE",
 
-    # Акценты интерактива
-    "accent": "#1F4788",        # 縹 ханада, синий
-    "accent_glow": "#4A78C0",   # светлее для тёмного фона
-    "accent_alt": "#77428D",    # 江戸紫 эдомурасаки, фиолетовый выделения
+    # Режимы системы, логика светофора
+    "s1": "#16A34A", "s1_soft": "#DCFCE7",
+    "s2": "#D97706", "s2_soft": "#FEF3C7",
+    "s3": "#DC2626", "s3_soft": "#FEE2E2",
 }
 
-
-# Цвета по коду режима, основной и свечение.
 REGIME_COLORS = {
-    "S1": (PALETTE["s1"], PALETTE["s1_glow"]),
-    "S2": (PALETTE["s2"], PALETTE["s2_glow"]),
-    "S3": (PALETTE["s3"], PALETTE["s3_glow"]),
+    "S1": (PALETTE["s1"], PALETTE["s1_soft"]),
+    "S2": (PALETTE["s2"], PALETTE["s2_soft"]),
+    "S3": (PALETTE["s3"], PALETTE["s3_soft"]),
 }
 
+# Уровни вердикта в цветах светофора.
+VERDICT_COLORS = {
+    "green": (PALETTE["s1"], PALETTE["s1_soft"]),
+    "amber": (PALETTE["s2"], PALETTE["s2_soft"]),
+    "red": (PALETTE["s3"], PALETTE["s3_soft"]),
+}
 
 FONTS = {
-    "mono": "'JetBrains Mono', 'SFMono-Regular', Consolas, monospace",
     "sans": "'Inter', 'Helvetica Neue', system-ui, sans-serif",
-    "import_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap",
+    "mono": "'JetBrains Mono', 'SFMono-Regular', Consolas, monospace",
+    "import_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
 }
 
 
-def regime_color(code: str, glow: bool = False) -> str:
-    """Возвращает цвет режима по коду S1, S2 или S3."""
+def regime_color(code: str, soft: bool = False) -> str:
     if code not in REGIME_COLORS:
         raise ValueError(f"неизвестный режим: {code}")
-    base, glw = REGIME_COLORS[code]
-    return glw if glow else base
+    strong, light = REGIME_COLORS[code]
+    return light if soft else strong
+
+
+def verdict_color(level: str, soft: bool = False) -> str:
+    if level not in VERDICT_COLORS:
+        raise ValueError(f"неизвестный уровень: {level}")
+    strong, light = VERDICT_COLORS[level]
+    return light if soft else strong
 
 
 def _is_hex(value: str) -> bool:
@@ -78,91 +75,56 @@ def _is_hex(value: str) -> bool:
     return len(body) in (3, 6) and all(c in "0123456789abcdefABCDEF" for c in body)
 
 
+def plotly_layout() -> dict:
+    """Общие настройки оформления фигур plotly в светлой теме."""
+    return dict(
+        paper_bgcolor=PALETTE["bg_panel"],
+        plot_bgcolor=PALETTE["bg_panel"],
+        font=dict(family="Inter, sans-serif", color=PALETTE["text_secondary"], size=13),
+        margin=dict(l=48, r=20, t=30, b=40),
+        colorway=[PALETTE["accent"], PALETTE["accent2"], PALETTE["s2"], PALETTE["s3"]],
+    )
+
+
 def build_css() -> str:
-    """
-    Собирает таблицу стилей для применения в интерфейсе. Объявляет переменные
-    палитры, шрифты и базовое оформление поверхностей и заголовков.
-    """
     p = PALETTE
     return f"""
 @import url('{FONTS["import_url"]}');
 
-:root {{
-  --bg-base: {p["bg_base"]};
-  --bg-panel: {p["bg_panel"]};
-  --bg-elevated: {p["bg_elevated"]};
-  --border: {p["border"]};
-  --text-primary: {p["text_primary"]};
-  --text-secondary: {p["text_secondary"]};
-  --text-muted: {p["text_muted"]};
-  --s1: {p["s1"]}; --s1-glow: {p["s1_glow"]};
-  --s2: {p["s2"]}; --s2-glow: {p["s2_glow"]};
-  --s3: {p["s3"]}; --s3-glow: {p["s3_glow"]};
-  --accent: {p["accent"]}; --accent-glow: {p["accent_glow"]};
-  --accent-alt: {p["accent_alt"]};
-  --font-mono: {FONTS["mono"]};
-  --font-sans: {FONTS["sans"]};
-}}
+.stApp {{ background: {p["bg_page"]}; font-family: {FONTS["sans"]}; color: {p["text_primary"]}; }}
+.block-container {{ padding-top: 2rem; padding-bottom: 2rem; max-width: 1320px; }}
 
-.stApp {{
-  background: var(--bg-base);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-}}
+h1, h2, h3 {{ font-family: {FONTS["sans"]}; color: {p["text_primary"]}; letter-spacing: -0.02em; }}
+h1 {{ font-size: 38px; font-weight: 800; }}
 
-h1, h2, h3, h4 {{
-  font-family: var(--font-sans);
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}}
+#MainMenu, header, footer {{ visibility: hidden; }}
 
-.fmam-mono, .fmam-metric {{
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}}
+.dash-eyebrow {{ font-size: 13px; letter-spacing: 2px; font-weight: 600; color: {p["text_muted"]}; text-transform: uppercase; }}
+.dash-sub {{ font-size: 17px; color: {p["text_secondary"]}; margin-bottom: 4px; }}
 
-.fmam-panel {{
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 20px;
-}}
+.kpi {{ background: {p["bg_panel"]}; border: 1px solid {p["border"]}; border-radius: 16px;
+        padding: 18px 20px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
+.kpi-label {{ font-size: 12px; letter-spacing: 1px; font-weight: 600; color: {p["text_muted"]}; text-transform: uppercase; }}
+.kpi-value {{ font-size: 44px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; color: {p["text_primary"]}; }}
+.kpi-delta {{ font-size: 13px; font-weight: 600; }}
 
-.fmam-card {{
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-}}
+.verdict {{ border-radius: 18px; padding: 24px 28px; box-shadow: 0 2px 10px rgba(15,27,45,.08); }}
+.verdict-title {{ font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 12px; }}
+.verdict-text {{ font-size: 17px; line-height: 1.55; margin-top: 8px; }}
+.verdict-dot {{ width: 16px; height: 16px; border-radius: 50%; }}
 
-.fmam-metric {{
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--text-primary);
-}}
+.panel {{ background: {p["bg_panel"]}; border: 1px solid {p["border"]}; border-radius: 16px;
+          padding: 18px 20px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
+.panel-title {{ font-size: 17px; font-weight: 700; color: {p["text_primary"]}; margin-bottom: 12px; }}
 
-.fmam-label {{
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}}
+.agentcard {{ background: {p["bg_panel"]}; border: 1px solid {p["border"]}; border-radius: 14px;
+             padding: 16px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
+.agentcard-name {{ font-size: 17px; font-weight: 700; color: {p["text_primary"]}; }}
+.agentcard-adv {{ font-size: 12px; color: {p["text_muted"]}; margin-bottom: 10px; }}
 
-.fmam-badge {{
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 13px;
-}}
-.fmam-s1 {{ color: var(--s1-glow); border: 1px solid var(--s1); }}
-.fmam-s2 {{ color: var(--s2-glow); border: 1px solid var(--s2); }}
-.fmam-s3 {{ color: var(--s3-glow); border: 1px solid var(--s3); }}
+.barrow {{ display:flex; justify-content:space-between; font-size:13px; color:{p["text_secondary"]}; margin-top:8px; }}
+.bartrack {{ background:{p["bg_page"]}; border-radius:6px; height:8px; margin-top:4px; }}
+.barfill {{ height:8px; border-radius:6px; }}
 
-.fmam-tooltip {{
-  border-bottom: 1px dotted var(--text-muted);
-  cursor: help;
-}}
+.pill {{ display:inline-block; padding:6px 14px; border-radius:999px; font-weight:700; font-size:14px; }}
 """
