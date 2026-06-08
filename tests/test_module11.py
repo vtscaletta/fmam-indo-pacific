@@ -37,3 +37,38 @@ def test_trajectory_supplies_states_for_trace():
     for c in AGENTS:
         assert len(tr.agent_states[c]) == 8
         assert len(tr.agent_actions[c]) == 8
+
+
+# --- Модуль 11.1. Математический слой и свод правил ---
+
+def test_all_rules_returns_27():
+    from engine.fuzzy_agent import JAPAN
+    rules = JAPAN.all_rules()
+    assert len(rules) == 27
+    keys = {(r["if"]["threat"], r["if"]["trust"], r["if"]["erosion"]) for r in rules}
+    assert len(keys) == 27  # все комбинации уникальны
+
+
+def test_all_rules_have_three_consequents():
+    from engine.fuzzy_agent import JAPAN
+    for r in JAPAN.all_rules():
+        assert set(r["then"]) == {"milex", "rhet", "drift"}
+
+
+def test_mf_params_match_config():
+    from engine.fuzzy_agent import JAPAN, JAPAN_CONFIG
+    assert JAPAN.mf_params("z1", "high") == JAPAN_CONFIG.threat.high
+    assert JAPAN.mf_params("z2", "med") == JAPAN_CONFIG.trust.med
+    assert JAPAN.mf_params("z3", "low") == JAPAN_CONFIG.erosion.low
+
+
+def test_gauss_formula_matches_fuzzify():
+    """Гауссова формула разбора совпадает с фаззификацией движка."""
+    import math
+    from engine.fuzzy_agent import JAPAN
+    z = 0.72
+    fz = JAPAN.fuzzify(z, 0.5, 0.5)
+    term = max(fz["z1"], key=fz["z1"].get)
+    c, s = JAPAN.mf_params("z1", term)
+    manual = math.exp(-((z - c) ** 2) / (2 * s * s))
+    assert abs(manual - fz["z1"][term]) < 0.01
