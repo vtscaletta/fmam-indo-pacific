@@ -33,7 +33,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "scenario_label": {"ru": "Сценарий", "en": "Scenario"},
     "horizon_label": {"ru": "Горизонт, лет", "en": "Horizon, years"},
     "language_label": {"ru": "Язык", "en": "Language"},
-    "run_button": {"ru": "Рассчитать прогноз", "en": "Run forecast"},
+    "run_button": {"ru": "Проиграть сценарий", "en": "Run scenario"},
     "agent_label": {"ru": "Агент", "en": "Agent"},
     "year_label": {"ru": "Год", "en": "Year"},
 
@@ -87,6 +87,27 @@ STRINGS: dict[str, dict[str, str]] = {
     "peak_label": {"ru": "Пик напряжения", "en": "Peak tension"},
     "to_threshold": {"ru": "До порога срыва", "en": "To collapse threshold"},
     "events_title": {"ru": "События сценария", "en": "Scenario events"},
+    # Конструктор и классификация
+    "mode_label": {"ru": "Режим", "en": "Mode"},
+    "mode_ready": {"ru": "Готовые сценарии", "en": "Preset scenarios"},
+    "mode_custom": {"ru": "Свой сценарий", "en": "Custom scenario"},
+    "builder_title": {"ru": "Конструктор сценария", "en": "Scenario builder"},
+    "builder_hint": {"ru": "Соберите мир из событий. Модель сама вычислит, как государства отреагируют.", "en": "Assemble a world from events. The model computes how states react."},
+    "ev_year": {"ru": "Год", "en": "Year"},
+    "ev_agent": {"ru": "Государство", "en": "State"},
+    "ev_type": {"ru": "Событие", "en": "Event"},
+    "ev_force": {"ru": "Сила", "en": "Magnitude"},
+    "ev_add": {"ru": "Добавить событие", "en": "Add event"},
+    "ev_clear": {"ru": "Очистить всё", "en": "Clear all"},
+    "ev_play": {"ru": "Проиграть собранный сценарий", "en": "Run assembled scenario"},
+    "ev_empty": {"ru": "Событий пока нет. Добавьте хотя бы одно.", "en": "No events yet. Add at least one."},
+    "ev_remove": {"ru": "удалить", "en": "remove"},
+    "threat_type_title": {"ru": "Тип угрозы", "en": "Threat type"},
+    "force_light": {"ru": "умеренное", "en": "light"},
+    "force_strong": {"ru": "сильное", "en": "strong"},
+    "force_extreme": {"ru": "экстремальное", "en": "extreme"},
+    "custom_name": {"ru": "Свой сценарий", "en": "Custom scenario"},
+
 }
 
 
