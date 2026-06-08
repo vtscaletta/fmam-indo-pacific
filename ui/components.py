@@ -74,3 +74,21 @@ def agent_card(name: str, adversary: str, inputs: tuple, action: dict, lang="ru"
         </div>""",
         unsafe_allow_html=True,
     )
+
+
+def threat_type_badge(classification: dict, lang="ru") -> None:
+    """Бейдж доминирующего типа угрозы с пояснением."""
+    palette_by_type = {
+        "material": PALETTE["accent"],
+        "alliance": PALETTE["s2"],
+        "normative": PALETTE["s3"],
+        "mixed": PALETTE["text_muted"],
+    }
+    color = palette_by_type.get(classification["type"], PALETTE["text_muted"])
+    st.markdown(
+        f"""<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0 10px 0">
+        <span class="pill" style="background:{color};color:#fff">{classification['label']}</span>
+        <span style="font-size:14px;color:{PALETTE['text_secondary']}">{classification['text']}</span>
+        </div>""",
+        unsafe_allow_html=True,
+    )
