@@ -107,6 +107,19 @@ STRINGS: dict[str, dict[str, str]] = {
     "force_strong": {"ru": "сильное", "en": "strong"},
     "force_extreme": {"ru": "экстремальное", "en": "extreme"},
     "custom_name": {"ru": "Свой сценарий", "en": "Custom scenario"},
+    # Сравнение сценариев
+    "mode_compare": {"ru": "Сравнение сценариев", "en": "Compare scenarios"},
+    "cmp_title": {"ru": "Сравнение сценариев бок о бок", "en": "Scenarios side by side"},
+    "cmp_tension": {"ru": "Траектории напряжения", "en": "Tension trajectories"},
+    "cmp_risk": {"ru": "Риск дестабилизации к концу горизонта", "en": "Destabilization risk at horizon end"},
+    "cmp_table": {"ru": "Сводная таблица", "en": "Summary table"},
+    "col_scenario": {"ru": "Сценарий", "en": "Scenario"},
+    "col_verdict": {"ru": "Оценка", "en": "Verdict"},
+    "col_tension": {"ru": "Напряжение", "en": "Tension"},
+    "col_risk": {"ru": "Риск", "en": "Risk"},
+    "col_peak": {"ru": "Пик", "en": "Peak"},
+    "col_threat": {"ru": "Тип угрозы", "en": "Threat type"},
+
 
 }
 
