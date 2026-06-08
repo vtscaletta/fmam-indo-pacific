@@ -24,6 +24,7 @@ from engine.synthesis import (
 from ui.theme import PALETTE
 from ui.i18n import t
 from ui.components import panel_open, panel_close
+from ui.charts import membership_figure
 
 
 # Перевод служебных меток в человеческий язык интерфейса.
@@ -81,10 +82,13 @@ def render_transparency(traj, lang: str) -> None:
     fz = CONTROLLER.fuzzify(z1, z2, z3)
     cols = st.columns(3)
     for col, (zkey, vkey) in zip(cols, _VAR_ORDER):
+        params = {term: CONTROLLER.mf_params(zkey, term) for term in ("low", "med", "high")}
         with col:
-            st.markdown(f'<div style="font-weight:700;color:{PALETTE["text_primary"]};margin-bottom:4px">'
-                        f'{t(vkey, lang)} <span style="color:{PALETTE["accent"]}">{zmap[zkey]:.2f}</span></div>'
-                        + _membership_bars(fz[zkey], lang), unsafe_allow_html=True)
+            st.plotly_chart(
+                membership_figure(t(vkey, lang), zmap[zkey], params, fz[zkey], lang),
+                use_container_width=True, config={"displayModeBar": False},
+                key=f"trn_mf_{zkey}",
+            )
 
     _hint(t("trn_s1_math", lang))
     for zkey, _vkey in _VAR_ORDER:
