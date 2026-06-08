@@ -89,8 +89,8 @@ STRINGS: dict[str, dict[str, str]] = {
     "events_title": {"ru": "События сценария", "en": "Scenario events"},
     # Конструктор и классификация
     "mode_label": {"ru": "Режим", "en": "Mode"},
-    "mode_ready": {"ru": "Готовые сценарии", "en": "Preset scenarios"},
-    "mode_custom": {"ru": "Свой сценарий", "en": "Custom scenario"},
+    "mode_ready": {"ru": "Эталонные сценарии", "en": "Reference scenarios"},
+    "mode_custom": {"ru": "Авторский сценарий", "en": "Authored scenario"},
     "builder_title": {"ru": "Конструктор сценария", "en": "Scenario builder"},
     "builder_hint": {"ru": "Соберите мир из событий. Модель сама вычислит, как государства отреагируют.", "en": "Assemble a world from events. The model computes how states react."},
     "ev_year": {"ru": "Год", "en": "Year"},
@@ -108,7 +108,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "force_extreme": {"ru": "экстремальное", "en": "extreme"},
     "custom_name": {"ru": "Свой сценарий", "en": "Custom scenario"},
     # Сравнение сценариев
-    "mode_compare": {"ru": "Сравнение сценариев", "en": "Compare scenarios"},
+    "mode_compare": {"ru": "Сопоставление сценариев", "en": "Scenario comparison"},
     "cmp_title": {"ru": "Сравнение сценариев бок о бок", "en": "Scenarios side by side"},
     "cmp_tension": {"ru": "Траектории напряжения", "en": "Tension trajectories"},
     "cmp_risk": {"ru": "Риск дестабилизации к концу горизонта", "en": "Destabilization risk at horizon end"},
