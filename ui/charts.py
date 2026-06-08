@@ -67,7 +67,9 @@ def tension_area_figure(trajectory, thresholds: dict, lang="ru") -> go.Figure:
     ))
     fig.update_yaxes(range=[0, 1], gridcolor=PALETTE["border"])
     fig.update_xaxes(gridcolor=PALETTE["border"])
-    return _apply(fig, height=320)
+    fig = _apply(fig, height=280)
+    fig.update_layout(margin=dict(l=44, r=16, t=16, b=34))
+    return fig
 
 
 def regime_donut_figure(dist, lang="ru") -> go.Figure:
@@ -142,15 +144,16 @@ def agent_radar_figure(start, final=None, name="", lang="ru") -> go.Figure:
     s1, s2, s3 = start
     fig.add_trace(go.Scatterpolar(
         r=[s1, s2, s3, s1], theta=theta, fill="toself", name=t("agent_start", lang),
-        line=dict(color=PALETTE["text_muted"], width=1.5, dash="dot"),
-        fillcolor="rgba(148,163,184,0.12)",
+        line=dict(color=PALETTE["text_muted"], width=1, dash="dot"),
+        fillcolor="rgba(148,163,184,0.05)",
         hovertemplate="%{theta}: %{r:.2f}<extra>" + t("agent_start", lang) + "</extra>",
     ))
     if final is not None:
         f1, f2, f3 = final
         fig.add_trace(go.Scatterpolar(
             r=[f1, f2, f3, f1], theta=theta, fill="toself", name=t("agent_final", lang),
-            line=dict(color=PALETTE["accent"], width=2.5), fillcolor="rgba(37,99,235,0.18)",
+            line=dict(color=PALETTE["accent"], width=3.5), fillcolor="rgba(37,99,235,0.30)",
+            marker=dict(size=6, color=PALETTE["accent"]),
             hovertemplate="%{theta}: %{r:.2f}<extra>" + t("agent_final", lang) + "</extra>",
         ))
     fig.update_layout(polar=dict(radialaxis=dict(range=[0, 1], showticklabels=False)),
