@@ -147,6 +147,17 @@ STRINGS: dict[str, dict[str, str]] = {
     "trn_rule_then": {"ru": "то", "en": "then"},
     "trn_rule_strength": {"ru": "сила", "en": "strength"},
     "trn_membership": {"ru": "степень принадлежности", "en": "membership"},
+    "trn_math_toggle": {"ru": "Показать математику", "en": "Show the mathematics"},
+    "trn_s1_math": {"ru": "Степень принадлежности считается гауссовой функцией. Для доминирующего терма каждой переменной подстановка такова.", "en": "Membership is a Gaussian. Substitution for the dominant term of each variable."},
+    "trn_s2_math": {"ru": "Сила правила есть t-норма, минимум среди трёх степеней принадлежности антецедента. Для сильнейшего правила.", "en": "Rule strength is the t-norm, the minimum across the three antecedent memberships."},
+    "trn_s3_math": {"ru": "Каждый выход сворачивается методом центра тяжести, отношение взвешенной площади к площади. Результат совпадает с числами выше.", "en": "Each output collapses by the centre of gravity."},
+    "trn_s4": {"ru": "Шаг 4. Системный уровень. Синтез напряжения", "en": "Step 4. System level. Tension synthesis"},
+    "trn_s4_hint": {"ru": "Действия всех агентов сворачиваются в системное напряжение года через двухконтурный синтез. Память сглаживает три измерения активности, перцептивный контур несёт восприятие напрямую.", "en": "All agents collapse into the system tension via the two-loop synthesis."},
+    "trn_s4_mem": {"ru": "Память хранит сглаженный след по каждому измерению, с асимметричным забыванием. Дрейф ведёт себя как храповик: быстро вверх, почти никак вниз.", "en": "Memory keeps a smoothed trace per dimension with asymmetric forgetting."},
+    "trn_s4_pi": {"ru": "Перцептивное давление, свёртка восприятия угрозы, дефицита доверия и эрозии по всем агентам.", "en": "Perceptual pressure across all agents."},
+    "trn_s4_tau": {"ru": "Итоговое напряжение года через логистическую сигмоиду.", "en": "Final tension via the logistic sigmoid."},
+    "trn_lam_label": {"ru": "Коэффициенты забывания по измерениям (нарастание, спад)", "en": "Forgetting per dimension (up, down)"},
+    "trn_all_rules": {"ru": "Полная база из 27 продукционных правил (для приложения)", "en": "Full base of 27 rules (for the appendix)"},
 
 
 
