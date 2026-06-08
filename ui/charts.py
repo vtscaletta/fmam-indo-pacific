@@ -95,23 +95,30 @@ def regime_area_figure(trajectory, lang="ru") -> go.Figure:
         ))
     fig.update_yaxes(range=[0, 1], tickformat=".0%", gridcolor=PALETTE["border"])
     fig.update_xaxes(gridcolor=PALETTE["border"])
-    fig.update_layout(legend=dict(orientation="h", y=1.08))
-    return _apply(fig, height=300)
+    fig = _apply(fig, height=320)
+    fig.update_layout(legend=dict(orientation="h", y=-0.18, x=0), margin=dict(t=20))
+    return fig
+
+
+SHORT_NAMES = {"usa": "США", "chn": "КНР", "jpn": "Япония", "twn": "Тайвань", "kor": "Ю.Корея"}
 
 
 def influence_heatmap_figure(lang="ru") -> go.Figure:
     """Тепловая карта матрицы влияния: кто на кого давит."""
-    names = [AGENTS[c].name for c in CODES]
+    names = [SHORT_NAMES[c] for c in CODES]
     z = [[INFLUENCE.W[i][j] for j in CODES] for i in CODES]
+    text = [[f"{INFLUENCE.W[i][j]:.2f}" if INFLUENCE.W[i][j] > 0 else "" for j in CODES] for i in CODES]
     fig = go.Figure(go.Heatmap(
-        z=z, x=names, y=names,
+        z=z, x=names, y=names, text=text, texttemplate="%{text}",
+        textfont=dict(size=13, color=PALETTE["text_primary"]),
         colorscale=[[0, PALETTE["bg_subtle"]], [0.5, PALETTE["accent2"]], [1, PALETTE["accent"]]],
-        zmin=0, zmax=1, xgap=3, ygap=3,
-        colorbar=dict(thickness=12, len=0.8),
+        zmin=0, zmax=1, xgap=4, ygap=4,
+        colorbar=dict(thickness=12, len=0.7, x=1.02),
         hovertemplate="%{y} → %{x}: %{z:.2f}<extra></extra>",
     ))
-    fig.update_layout(yaxis=dict(autorange="reversed"))
-    return _apply(fig, height=340)
+    fig = _apply(fig, height=360)
+    fig.update_layout(yaxis=dict(autorange="reversed"), margin=dict(l=90, r=90, t=20, b=50))
+    return fig
 
 
 def agent_radar_figure(state, name="", lang="ru") -> go.Figure:
