@@ -1,16 +1,6 @@
-"""
-Тесты слоя представления.
+"""Тесты слоя представления и аналитического вывода. Запуск: pytest -v"""
 
-Проверяют построители графиков на реальной траектории и синтаксическую
-целостность главного файла. Визуальный рендер проверяется развёртыванием.
-
-Запуск из корня проекта:
-    pytest -v
-"""
-
-import ast
-import os
-
+import ast, os
 import plotly.graph_objects as go
 
 from engine.simulator import SIMULATOR
@@ -18,55 +8,60 @@ from engine.scenarios import ALL_SCENARIOS
 from engine.agents import AGENTS, run_agent
 from engine.synthesis import phase_thresholds
 from engine.markov import MARKOV
-from ui.charts import tension_figure, regime_figure, agent_action_figure
+from engine.analysis import classify
+from ui.charts import (gauge_figure, tension_area_figure, regime_donut_figure,
+                       regime_area_figure, influence_heatmap_figure, agent_radar_figure)
 
 
-def _traj():
-    return SIMULATOR.run(ALL_SCENARIOS["taiwan"], AGENTS, horizon=10)
+def _traj(key="taiwan"):
+    return SIMULATOR.run(ALL_SCENARIOS[key], AGENTS, horizon=10)
 
 
-def test_tension_figure_has_line_and_thresholds():
-    """Фигура напряжения содержит линию и две пороговые отсечки."""
+def test_all_widgets_build():
+    th = phase_thresholds(MARKOV); tr = _traj()
+    assert isinstance(gauge_figure(0.6, th), go.Figure)
+    assert len(tension_area_figure(tr, th).data) == 1
+    assert len(regime_donut_figure(tr.regime_dist[-1]).data) == 1
+    assert len(regime_area_figure(tr).data) == 3
+    assert len(influence_heatmap_figure().data) == 1
+    assert len(agent_radar_figure((0.7, 0.5, 0.6), "X").data) == 1
+
+
+def test_gauge_zones_from_thresholds():
     th = phase_thresholds(MARKOV)
-    fig = tension_figure(_traj(), th, "ru")
-    assert isinstance(fig, go.Figure)
-    assert len(fig.data) == 1
-    ys = sorted(round(s["y0"], 3) for s in fig.layout.shapes)
-    assert ys == [round(th["S1->S2"], 3), round(th["S2->S3"], 3)]
+    fig = gauge_figure(0.5, th)
+    steps = fig.data[0].gauge.steps
+    assert len(steps) == 3
 
 
-def test_tension_axis_bounded_unit():
-    """Ось напряжения ограничена единичным интервалом."""
-    fig = tension_figure(_traj(), phase_thresholds(MARKOV), "en")
-    assert tuple(fig.layout.yaxis.range) == (0, 1)
+def test_verdict_distinguishes_scenarios():
+    th = phase_thresholds(MARKOV)
+    base = classify(_traj("inertial"), th)
+    crisis = classify(_traj("taiwan"), th)
+    assert crisis["level"] == "red"
+    assert base["level"] in ("amber", "green")
+    assert crisis["risk"] > base["risk"]
 
 
-def test_regime_figure_three_stacked_series():
-    """Фигура режимов содержит три площади стопкой."""
-    fig = regime_figure(_traj(), "ru")
-    assert len(fig.data) == 3
-    for tr in fig.data:
-        assert tr.stackgroup == "regime"
+def test_verdict_fields():
+    v = classify(_traj("taiwan"), phase_thresholds(MARKOV))
+    assert set(v) >= {"level", "title", "text", "risk", "peak", "breaches_collapse"}
+    assert v["level"] in ("green", "amber", "red")
+    assert len(v["text"]) > 0
 
 
-def test_agent_action_figure_single_bar_group():
-    """Профиль действия агента содержит один набор столбцов."""
-    fig = agent_action_figure(run_agent("jpn"), "en")
-    assert len(fig.data) == 1
-    assert len(fig.data[0].x) == 3
+def test_crisis_breaches_collapse():
+    v = classify(_traj("taiwan"), phase_thresholds(MARKOV))
+    assert v["breaches_collapse"] is True
 
 
 def test_charts_localize():
-    """Подписи графиков переключаются по языку."""
     tr = _traj()
-    ru = regime_figure(tr, "ru")
-    en = regime_figure(tr, "en")
-    assert ru.data[0].name == "Устойчивый баланс"
-    assert en.data[0].name == "Stable balance"
+    assert regime_area_figure(tr, "ru").data[0].name == "Устойчивый баланс"
+    assert regime_area_figure(tr, "en").data[0].name == "Stable balance"
 
 
-def test_app_module_parses():
-    """Главный файл синтаксически корректен."""
+def test_app_parses():
     here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     with open(os.path.join(here, "app.py"), encoding="utf-8") as f:
         ast.parse(f.read())
