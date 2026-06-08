@@ -83,16 +83,25 @@ def regime_donut_figure(dist, lang="ru") -> go.Figure:
     return _apply(fig, height=300)
 
 
-def regime_area_figure(trajectory, lang="ru") -> go.Figure:
-    """Доли режимов по годам стопкой площадей."""
+def regime_area_figure(trajectory, lang="ru", mode="area") -> go.Figure:
+    """
+    Доли режимов по годам. mode area даёт стопку площадей, mode lines даёт
+    три раздельные линии, что иногда читается тоньше на близких долях.
+    """
     years, dist = trajectory.years, trajectory.regime_dist
     fig = go.Figure()
     for idx, code in ((0, "S1"), (1, "S2"), (2, "S3")):
-        fig.add_trace(go.Scatter(
-            x=years, y=[float(d[idx]) for d in dist], mode="lines", name=t(f"regime_{code}", lang),
-            stackgroup="r", line=dict(width=0.5, color=regime_color(code)), fillcolor=regime_color(code),
-            hovertemplate="%{y:.0%}<extra></extra>",
-        ))
+        series = [float(d[idx]) for d in dist]
+        if mode == "lines":
+            fig.add_trace(go.Scatter(
+                x=years, y=series, mode="lines+markers", name=t(f"regime_{code}", lang),
+                line=dict(width=2.5, color=regime_color(code)), marker=dict(size=5),
+                hovertemplate="%{y:.0%}<extra></extra>"))
+        else:
+            fig.add_trace(go.Scatter(
+                x=years, y=series, mode="lines", name=t(f"regime_{code}", lang),
+                stackgroup="r", line=dict(width=0.5, color=regime_color(code)),
+                fillcolor=regime_color(code), hovertemplate="%{y:.0%}<extra></extra>"))
     fig.update_yaxes(range=[0, 1], tickformat=".0%", gridcolor=PALETTE["border"])
     fig.update_xaxes(gridcolor=PALETTE["border"])
     fig = _apply(fig, height=320)
@@ -121,18 +130,33 @@ def influence_heatmap_figure(lang="ru") -> go.Figure:
     return fig
 
 
-def agent_radar_figure(state, name="", lang="ru") -> go.Figure:
-    """Радарный профиль трёх входных переменных агента."""
+def agent_radar_figure(start, final=None, name="", lang="ru") -> go.Figure:
+    """
+    Радарный профиль агента. Если дан финал, поверх стартового профиля 2025
+    года ложится профиль конца сценария, и сдвиг виден глазом.
+    """
     cats = [t("var_threat", lang), t("var_trust", lang), t("var_erosion", lang)]
-    z1, z2, z3 = state
-    fig = go.Figure(go.Scatterpolar(
-        r=[z1, z2, z3, z1], theta=cats + [cats[0]], fill="toself",
-        line=dict(color=PALETTE["accent"], width=2), fillcolor="rgba(37,99,235,0.18)",
-        hovertemplate="%{theta}: %{r:.2f}<extra></extra>",
+    theta = cats + [cats[0]]
+    fig = go.Figure()
+    s1, s2, s3 = start
+    fig.add_trace(go.Scatterpolar(
+        r=[s1, s2, s3, s1], theta=theta, fill="toself", name=t("agent_start", lang),
+        line=dict(color=PALETTE["text_muted"], width=1.5, dash="dot"),
+        fillcolor="rgba(148,163,184,0.12)",
+        hovertemplate="%{theta}: %{r:.2f}<extra>" + t("agent_start", lang) + "</extra>",
     ))
+    if final is not None:
+        f1, f2, f3 = final
+        fig.add_trace(go.Scatterpolar(
+            r=[f1, f2, f3, f1], theta=theta, fill="toself", name=t("agent_final", lang),
+            line=dict(color=PALETTE["accent"], width=2.5), fillcolor="rgba(37,99,235,0.18)",
+            hovertemplate="%{theta}: %{r:.2f}<extra>" + t("agent_final", lang) + "</extra>",
+        ))
     fig.update_layout(polar=dict(radialaxis=dict(range=[0, 1], showticklabels=False)),
-                      showlegend=False, title=dict(text=name, font=dict(size=14)))
-    return _apply(fig, height=260)
+                      showlegend=final is not None,
+                      legend=dict(orientation="h", y=-0.12, font=dict(size=11)),
+                      title=dict(text=name, font=dict(size=14)))
+    return _apply(fig, height=300)
 
 
 # Цвета сценариев для сравнения. Тайвань багряный как тяжелейший.
