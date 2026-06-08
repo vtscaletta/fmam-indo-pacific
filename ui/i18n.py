@@ -76,6 +76,17 @@ STRINGS: dict[str, dict[str, str]] = {
     "preliminary_note": {"ru": "Параметры предварительные",
                          "en": "Parameters are preliminary"},
     "no_events": {"ru": "Событий нет", "en": "No events"},
+    # Дашборд и вердикт
+    "verdict_title": {"ru": "Заключение системы", "en": "System verdict"},
+    "influence_title": {"ru": "Матрица влияния · кто на кого давит", "en": "Influence matrix · who pressures whom"},
+    "tension_trace": {"ru": "Траектория напряжения", "en": "Tension trajectory"},
+    "regime_mix": {"ru": "Состав режимов по годам", "en": "Regime mix over years"},
+    "regime_final": {"ru": "Режимы на финальном году", "en": "Regimes at final year"},
+    "gauge_tension": {"ru": "Напряжение", "en": "Tension"},
+    "gauge_risk": {"ru": "Риск срыва", "en": "Collapse risk"},
+    "peak_label": {"ru": "Пик напряжения", "en": "Peak tension"},
+    "to_threshold": {"ru": "До порога срыва", "en": "To collapse threshold"},
+    "events_title": {"ru": "События сценария", "en": "Scenario events"},
 }
 
 
