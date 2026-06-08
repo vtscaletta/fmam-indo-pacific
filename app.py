@@ -127,16 +127,31 @@ def main():
     lang, scenario_key, horizon, run = sidebar()
 
     if "params" not in st.session_state:
-        st.session_state["params"] = ("inertial", 10)
+        st.session_state["params"] = None
     if run:
         st.session_state["params"] = (scenario_key, horizon)
-    active_key, active_h = st.session_state["params"]
 
+    st.markdown(
+        f'<div class="dash-eyebrow">{t("app_title", lang)}</div>',
+        unsafe_allow_html=True)
+
+    if st.session_state["params"] is None:
+        invite = ("Выберите сценарий слева и нажмите «Рассчитать прогноз»."
+                  if lang == "ru" else "Pick a scenario on the left and press Run forecast.")
+        st.markdown(
+            f'<h1>{t("app_subtitle", lang)}</h1>'
+            f'<div class="panel" style="margin-top:18px;text-align:center;padding:48px 24px">'
+            f'<div style="font-size:20px;font-weight:700;color:{PALETTE["text_primary"]};margin-bottom:8px">'
+            f'{"Готов к расчёту" if lang == "ru" else "Ready to compute"}</div>'
+            f'<div style="font-size:16px;color:{PALETTE["text_secondary"]}">{invite}</div></div>',
+            unsafe_allow_html=True)
+        return
+
+    active_key, active_h = st.session_state["params"]
     thresholds = cached_thresholds()
     traj = cached_run(active_key, active_h)
 
     st.markdown(
-        f'<div class="dash-eyebrow">{t("app_title", lang)}</div>'
         f'<h1>{t(SCENARIO_LABELS[active_key], lang)}, {traj.years[0]}–{traj.years[-1]}</h1>'
         f'<div class="dash-sub">{t("app_subtitle", lang)}</div>',
         unsafe_allow_html=True)
