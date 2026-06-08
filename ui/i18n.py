@@ -39,7 +39,7 @@ STRINGS: dict[str, dict[str, str]] = {
 
     # Сценарии
     "scenario_inertial": {"ru": "Инерционный дрейф", "en": "Inertial drift"},
-    "scenario_article9": {"ru": "Ревизия девятой статьи", "en": "Article 9 revision"},
+    "scenario_article9": {"ru": "Пересмотр девятой статьи", "en": "Article 9 revision"},
     "scenario_taiwan": {"ru": "Тайваньский кризис", "en": "Taiwan crisis"},
     "scenario_alliance": {"ru": "Ослабление альянса", "en": "Alliance weakening"},
 
@@ -127,6 +127,28 @@ STRINGS: dict[str, dict[str, str]] = {
     "agent_start": {"ru": "старт 2025", "en": "start 2025"},
     "agent_final": {"ru": "финал сценария", "en": "scenario end"},
     "agent_shift": {"ru": "сдвиг за сценарий", "en": "shift over scenario"},
+    # Детальные описания базовых сценариев
+    "desc_inertial": {"ru": "Контрольный прогон без внешних потрясений. Регион движется только по внутренней логике: дилемме безопасности, инерции военных расходов, медленному накоплению нормативной эрозии. Служит фоном, относительно которого читаются остальные сценарии.", "en": "Control run without external shocks. The region evolves by internal logic alone."},
+    "desc_article9": {"ru": "На третий год Япония закрепляет нормативный сдвиг конституционной реформой. Ограничения на применение силы размываются скачком и назад почти не откатываются. КНР воспринимает ремилитаризацию Японии как прямую угрозу.", "en": "Japan locks in a normative shift via constitutional reform in year three."},
+    "desc_taiwan": {"ru": "Затяжная эскалация вокруг Тайваньского пролива с третьего года. Военное давление КНР, мобилизация Тайваня, втягивание США и Японии. Кризис необратимо милитаризует и сам Китай, оттого след остаётся надолго.", "en": "Protracted escalation around the Taiwan Strait from year three."},
+    "desc_alliance": {"ru": "На второй год США отступают из региона. Доверие Японии, Кореи и Тайваня к гарантиям резко падает, запускается гонка автономных вооружений и собственный нормативный сдвиг каждого.", "en": "The United States retreats in year two, eroding allied trust."},
+    "desc_custom": {"ru": "Сценарий, собранный вручную из событий. Реакцию государств модель вычисляет сама.", "en": "A scenario assembled by hand from events."},
+    # Модуль 11, разбор решения
+    "trn_intro": {"ru": "Как машина пришла к решению, шаг за шагом. Выберите государство и год, и система раскроет свою кухню без чёрного ящика.", "en": "How the machine reached its decision, step by step."},
+    "trn_pick_agent": {"ru": "Государство", "en": "State"},
+    "trn_pick_year": {"ru": "Год", "en": "Year"},
+    "trn_s1": {"ru": "Шаг 1. Перевод в нечёткие термины", "en": "Step 1. Fuzzification"},
+    "trn_s1_hint": {"ru": "Числовое состояние переводится в человеческие понятия: низкий, средний, высокий. Одно значение может частично принадлежать сразу двум.", "en": "Numeric state becomes human terms."},
+    "trn_s2": {"ru": "Шаг 2. Сработавшие правила реализма", "en": "Step 2. Fired realism rules"},
+    "trn_s2_hint": {"ru": "Каждое правило это суждение вида если-то. Сила показывает, насколько правило применимо к текущему состоянию.", "en": "Each rule is an if-then judgement."},
+    "trn_s3": {"ru": "Шаг 3. Свёртка в действие", "en": "Step 3. Defuzzification"},
+    "trn_s3_hint": {"ru": "Все сработавшие правила взвешиваются по силе и сворачиваются в три числа действия методом центра тяжести.", "en": "Fired rules collapse into the action."},
+    "trn_rule_if": {"ru": "если", "en": "if"},
+    "trn_rule_then": {"ru": "то", "en": "then"},
+    "trn_rule_strength": {"ru": "сила", "en": "strength"},
+    "trn_membership": {"ru": "степень принадлежности", "en": "membership"},
+
+
 
 
 
