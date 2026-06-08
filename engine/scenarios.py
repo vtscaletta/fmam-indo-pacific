@@ -75,7 +75,7 @@ INERTIAL = Scenario(
 )
 
 ARTICLE9_REVISION = Scenario(
-    name="Формальная ревизия девятой статьи",
+    name="Пересмотр девятой статьи",
     description="Япония закрепляет нормативный сдвиг конституционной реформой.",
     events=[
         ShockEvent(2, "jpn", "z3", 0.25,
