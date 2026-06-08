@@ -1,85 +1,76 @@
 """
-Компоненты интерфейса. Переиспользуемые блоки разметки в тёмной теме.
-
-Каждая функция печатает готовый фрагмент через streamlit. Разметка опирается
-на классы темы, объявленные в build_css.
+Компоненты дашборда. Блоки разметки в светлой деловой теме.
 """
 
 from __future__ import annotations
 
 import streamlit as st
 
-from ui.theme import PALETTE, regime_color
+from ui.theme import PALETTE, regime_color, verdict_color
 from ui.i18n import t, tooltip
 
 
-def metric_card(label: str, value: str, accent: str = None) -> None:
-    """Карточка одной метрики: подпись сверху, крупное моноширинное значение."""
-    color = accent or PALETTE["text_primary"]
+def verdict_banner(verdict: dict) -> None:
+    """Крупная плашка-светофор с заключением и объяснением из чисел."""
+    color = verdict_color(verdict["level"])
+    soft = verdict_color(verdict["level"], soft=True)
     st.markdown(
-        f"""<div class="fmam-card">
-        <div class="fmam-label">{label}</div>
-        <div class="fmam-metric" style="color:{color}">{value}</div>
+        f"""<div class="verdict" style="background:{soft};border:1px solid {color}">
+        <div class="verdict-title" style="color:{color}">
+          <span class="verdict-dot" style="background:{color}"></span>{verdict['title']}</div>
+        <div class="verdict-text" style="color:{PALETTE['text_primary']}">{verdict['text']}</div>
         </div>""",
         unsafe_allow_html=True,
     )
 
 
-def regime_badge(code: str, lang: str = "ru") -> str:
-    """Возвращает разметку бейджа режима в его цвете."""
-    name = t(f"regime_{code}", lang)
-    cls = {"S1": "fmam-s1", "S2": "fmam-s2", "S3": "fmam-s3"}[code]
-    return f'<span class="fmam-badge {cls}">{code} · {name}</span>'
+def kpi(label: str, value: str, color: str = None, delta: str = "") -> None:
+    """Карточка показателя с крупной цифрой."""
+    c = color or PALETTE["text_primary"]
+    d = f'<div class="kpi-delta" style="color:{PALETTE["text_muted"]}">{delta}</div>' if delta else ""
+    st.markdown(
+        f"""<div class="kpi">
+        <div class="kpi-label">{label}</div>
+        <div class="kpi-value" style="color:{c}">{value}</div>{d}</div>""",
+        unsafe_allow_html=True,
+    )
 
 
-def term_with_tooltip(label: str, key: str, lang: str = "ru") -> str:
-    """Термин с пунктирным подчёркиванием и всплывающей подсказкой."""
-    tip = tooltip(key, lang)
-    if not tip:
-        return label
-    safe = tip.replace('"', "&quot;")
-    return f'<span class="fmam-tooltip" title="{safe}">{label}</span>'
+def panel_open(title: str) -> None:
+    st.markdown(f'<div class="panel"><div class="panel-title">{title}</div>', unsafe_allow_html=True)
 
 
-def agent_card(name: str, inputs: tuple, action: dict, lang: str = "ru") -> None:
-    """
-    Карточка агента: входное состояние и порождённое действие. Полоски дают
-    мгновенное сравнение уровней без чтения чисел.
-    """
+def panel_close() -> None:
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+def agent_card(name: str, adversary: str, inputs: tuple, action: dict, lang="ru") -> None:
+    """Карточка агента с цветными полосами входов и профилем действия."""
     z1, z2, z3 = inputs
 
     def bar(label_key, value, color, tip_key):
-        label = term_with_tooltip(t(label_key, lang), tip_key, lang)
+        tip = tooltip(tip_key, lang).replace('"', "&quot;")
         pct = int(round(value * 100))
-        return f"""<div style="margin:6px 0">
-          <div style="display:flex;justify-content:space-between;font-size:12px;color:{PALETTE['text_secondary']}">
-            <span>{label}</span><span class="fmam-mono">{value:.2f}</span></div>
-          <div style="background:{PALETTE['bg_base']};border-radius:6px;height:7px;margin-top:3px">
-            <div style="width:{pct}%;height:7px;border-radius:6px;background:{color}"></div></div>
-        </div>"""
+        return (
+            f'<div class="barrow"><span title="{tip}" style="border-bottom:1px dotted {PALETTE["text_muted"]}">'
+            f'{t(label_key, lang)}</span><span style="font-weight:700;color:{PALETTE["text_primary"]}">{value:.2f}</span></div>'
+            f'<div class="bartrack"><div class="barfill" style="width:{pct}%;background:{color}"></div></div>'
+        )
 
     body = (
         bar("var_threat", z1, PALETTE["s3"], "var_threat")
-        + bar("var_trust", z2, PALETTE["s1_glow"], "var_trust")
+        + bar("var_trust", z2, PALETTE["s1"], "var_trust")
         + bar("var_erosion", z3, PALETTE["s2"], "var_erosion")
     )
     st.markdown(
-        f"""<div class="fmam-card">
-        <div style="font-weight:700;font-size:16px;margin-bottom:8px;color:{PALETTE['text_primary']}">{name}</div>
+        f"""<div class="agentcard">
+        <div class="agentcard-name">{name}</div>
+        <div class="agentcard-adv">противник · {adversary}</div>
         {body}
-        <div class="fmam-label" style="margin-top:10px">{t('out_milex', lang)} · {t('out_rhet', lang)} · {t('out_drift', lang)}</div>
-        <div class="fmam-mono" style="color:{PALETTE['text_secondary']};font-size:13px">
+        <div style="margin-top:12px;font-size:12px;color:{PALETTE['text_muted']};font-weight:600">
+        {t('out_milex', lang)} · {t('out_rhet', lang)} · {t('out_drift', lang)}</div>
+        <div style="font-weight:700;color:{PALETTE['text_secondary']};font-size:14px">
         {action['milex']:.2f} · {action['rhet']:.2f} · {action['drift']:.2f}</div>
         </div>""",
-        unsafe_allow_html=True,
-    )
-
-
-def section_title(text: str) -> None:
-    """Заголовок раздела с тонкой линией снизу."""
-    st.markdown(
-        f"""<div style="border-bottom:1px solid {PALETTE['border']};
-        padding-bottom:6px;margin:8px 0 14px 0;font-weight:700;font-size:18px;
-        color:{PALETTE['text_primary']}">{text}</div>""",
         unsafe_allow_html=True,
     )
