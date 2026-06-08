@@ -68,20 +68,26 @@ THREAT_TYPES = {
 
 
 def _axis_scores(trajectory) -> dict:
-    """Площадь отклонения по трём осям за горизонт, нормированная."""
+    """
+    Площадь отклонения по трём осям за горизонт, взвешенная по влиянию агента.
+    Сдвиг у тяжёлого игрока весит больше, чем у малого, оттого эскалация КНР
+    не тонет в усреднении по мелким государствам.
+    """
     from engine.influence import CODES
+    from engine.synthesis import influence_weights
+    w = influence_weights()
     threat_area = trust_area = erosion_area = 0.0
     for c in CODES:
         states = trajectory.agent_states[c]
         z1_0, z2_0, z3_0 = states[0]
         for z1, z2, z3 in states:
-            threat_area += max(0.0, z1 - z1_0)
-            trust_area += max(0.0, z2_0 - z2)
-            erosion_area += max(0.0, z3 - z3_0)
-    horizon = len(trajectory.agent_states[CODES[0]]) * len(CODES)
-    return {"material": threat_area / horizon,
-            "alliance": trust_area / horizon,
-            "normative": erosion_area / horizon}
+            threat_area += w[c] * max(0.0, z1 - z1_0)
+            trust_area += w[c] * max(0.0, z2_0 - z2)
+            erosion_area += w[c] * max(0.0, z3 - z3_0)
+    years = len(trajectory.agent_states[CODES[0]])
+    return {"material": threat_area / years,
+            "alliance": trust_area / years,
+            "normative": erosion_area / years}
 
 
 def classify_threat_type(trajectory, baseline=None) -> dict:
@@ -105,19 +111,32 @@ def classify_threat_type(trajectory, baseline=None) -> dict:
     top_val = scores[top_key]
     runner = sorted(scores.values(), reverse=True)[1]
 
-    if top_val < 0.015 or (top_val - runner) < 0.008:
-        kind = "mixed"
-    else:
-        kind = top_key
-
     names = {
         "material": "ростом восприятия угрозы и гонкой вооружений",
         "alliance": "обвалом доверия к союзникам",
-        "normative": "нормативным распадом, эрозией ограничений на силу",
-        "mixed": "сразу по нескольким осям без явного лидера",
+        "normative": "нормативным распадом, эрозией ограничений на применение силы",
     }
-    text = (f"Сценарий развивается преимущественно {names[kind]}. "
-            f"Сдвиги осей за горизонт: угроза {scores['material']:+.2f}, "
-            f"доверие {-scores['alliance']:+.2f}, эрозия {scores['normative']:+.2f}.")
+
+    # Два разных смешанных случая, которые нельзя путать.
+    # Околофоновый: события слабо отклоняют систему или взаимно гасятся.
+    # Многоосевой: несколько осей растут сопоставимо, без явного лидера.
+    near_background = (baseline is not None) and (top_val < 0.015)
+    no_leader = (top_val - runner) < 0.008
+
+    if near_background:
+        kind = "mixed"
+        text = ("События слабо отклоняют систему от инерционного фона либо "
+                "взаимно гасят друг друга. Выраженного типа угрозы нет, "
+                "динамика близка к естественному дрейфу.")
+    elif no_leader:
+        kind = "mixed"
+        text = ("Несколько осей смещаются сопоставимо, без явного лидера. "
+                "Профиль комбинированный, угроза, доверие и эрозия сдвигаются "
+                "соизмеримо.")
+    else:
+        kind = top_key
+        ref = " над инерционным фоном" if baseline is not None else ""
+        text = (f"Сценарий развивается преимущественно {names[kind]}. "
+                f"Избыток{ref} по ведущей оси составляет {top_val:.2f}.")
 
     return {"type": kind, "label": THREAT_TYPES[kind], "text": text, "scores": scores}
