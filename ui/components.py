@@ -92,3 +92,33 @@ def threat_type_badge(classification: dict, lang="ru") -> None:
         </div>""",
         unsafe_allow_html=True,
     )
+
+
+
+def comparison_matrix(rows: list, lang="ru") -> None:
+    """Сводная таблица сравнения сценариев со светофорными точками вердикта."""
+    from ui.theme import verdict_color
+    head = (f'<tr style="text-align:left;color:{PALETTE["text_muted"]};font-size:12px;'
+            f'letter-spacing:1px;text-transform:uppercase">'
+            f'<th style="padding:10px 14px">{t("col_scenario", lang)}</th>'
+            f'<th style="padding:10px 14px">{t("col_verdict", lang)}</th>'
+            f'<th style="padding:10px 14px">{t("col_tension", lang)}</th>'
+            f'<th style="padding:10px 14px">{t("col_risk", lang)}</th>'
+            f'<th style="padding:10px 14px">{t("col_peak", lang)}</th>'
+            f'<th style="padding:10px 14px">{t("col_threat", lang)}</th></tr>')
+    body = ""
+    for r in rows:
+        vc = verdict_color(r["verdict_level"])
+        body += (f'<tr style="border-top:1px solid {PALETTE["border"]}">'
+                 f'<td style="padding:12px 14px;font-weight:700;color:{PALETTE["text_primary"]}">{r["name"]}</td>'
+                 f'<td style="padding:12px 14px"><span class="verdict-dot" '
+                 f'style="display:inline-block;width:12px;height:12px;border-radius:50%;background:{vc}"></span></td>'
+                 f'<td style="padding:12px 14px;font-weight:700;color:{PALETTE["accent"]}">{r["tension"]:.3f}</td>'
+                 f'<td style="padding:12px 14px;font-weight:700;color:{vc}">{r["risk"]*100:.0f}%</td>'
+                 f'<td style="padding:12px 14px;color:{PALETTE["text_secondary"]}">{r["peak"]:.3f}</td>'
+                 f'<td style="padding:12px 14px;color:{PALETTE["text_secondary"]}">{r["threat_label"]}</td></tr>')
+    st.markdown(
+        f'<div class="panel"><table style="width:100%;border-collapse:collapse">'
+        f'{head}{body}</table></div>',
+        unsafe_allow_html=True,
+    )
