@@ -61,6 +61,11 @@ def sidebar():
             key = st.selectbox("scen", list(SCENARIO_LABELS), label_visibility="collapsed",
                                format_func=lambda k: t(SCENARIO_LABELS[k], lang))
             run = st.button(t("run_button", lang), use_container_width=True, type="primary")
+        st.markdown("---")
+        if st.button(t("reset_button", lang), use_container_width=True):
+            for k in ("active", "custom_traj", "builder_spec"):
+                st.session_state.pop(k, None)
+            st.rerun()
     return lang, mode, key, horizon, run
 
 
@@ -155,7 +160,10 @@ def overview(traj, thresholds, baseline, lang):
         panel_close()
     with b:
         panel_open(t("regime_mix", lang))
-        st.plotly_chart(regime_area_figure(traj, lang), use_container_width=True, config=PLOT_CFG)
+        view = st.radio(t("regime_view", lang), ["area", "lines"], horizontal=True,
+                        label_visibility="collapsed", key="regime_view_sel",
+                        format_func=lambda m: t(f"view_{m}", lang))
+        st.plotly_chart(regime_area_figure(traj, lang, mode=view), use_container_width=True, config=PLOT_CFG)
         panel_close()
 
     panel_open(t("influence_title", lang))
@@ -170,18 +178,23 @@ def overview(traj, thresholds, baseline, lang):
         panel_close()
 
 
-def agents(lang):
+def agents(traj, lang):
     cols = st.columns(5)
     for col, code in zip(cols, AGENTS):
         a = AGENTS[code]
+        start = tuple(traj.agent_states[code][0])
+        final = tuple(traj.agent_states[code][-1])
+        action = traj.agent_actions[code][-1]
         with col:
-            agent_card(a.name, a.adversary, (a.z1, a.z2, a.z3), run_agent(code), lang)
+            agent_card(a.name, a.adversary, start, final, action, lang)
     st.write("")
     cols = st.columns(5)
     for col, code in zip(cols, AGENTS):
         a = AGENTS[code]
+        start = tuple(traj.agent_states[code][0])
+        final = tuple(traj.agent_states[code][-1])
         with col:
-            st.plotly_chart(agent_radar_figure((a.z1, a.z2, a.z3), a.name, lang),
+            st.plotly_chart(agent_radar_figure(start, final, a.name, lang),
                             use_container_width=True, config=PLOT_CFG)
 
 
@@ -196,7 +209,7 @@ def render_dashboard(traj, title, lang):
     with tabs[0]:
         overview(traj, thresholds, baseline, lang)
     with tabs[1]:
-        agents(lang)
+        agents(traj, lang)
     with tabs[2]:
         st.info("Разбор решения по шагам появится в следующем модуле."
                 if lang == "ru" else "Step-by-step trace arrives next.")
