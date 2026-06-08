@@ -24,7 +24,7 @@ def test_all_widgets_build():
     assert len(regime_donut_figure(tr.regime_dist[-1]).data) == 1
     assert len(regime_area_figure(tr).data) == 3
     assert len(influence_heatmap_figure().data) == 1
-    assert len(agent_radar_figure((0.7, 0.5, 0.6), "X").data) == 1
+    assert len(agent_radar_figure((0.7, 0.5, 0.6), (0.8, 0.4, 0.7), "X").data) == 2
 
 
 def test_gauge_zones_from_thresholds():
