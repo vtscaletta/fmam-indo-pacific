@@ -54,7 +54,7 @@ def sidebar():
         st.markdown(f"#### {t('mode_label', lang)}")
         mode = st.radio("mode", ["ready", "custom", "compare"], label_visibility="collapsed",
                         format_func=lambda m: t(f"mode_{m}", lang))
-        horizon = st.slider(t("horizon_label", lang), 5, 10, 10)
+        horizon = st.slider(t("horizon_label", lang), 3, 10, 10)
         key, run = None, False
         if mode == "ready":
             st.markdown(f"#### {t('scenario_label', lang)}")
@@ -198,11 +198,16 @@ def agents(traj, lang):
                             use_container_width=True, config=PLOT_CFG)
 
 
-def render_dashboard(traj, title, lang):
+def render_dashboard(traj, title, lang, description=None):
     thresholds = cached_thresholds()
     baseline = cached_run("inertial", len(traj.years))
     st.markdown(f'<h1>{title}, {traj.years[0]}–{traj.years[-1]}</h1>'
                 f'<div class="dash-sub">{t("app_subtitle", lang)}</div>', unsafe_allow_html=True)
+    if description:
+        st.markdown(
+            f'<div class="panel" style="margin:10px 0 6px 0;font-size:15px;'
+            f'color:{PALETTE["text_secondary"]};line-height:1.55">{description}</div>',
+            unsafe_allow_html=True)
     st.write("")
     tabs = st.tabs([t("tab_overview", lang), t("tab_agents", lang),
                     t("tab_transparency", lang), t("tab_report", lang)])
@@ -211,8 +216,8 @@ def render_dashboard(traj, title, lang):
     with tabs[1]:
         agents(traj, lang)
     with tabs[2]:
-        st.info("Разбор решения по шагам появится в следующем модуле."
-                if lang == "ru" else "Step-by-step trace arrives next.")
+        from ui.transparency import render_transparency
+        render_transparency(traj, lang)
     with tabs[3]:
         st.info("Генерация отчёта появится в финальном модуле."
                 if lang == "ru" else "Report generation arrives in the final module.")
@@ -295,7 +300,8 @@ def main():
                         unsafe_allow_html=True)
             return
         _, k, h = active
-        render_dashboard(cached_run(k, h), t(SCENARIO_LABELS[k], lang), lang)
+        render_dashboard(cached_run(k, h), t(SCENARIO_LABELS[k], lang), lang,
+                         description=t(f"desc_{k}", lang))
     else:
         spec, play = builder_panel(lang, horizon)
         if play and spec:
@@ -304,7 +310,8 @@ def main():
         traj = st.session_state.get("custom_traj")
         if traj is not None:
             st.write("")
-            render_dashboard(traj, t("custom_name", lang), lang)
+            render_dashboard(traj, t("custom_name", lang), lang,
+                             description=t("desc_custom", lang))
 
 
 main()
