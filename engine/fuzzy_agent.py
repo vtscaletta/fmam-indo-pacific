@@ -230,6 +230,36 @@ class FuzzyAgent:
         rows.sort(key=lambda r: r["alpha"], reverse=True)
         return rows
 
+    def all_rules(self) -> list:
+        """
+        Полная база из двадцати семи продукционных правил без привязки к
+        состоянию. Перебор ведётся по той же карте консеквентов, что строит
+        систему вывода, поэтому свод тождествен работающему контроллеру.
+        Предназначен для вынесения в приложение диссертации.
+        """
+        rows = []
+        for t in _TERMS:
+            for tr in _TERMS:
+                for e in _TERMS:
+                    lt, ltr, le = _LVL[t], _LVL[tr], _LVL[e]
+                    rows.append(
+                        {
+                            "if": {"threat": t, "trust": tr, "erosion": e},
+                            "then": {
+                                "milex": _consequent_milex(lt, ltr, le),
+                                "rhet": _consequent_rhet(lt, ltr, le),
+                                "drift": _consequent_drift(lt, ltr, le),
+                            },
+                        }
+                    )
+        return rows
+
+    def mf_params(self, var: str, term: str) -> tuple:
+        """Центр и ширину гауссовой функции принадлежности (var, term)."""
+        cal = {"z1": self.config.threat, "z2": self.config.trust,
+               "z3": self.config.erosion}[var]
+        return getattr(cal, term)
+
 
 # Готовый экземпляр агента "Япония" для импорта.
 JAPAN = FuzzyAgent(JAPAN_CONFIG)
