@@ -44,23 +44,29 @@ def panel_close() -> None:
     st.markdown("</div>", unsafe_allow_html=True)
 
 
-def agent_card(name: str, adversary: str, inputs: tuple, action: dict, lang="ru") -> None:
-    """Карточка агента с цветными полосами входов и профилем действия."""
-    z1, z2, z3 = inputs
-
-    def bar(label_key, value, color, tip_key):
+def agent_card(name: str, adversary: str, start: tuple, final: tuple, action: dict, lang="ru") -> None:
+    """
+    Карточка агента. Полоса показывает финал сценария, метка под ней даёт
+    старт и сдвиг, оттого видно, куда государство сместилось за горизонт.
+    """
+    def bar(label_key, s_val, f_val, color, tip_key):
         tip = tooltip(tip_key, lang).replace('"', "&quot;")
-        pct = int(round(value * 100))
+        pct = int(round(f_val * 100))
+        delta = f_val - s_val
+        sign = "+" if delta >= 0 else "−"
+        dcolor = PALETTE["s3"] if abs(delta) >= 0.005 and color == PALETTE["s3"] else PALETTE["text_muted"]
         return (
             f'<div class="barrow"><span title="{tip}" style="border-bottom:1px dotted {PALETTE["text_muted"]}">'
-            f'{t(label_key, lang)}</span><span style="font-weight:700;color:{PALETTE["text_primary"]}">{value:.2f}</span></div>'
+            f'{t(label_key, lang)}</span><span style="font-weight:700;color:{PALETTE["text_primary"]}">{f_val:.2f}</span></div>'
             f'<div class="bartrack"><div class="barfill" style="width:{pct}%;background:{color}"></div></div>'
+            f'<div style="font-size:11px;color:{PALETTE["text_muted"]};margin-top:2px">'
+            f'{t("agent_start", lang)} {s_val:.2f} · {sign}{abs(delta):.2f}</div>'
         )
 
     body = (
-        bar("var_threat", z1, PALETTE["s3"], "var_threat")
-        + bar("var_trust", z2, PALETTE["s1"], "var_trust")
-        + bar("var_erosion", z3, PALETTE["s2"], "var_erosion")
+        bar("var_threat", start[0], final[0], PALETTE["s3"], "var_threat")
+        + bar("var_trust", start[1], final[1], PALETTE["s1"], "var_trust")
+        + bar("var_erosion", start[2], final[2], PALETTE["s2"], "var_erosion")
     )
     st.markdown(
         f"""<div class="agentcard">
