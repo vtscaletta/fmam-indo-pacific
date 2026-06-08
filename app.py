@@ -52,7 +52,7 @@ def sidebar():
         lang = st.radio("lang", list(LANGUAGES), horizontal=True, label_visibility="collapsed",
                         format_func=lambda x: {"ru": "Русский", "en": "English"}[x])
         st.markdown(f"#### {t('mode_label', lang)}")
-        mode = st.radio("mode", ["ready", "custom"], label_visibility="collapsed",
+        mode = st.radio("mode", ["ready", "custom", "compare"], label_visibility="collapsed",
                         format_func=lambda m: t(f"mode_{m}", lang))
         horizon = st.slider(t("horizon_label", lang), 5, 10, 10)
         key, run = None, False
@@ -205,9 +205,67 @@ def render_dashboard(traj, title, lang):
                 if lang == "ru" else "Report generation arrives in the final module.")
 
 
+def compare_view(lang, horizon):
+    """Сравнение всех готовых сценариев бок о бок."""
+    from ui.charts import comparison_tension_figure, comparison_risk_figure
+    from ui.components import comparison_matrix
+
+    thresholds = cached_thresholds()
+    baseline = cached_run("inertial", horizon)
+    trajs = {k: cached_run(k, horizon) for k in SCENARIO_LABELS}
+    labels = {k: t(SCENARIO_LABELS[k], lang) for k in SCENARIO_LABELS}
+
+    # Если пользователь собрал свой сценарий, он встаёт пятой линией.
+    custom = st.session_state.get("custom_traj")
+    has_custom = custom is not None and len(custom.years) == horizon
+    if has_custom:
+        trajs["custom"] = custom
+        labels["custom"] = t("custom_name", lang)
+
+    st.markdown(f'<h1>{t("cmp_title", lang)}</h1>'
+                f'<div class="dash-sub">{t("app_subtitle", lang)}</div>', unsafe_allow_html=True)
+    if not has_custom:
+        st.markdown(
+            f'<div style="font-size:14px;color:{PALETTE["text_muted"]};margin-bottom:6px">'
+            + ("Соберите свой сценарий в режиме «Свой сценарий», и он встанет пятой линией для сравнения."
+               if lang == "ru" else
+               "Assemble a custom scenario to add it as a fifth line here.")
+            + "</div>", unsafe_allow_html=True)
+    st.write("")
+
+    panel_open(t("cmp_tension", lang))
+    st.plotly_chart(comparison_tension_figure(trajs, thresholds, labels, lang),
+                    use_container_width=True, config=PLOT_CFG)
+    panel_close()
+
+    rows = []
+    for k in trajs:
+        tr = trajs[k]
+        v = classify(tr, thresholds)
+        threat = classify_threat_type(tr, baseline=baseline)
+        rows.append({"name": labels[k], "verdict_level": v["level"],
+                     "tension": tr.tension[-1], "risk": tr.regime_dist[-1][2],
+                     "peak": max(tr.tension), "threat_label": threat["label"]})
+
+    a, b = st.columns([3, 2])
+    with a:
+        panel_open(t("cmp_table", lang))
+        comparison_matrix(rows, lang)
+        panel_close()
+    with b:
+        panel_open(t("cmp_risk", lang))
+        st.plotly_chart(comparison_risk_figure(trajs, labels, lang),
+                        use_container_width=True, config=PLOT_CFG)
+        panel_close()
+
+
 def main():
     lang, mode, key, horizon, run = sidebar()
     st.markdown(f'<div class="dash-eyebrow">{t("app_title", lang)}</div>', unsafe_allow_html=True)
+
+    if mode == "compare":
+        compare_view(lang, horizon)
+        return
 
     if mode == "ready":
         if run:
