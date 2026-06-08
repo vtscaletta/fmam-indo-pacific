@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+import numpy as np
 import plotly.graph_objects as go
 
 from ui.theme import PALETTE, regime_color, plotly_layout
@@ -157,6 +158,61 @@ def agent_radar_figure(start, final=None, name="", lang="ru") -> go.Figure:
                       legend=dict(orientation="h", y=-0.12, font=dict(size=11)),
                       title=dict(text=name, font=dict(size=14)))
     return _apply(fig, height=300)
+
+
+_TERM_COLOR = {"low": PALETTE["s1"], "med": PALETTE["s2"], "high": PALETTE["s3"]}
+_TERM_FILL = {"low": "rgba(22,163,74,0.10)", "med": "rgba(217,119,6,0.10)",
+              "high": "rgba(220,38,38,0.10)"}
+_TERM_LABEL = {"low": "term_low", "med": "term_med", "high": "term_high"}
+
+
+def membership_figure(var_label: str, z_value: float, params: dict,
+                      memberships: dict, lang: str = "ru") -> go.Figure:
+    """
+    График функций принадлежности одной переменной, те самые холмики.
+
+    Три гауссовых терма на области [0, 1], вертикаль на текущем значении и
+    маркеры в точках пересечения со степенями принадлежности. Делает зримым
+    то, что формула выражает числом: значение частично принадлежит сразу
+    нескольким термам. params суть {term: (центр, ширина)}, memberships суть
+    {term: степень}.
+    """
+    u = np.arange(0.0, 1.001, 0.005)
+    fig = go.Figure()
+    for term in ("low", "med", "high"):
+        c, s = params[term]
+        mu = np.exp(-((u - c) ** 2) / (2.0 * s * s))
+        fig.add_trace(go.Scatter(
+            x=u, y=mu, mode="lines", name=t(_TERM_LABEL[term], lang),
+            line=dict(color=_TERM_COLOR[term], width=2),
+            fill="tozeroy", fillcolor=_TERM_FILL[term],
+            hoverinfo="skip",
+        ))
+    # Вертикаль на текущем значении.
+    fig.add_shape(type="line", x0=z_value, x1=z_value, y0=0, y1=1.04,
+                  line=dict(color=PALETTE["text_secondary"], width=1.5, dash="dash"))
+    # Маркеры степеней принадлежности на вертикали.
+    for term in ("low", "med", "high"):
+        val = memberships[term]
+        if val < 0.02:
+            continue
+        fig.add_trace(go.Scatter(
+            x=[z_value], y=[val], mode="markers+text",
+            marker=dict(color=_TERM_COLOR[term], size=9,
+                        line=dict(color="white", width=1.5)),
+            text=[f"{val:.2f}"], textposition="middle right",
+            textfont=dict(size=11, color=_TERM_COLOR[term]),
+            showlegend=False, hoverinfo="skip",
+        ))
+    fig.update_layout(
+        title=dict(text=f"{var_label} · {z_value:.2f}", font=dict(size=13)),
+        xaxis=dict(range=[0, 1], showgrid=False, tickfont=dict(size=10)),
+        yaxis=dict(range=[0, 1.1], showticklabels=False, showgrid=False),
+        showlegend=True,
+        legend=dict(orientation="h", y=-0.18, font=dict(size=10)),
+        margin=dict(l=10, r=10, t=34, b=10),
+    )
+    return _apply(fig, height=240)
 
 
 # Цвета сценариев для сравнения. Тайвань багряный как тяжелейший.
