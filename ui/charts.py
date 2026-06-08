@@ -133,3 +133,52 @@ def agent_radar_figure(state, name="", lang="ru") -> go.Figure:
     fig.update_layout(polar=dict(radialaxis=dict(range=[0, 1], showticklabels=False)),
                       showlegend=False, title=dict(text=name, font=dict(size=14)))
     return _apply(fig, height=260)
+
+
+# Цвета сценариев для сравнения. Тайвань багряный как тяжелейший.
+COMPARE_COLORS = {
+    "inertial": PALETTE["text_muted"],
+    "article9": PALETTE["accent"],
+    "alliance": PALETTE["accent2"],
+    "taiwan": PALETTE["s3"],
+    "custom": "#7C3AED",
+}
+
+
+def comparison_tension_figure(trajs: dict, thresholds: dict, labels: dict, lang="ru") -> go.Figure:
+    """Траектории напряжения нескольких сценариев на одних осях."""
+    fig = go.Figure()
+    th12, th23 = thresholds.get("S1->S2"), thresholds.get("S2->S3")
+    if th12 is not None:
+        fig.add_hline(y=th12, line=dict(color=PALETTE["s1"], width=1, dash="dot"))
+    if th23 is not None:
+        fig.add_hline(y=th23, line=dict(color=PALETTE["s3"], width=1, dash="dot"))
+    for key, tr in trajs.items():
+        fig.add_trace(go.Scatter(
+            x=tr.years, y=tr.tension, mode="lines+markers", name=labels.get(key, key),
+            line=dict(color=COMPARE_COLORS.get(key, PALETTE["accent"]), width=3, shape="spline"),
+            marker=dict(size=6),
+            hovertemplate="%{x}: %{y:.3f}<extra></extra>",
+        ))
+    fig.update_yaxes(range=[0, 1], gridcolor=PALETTE["border"])
+    fig.update_xaxes(gridcolor=PALETTE["border"])
+    fig = _apply(fig, height=380)
+    fig.update_layout(legend=dict(orientation="h", y=-0.16, x=0))
+    return fig
+
+
+def comparison_risk_figure(trajs: dict, labels: dict, lang="ru") -> go.Figure:
+    """Столбики итогового риска дестабилизации по сценариям."""
+    keys = list(trajs)
+    names = [labels.get(k, k) for k in keys]
+    risks = [float(trajs[k].regime_dist[-1][2]) * 100 for k in keys]
+    colors = [COMPARE_COLORS.get(k, PALETTE["accent"]) for k in keys]
+    fig = go.Figure(go.Bar(
+        x=risks, y=names, orientation="h", marker=dict(color=colors),
+        text=[f"{r:.0f}%" for r in risks], textposition="outside",
+        hovertemplate="%{x:.0f}%<extra></extra>",
+    ))
+    fig.update_xaxes(range=[0, max(risks) * 1.25 if risks else 1], ticksuffix="%", gridcolor=PALETTE["border"])
+    fig = _apply(fig, height=300)
+    fig.update_layout(showlegend=False)
+    return fig
