@@ -139,3 +139,57 @@ ALL_SCENARIOS = {
     "taiwan": TAIWAN_CRISIS,
     "alliance": ALLIANCE_WEAKENING,
 }
+
+
+# --- Конструктор пользовательских сценариев ---
+
+# Каталог типов событий. Понятное название переводится в переменную состояния
+# и знак воздействия. Пользователь собирает мир из этих кубиков, а модель сама
+# вычисляет, как агенты на них отреагируют.
+EVENT_CATALOG = {
+    "mil_escalation": {"var": "z1", "sign": +1,
+                       "ru": "Военная эскалация", "en": "Military escalation"},
+    "detente": {"var": "z1", "sign": -1,
+                "ru": "Военная разрядка", "en": "Military detente"},
+    "alliance_loss": {"var": "z2", "sign": -1,
+                      "ru": "Подрыв доверия к союзнику", "en": "Erosion of alliance trust"},
+    "alliance_boost": {"var": "z2", "sign": +1,
+                       "ru": "Укрепление альянса", "en": "Alliance reinforcement"},
+    "norm_shift": {"var": "z3", "sign": +1,
+                   "ru": "Нормативный сдвиг, мобилизация, реформа", "en": "Normative shift"},
+}
+
+# Уровни силы события.
+MAGNITUDE_LEVELS = {
+    "light": {"value": 0.10, "ru": "умеренное", "en": "light"},
+    "strong": {"value": 0.20, "ru": "сильное", "en": "strong"},
+    "extreme": {"value": 0.30, "ru": "экстремальное", "en": "extreme"},
+}
+
+
+def build_custom_scenario(spec: list, name: str = "Свой сценарий") -> Scenario:
+    """
+    Собирает сценарий из пользовательской спецификации.
+
+    spec суть список словарей с ключами step, agent, event, magnitude.
+    step    год относительно начала, отсчёт от нуля
+    agent   код агента
+    event   ключ из EVENT_CATALOG
+    magnitude  ключ из MAGNITUDE_LEVELS
+
+    Кубики задают внешние события мира, не действия агентов. Реакцию агентов
+    модель вычисляет сама, причинность сохранена.
+    """
+    events = []
+    for item in spec:
+        cat = EVENT_CATALOG[item["event"]]
+        mag = MAGNITUDE_LEVELS[item["magnitude"]]["value"]
+        delta = cat["sign"] * mag
+        agent_name = AGENTS_NAME.get(item["agent"], item["agent"])
+        desc = f"{agent_name}: {cat['ru']} ({MAGNITUDE_LEVELS[item['magnitude']]['ru']})"
+        events.append(ShockEvent(item["step"], item["agent"], cat["var"], delta, desc))
+    return Scenario(name=name, description="Пользовательский набор событий.", events=events)
+
+
+# Имена агентов для описаний, без импорта на уровне модуля во избежание цикла.
+AGENTS_NAME = {"usa": "США", "chn": "КНР", "jpn": "Япония", "twn": "Тайвань", "kor": "Республика Корея"}
