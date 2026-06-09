@@ -147,35 +147,32 @@ def overview(traj, thresholds, baseline, lang):
     with c[3]: kpi(t("to_threshold", lang), f"{to_th:+.3f}", PALETTE["s1"] if to_th > 0 else PALETTE["s3"])
     st.write("")
 
-        a, b = st.columns([1, 2])
+    a, b = st.columns([1, 2])
     with a:
         panel_open(t("gauge_tension", lang))
-        st.plotly_chart(gauge_figure(last, thresholds, ""), use_container_width=True, config=PLOT_CFG, key=f"gauge_{id(traj)}")
+        st.plotly_chart(gauge_figure(last, thresholds, ""), use_container_width=True, config=PLOT_CFG)
         panel_close()
     with b:
         panel_open(t("tension_trace", lang))
-        st.plotly_chart(tension_area_figure(traj, thresholds, lang), use_container_width=True, config=PLOT_CFG, key=f"tension_{id(traj)}")
+        st.plotly_chart(tension_area_figure(traj, thresholds, lang), use_container_width=True, config=PLOT_CFG)
         panel_close()
 
     a, b = st.columns([1, 2])
     with a:
         panel_open(t("regime_final", lang))
-        st.plotly_chart(regime_donut_figure(traj.regime_dist[-1], lang), use_container_width=True, config=PLOT_CFG, key=f"donut_{id(traj)}")
+        st.plotly_chart(regime_donut_figure(traj.regime_dist[-1], lang), use_container_width=True, config=PLOT_CFG)
         panel_close()
     with b:
         panel_open(t("regime_mix", lang))
         view = st.radio(t("regime_view", lang), ["area", "lines"], horizontal=True,
-                        label_visibility="collapsed", key=f"regime_view_sel_{id(traj)}",
+                        label_visibility="collapsed", key="regime_view_sel",
                         format_func=lambda m: t(f"view_{m}", lang))
-        st.plotly_chart(regime_area_figure(traj, lang, mode=view), use_container_width=True, config=PLOT_CFG, key=f"regime_area_{id(traj)}")
+        st.plotly_chart(regime_area_figure(traj, lang, mode=view), use_container_width=True, config=PLOT_CFG)
         panel_close()
 
     panel_open(t("influence_title", lang))
-    st.plotly_chart(influence_heatmap_figure(lang), use_container_width=True, config=PLOT_CFG, key=f"heatmap_{id(traj)}")
+    st.plotly_chart(influence_heatmap_figure(lang), use_container_width=True, config=PLOT_CFG)
     panel_close()
-
-
-
 
     if traj.events_log:
         panel_open(t("events_title", lang))
