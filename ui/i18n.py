@@ -28,7 +28,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "tab_agents": {"ru": "Агенты", "en": "Agents"},
     "tab_transparency": {"ru": "Разбор решения", "en": "Decision trace"},
     "tab_report": {"ru": "Отчёт", "en": "Report"},
-    "report_download": {"ru": "Скачать отчёт (HTML с графиком)", "en": "Download report (HTML with chart)"},
+    "report_download": {"ru": "Скачать отчёт (HTML)", "en": "Download report (HTML)"},
     "report_print_hint": {"ru": "Откройте файл в браузере и через печать сохраните как PDF, график сохранится.", "en": "Open in a browser and print to PDF, the chart is preserved."},
     "report_nodal": {"ru": "Узловые годы", "en": "Nodal years"},
     "report_year": {"ru": "Год", "en": "Year"},
