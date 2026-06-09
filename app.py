@@ -176,6 +176,7 @@ def overview(traj, thresholds, baseline, lang):
 
 
 
+
     if traj.events_log:
         panel_open(t("events_title", lang))
         for year, desc in traj.events_log:
