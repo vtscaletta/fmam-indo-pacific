@@ -72,7 +72,8 @@ def test_events_extracted_for_shock_scenario(thresholds):
     d = build_report_data(traj, ALL_SCENARIOS["taiwan"], thresholds)
     assert len(d["events"]) > 0
     for ev in d["events"]:
-        assert ev["variable"] in ("z1", "z2", "z3")
+        assert "year" in ev and "description" in ev
+        assert isinstance(ev["year"], int)
 
 
 # --- Модуль 12, слой текста ---
