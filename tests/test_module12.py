@@ -73,3 +73,45 @@ def test_events_extracted_for_shock_scenario(thresholds):
     assert len(d["events"]) > 0
     for ev in d["events"]:
         assert ev["variable"] in ("z1", "z2", "z3")
+
+
+# --- Модуль 12, слой текста ---
+
+def _narr(key, thresholds, horizon=6):
+    from engine.report_text import build_narrative
+    traj = _run(key, horizon)
+    data = build_report_data(traj, ALL_SCENARIOS[key], thresholds)
+    return build_narrative(data)
+
+
+def test_narrative_has_four_standard_sections(thresholds):
+    narr = _narr("taiwan", thresholds)
+    headings = [s["heading"] for s in narr["sections"]]
+    assert "Резюме" in headings
+    assert "Что мы знаем" in headings
+    assert "Что показывает модель" in headings
+    assert "Чего мы не знаем" in headings
+
+
+def test_narrative_style_no_colons_or_em_dashes(thresholds):
+    """Стиль автора, без двоеточий и длинных тире во всём тексте."""
+    for key in ("taiwan", "inertial", "article9", "alliance"):
+        narr = _narr(key, thresholds)
+        text = " ".join(p for s in narr["sections"] for p in s["paragraphs"])
+        assert ":" not in text, f"двоеточие в {key}"
+        assert "—" not in text, f"длинное тире в {key}"
+
+
+def test_narrative_paragraphs_nonempty(thresholds):
+    narr = _narr("article9", thresholds)
+    for sec in narr["sections"]:
+        assert len(sec["paragraphs"]) >= 1
+        for p in sec["paragraphs"]:
+            assert len(p.strip()) > 0
+
+
+def test_narrative_verdict_tone_varies(thresholds):
+    """Резюме красного и фонового сценариев звучат по-разному."""
+    taiwan = _narr("taiwan", thresholds)["sections"][0]["paragraphs"][0]
+    inertial = _narr("inertial", thresholds)["sections"][0]["paragraphs"][0]
+    assert taiwan != inertial
