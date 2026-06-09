@@ -66,8 +66,7 @@ def _known(data: dict) -> list:
     events = data.get("events", [])
     if events:
         listing = "; ".join(
-            f"{m['base_year'] + ev['step']} год, {ev['target']}, "
-            f"{ev['description'].rstrip('.')}"
+            f"{ev['year']} год, {ev['description'].rstrip('.')}"
             for ev in events
         )
         paras.append(
