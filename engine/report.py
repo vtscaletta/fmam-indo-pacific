@@ -93,6 +93,9 @@ def _drivers(traj, threat_type: dict) -> dict:
     агенты, чья активность весит в синтезе тяжелее прочих.
     """
     scores = threat_type.get("scores", {})
+    total = sum(scores.values()) or 1.0
+    shares = {k: round(v / total, 3) for k, v in scores.items()}
+    ordered = sorted(shares.items(), key=lambda kv: kv[1], reverse=True)
     # Средняя нормативная эрозия Японии за горизонт, ключевой узел работы.
     jp_states = traj.agent_states.get("jpn", [])
     jp_erosion = (sum(s[2] for s in jp_states) / len(jp_states)) if jp_states else None
@@ -101,10 +104,35 @@ def _drivers(traj, threat_type: dict) -> dict:
     cn_milex = (sum(a["milex"] for a in cn_actions) / len(cn_actions)) if cn_actions else None
     return {
         "axis_scores": scores,
+        "axis_shares": shares,
+        "axis_ranked": ordered,
         "dominant_axis": threat_type.get("type"),
         "japan_mean_erosion": round(jp_erosion, 3) if jp_erosion is not None else None,
         "china_mean_milex": round(cn_milex, 3) if cn_milex is not None else None,
     }
+
+
+def _comparison(traj, baseline, thresholds: dict) -> dict:
+    """
+    Сравнение с инерционным фоном и положение относительно порога срыва.
+    Отвечает на вопрос, что добавили именно заданные шоки сверх дрейфа.
+    """
+    final = float(traj.tension[-1]) if traj.tension else 0.0
+    peak = max((float(x) for x in traj.tension), default=0.0)
+    th23 = thresholds.get("S2->S3")
+    out = {
+        "final": round(final, 4),
+        "peak": round(peak, 4),
+        "gap_to_collapse": round(th23 - peak, 4) if th23 is not None else None,
+    }
+    if baseline is not None and getattr(baseline, "tension", None):
+        b_final = float(baseline.tension[-1])
+        b_peak = max(float(x) for x in baseline.tension)
+        out["baseline_final"] = round(b_final, 4)
+        out["baseline_peak"] = round(b_peak, 4)
+        out["excess_final"] = round(final - b_final, 4)
+        out["excess_peak"] = round(peak - b_peak, 4)
+    return out
 
 
 def _events(traj) -> list:
@@ -146,15 +174,17 @@ def _gaps(traj, thresholds: dict, base_year: int) -> list:
     return gaps
 
 
-def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2025) -> dict:
+def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2025,
+                      baseline=None) -> dict:
     """
     Главная сборка. Возвращает структуру отчёта по разведывательному
     стандарту, что знаем, что думаем, чего не знаем, плюс узловые годы для
-    врезок. Текст и источники накладываются последующими модулями.
+    врезок. Если передан инерционный baseline, добавляется сравнение фона.
+    Текст и источники накладываются последующими модулями.
     """
     timeline = _timeline(traj, thresholds)
     verdict = classify(traj, thresholds)
-    threat_type = classify_threat_type(traj)
+    threat_type = classify_threat_type(traj, baseline=baseline)
     return {
         "meta": {
             "scenario": getattr(scenario, "name", "сценарий"),
@@ -172,6 +202,7 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2025) -
         "timeline": timeline,
         "nodal_years": _nodal_years(timeline),
         "drivers": _drivers(traj, threat_type),
+        "comparison": _comparison(traj, baseline, thresholds),
         # Что знаем. Заданные сценарием толчки.
         "events": _events(traj),
         # Чего не знаем.
