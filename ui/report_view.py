@@ -80,8 +80,9 @@ def render_report(traj, title: str, description: str, thresholds: dict, lang: st
     # Врезка, траектория напряжения с порогами.
     panel_open(t("report_trajectory", lang))
     st.plotly_chart(tension_area_figure(traj, thresholds, lang),
-                    use_container_width=True, config=_PLOT_CFG)
+                    use_container_width=True, config=_PLOT_CFG, key=f"report_chart_{id(traj)}")
     panel_close()
+
 
     # Текстовые разделы, что знаем, что думаем, чего не знаем.
     for sec in narr["sections"]:
