@@ -28,6 +28,12 @@ STRINGS: dict[str, dict[str, str]] = {
     "tab_agents": {"ru": "Агенты", "en": "Agents"},
     "tab_transparency": {"ru": "Разбор решения", "en": "Decision trace"},
     "tab_report": {"ru": "Отчёт", "en": "Report"},
+    "report_download": {"ru": "Скачать отчёт (Markdown)", "en": "Download report (Markdown)"},
+    "report_nodal": {"ru": "Узловые годы", "en": "Nodal years"},
+    "report_year": {"ru": "Год", "en": "Year"},
+    "report_event": {"ru": "Что произошло", "en": "What happened"},
+    "report_tension": {"ru": "Напряжение", "en": "Tension"},
+    "report_trajectory": {"ru": "Траектория напряжения по годам", "en": "Tension trajectory"},
 
     # Управление
     "scenario_label": {"ru": "Сценарий", "en": "Scenario"},
