@@ -224,7 +224,7 @@ def render_dashboard(traj, title, lang, description=None):
         render_transparency(traj, lang)
     with tabs[3]:
         from ui.report_view import render_report
-        render_report(traj, title, description or "", thresholds, lang)
+        render_report(traj, title, description or "", thresholds, lang, baseline=baseline)
 
 
 def compare_view(lang, horizon):
