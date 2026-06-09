@@ -223,8 +223,8 @@ def render_dashboard(traj, title, lang, description=None):
         from ui.transparency import render_transparency
         render_transparency(traj, lang)
     with tabs[3]:
-        st.info("Генерация отчёта появится в финальном модуле."
-                if lang == "ru" else "Report generation arrives in the final module.")
+        from ui.report_view import render_report
+        render_report(traj, title, description or "", thresholds, lang)
 
 
 def compare_view(lang, horizon):
