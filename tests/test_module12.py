@@ -88,10 +88,10 @@ def _narr(key, thresholds, horizon=6):
 def test_narrative_has_four_standard_sections(thresholds):
     narr = _narr("taiwan", thresholds)
     headings = [s["heading"] for s in narr["sections"]]
-    assert "Резюме" in headings
-    assert "Что мы знаем" in headings
-    assert "Что показывает модель" in headings
-    assert "Чего мы не знаем" in headings
+    assert "Сводное заключение" in headings
+    assert "Исходная обстановка" in headings
+    assert "Динамика и результаты моделирования" in headings
+    assert "Пределы достоверности" in headings
 
 
 def test_narrative_style_no_colons_or_em_dashes(thresholds):
