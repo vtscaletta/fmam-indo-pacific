@@ -67,12 +67,12 @@ def _to_html(narr: dict, data: dict, fig, lang: str) -> str:
 <style>
   body {{ font-family: Georgia, 'Times New Roman', serif; max-width: 820px;
          margin: 40px auto; padding: 0 24px; color: #1a1a1a; line-height: 1.65;
-         font-size: 16px; }}
-  h1 {{ font-size: 24px; color: #1F4788; margin-bottom: 4px; }}
-  h2 {{ font-size: 20px; color: #1F4788; margin-top: 28px;
+         font-size: 17px; }}
+  h1 {{ font-size: 26px; color: #1F4788; margin-bottom: 4px; }}
+  h2 {{ font-size: 22px; color: #1F4788; margin-top: 28px;
         border-bottom: 1px solid #d8dee9; padding-bottom: 5px; }}
-  p {{ font-size: 16px; margin: 10px 0; text-align: justify; }}
-  .sub {{ color: #6b7280; font-style: italic; font-size: 15px; }}
+  p {{ font-size: 17px; margin: 11px 0; text-align: justify; }}
+  .sub {{ color: #6b7280; font-style: italic; font-size: 16px; }}
   .chart {{ margin: 18px 0; }}
   @media print {{ body {{ margin: 0; }} h2 {{ page-break-after: avoid; }} }}
 </style></head><body>
@@ -87,8 +87,8 @@ def render_report(traj, title: str, description: str, thresholds: dict,
                              baseline=baseline)
     narr = build_narrative(data)
 
-    st.markdown(f'<h2 style="margin-bottom:2px;font-size:24px">{narr["title"]}</h2>'
-                f'<div style="color:{PALETTE["text_muted"]};font-size:15px;'
+    st.markdown(f'<h2 style="margin-bottom:2px;font-size:26px">{narr["title"]}</h2>'
+                f'<div style="color:{PALETTE["text_muted"]};font-size:16px;'
                 f'margin-bottom:12px">{narr["subtitle"]}</div>', unsafe_allow_html=True)
 
     verdict_banner(data["verdict"])
@@ -102,7 +102,7 @@ def render_report(traj, title: str, description: str, thresholds: dict,
             continue
         panel_open(sec["heading"])
         for p in sec["paragraphs"]:
-            st.markdown(f'<div style="font-size:16px;line-height:1.65;'
+            st.markdown(f'<div style="font-size:17px;line-height:1.65;'
                         f'color:{PALETTE["text_primary"]};margin-bottom:9px">{p}</div>',
                         unsafe_allow_html=True)
         # Врезка графика после раздела динамики.
@@ -115,16 +115,16 @@ def render_report(traj, title: str, description: str, thresholds: dict,
     panel_open(t("report_nodal", lang))
     tmap = {row["year"]: row["tension"] for row in data["timeline"]}
     rows = "".join(
-        f'<tr><td style="padding:8px 14px;font-weight:700;font-size:16px;'
+        f'<tr><td style="padding:8px 14px;font-weight:700;font-size:17px;'
         f'color:{PALETTE["accent"]}">{n["year"]}</td>'
-        f'<td style="padding:8px 14px;font-size:15px;color:{PALETTE["text_primary"]}">{n["kind"]}</td>'
+        f'<td style="padding:8px 14px;font-size:16px;color:{PALETTE["text_primary"]}">{n["kind"]}</td>'
         f'<td style="padding:8px 14px;text-align:right;font-family:monospace;'
-        f'font-size:15px">{tmap.get(n["year"], 0):.3f}</td></tr>'
+        f'font-size:16px">{tmap.get(n["year"], 0):.3f}</td></tr>'
         for n in data["nodal_years"]
     )
     st.markdown(
         f'<table style="width:100%;border-collapse:collapse">'
-        f'<tr style="color:{PALETTE["text_muted"]};font-size:13px;text-transform:uppercase">'
+        f'<tr style="color:{PALETTE["text_muted"]};font-size:14px;text-transform:uppercase">'
         f'<th style="padding:8px 14px;text-align:left">{t("report_year", lang)}</th>'
         f'<th style="padding:8px 14px;text-align:left">{t("report_event", lang)}</th>'
         f'<th style="padding:8px 14px;text-align:right">{t("report_tension", lang)}</th></tr>'
@@ -136,6 +136,6 @@ def render_report(traj, title: str, description: str, thresholds: dict,
     st.download_button(
         t("report_download", lang), data=html_doc.encode("utf-8"),
         file_name="fmam_report.html", mime="text/html",
-        use_container_width=True,
+        use_container_width=False,
     )
     st.caption(t("report_print_hint", lang))
