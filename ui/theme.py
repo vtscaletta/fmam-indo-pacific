@@ -127,4 +127,8 @@ h1 {{ font-size: 38px; font-weight: 800; }}
 .barfill {{ height:8px; border-radius:6px; }}
 
 .pill {{ display:inline-block; padding:6px 14px; border-radius:999px; font-weight:700; font-size:14px; }}
+
+.stButton > button, .stDownloadButton > button {{
+    padding: 0.3rem 0.9rem !important; min-height: 0 !important;
+    line-height: 1.3 !important; }}
 """
