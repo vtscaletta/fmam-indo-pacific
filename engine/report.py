@@ -15,7 +15,6 @@
 from __future__ import annotations
 
 from engine.analysis import classify, classify_threat_type
-from engine.agents import AGENTS
 
 
 # Порог резкого сдвига напряжения за один год. Подобран так, чтобы отмечать
@@ -108,17 +107,15 @@ def _drivers(traj, threat_type: dict) -> dict:
     }
 
 
-def _events(scenario) -> list:
-    """Шоки сценария по годам. Экзогенные толчки, заданные конструктором."""
+def _events(traj) -> list:
+    """
+    Шоки сценария по годам из лога траектории. Год абсолютный, описание
+    человекочитаемое. Лог траектории есть единственный источник, что
+    исключает рассинхрон с объектом сценария.
+    """
     out = []
-    for ev in getattr(scenario, "events", []):
-        out.append({
-            "step": ev.step,
-            "target": AGENTS[ev.target].name if ev.target in AGENTS else ev.target,
-            "variable": ev.variable,
-            "delta": ev.delta,
-            "description": ev.description,
-        })
+    for year, description in getattr(traj, "events_log", []):
+        out.append({"year": year, "description": description})
     return out
 
 
@@ -176,7 +173,7 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2025) -
         "nodal_years": _nodal_years(timeline),
         "drivers": _drivers(traj, threat_type),
         # Что знаем. Заданные сценарием толчки.
-        "events": _events(scenario),
+        "events": _events(traj),
         # Чего не знаем.
         "gaps": _gaps(traj, thresholds, base_year),
     }
