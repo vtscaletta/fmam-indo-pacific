@@ -134,7 +134,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "regime_view": {"ru": "Вид графика", "en": "Chart view"},
     "view_area": {"ru": "Площади", "en": "Areas"},
     "view_lines": {"ru": "Линии", "en": "Lines"},
-    "agent_start": {"ru": "старт 2025", "en": "start 2025"},
+    "agent_start": {"ru": "стартовый срез", "en": "start state"},
     "agent_final": {"ru": "финал сценария", "en": "scenario end"},
     "agent_shift": {"ru": "сдвиг за сценарий", "en": "shift over scenario"},
     # Детальные описания базовых сценариев
@@ -167,7 +167,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "trn_s4_pi": {"ru": "Перцептивное давление, свёртка восприятия угрозы, дефицита доверия и эрозии по всем агентам.", "en": "Perceptual pressure across all agents."},
     "trn_s4_tau": {"ru": "Итоговое напряжение года через логистическую сигмоиду.", "en": "Final tension via the logistic sigmoid."},
     "trn_lam_label": {"ru": "Коэффициенты забывания по измерениям (нарастание, спад)", "en": "Forgetting per dimension (up, down)"},
-    "trn_all_rules": {"ru": "Полная база из 27 продукционных правил (для приложения)", "en": "Full base of 27 rules (for the appendix)"},
+    "trn_all_rules": {"ru": "Полная база из 27 продукционных правил", "en": "Full base of 27 production rules"},
 
 
 
