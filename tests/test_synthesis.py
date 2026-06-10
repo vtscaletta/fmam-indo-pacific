@@ -94,7 +94,7 @@ def test_quiet_system_low_tension():
     assert tau < 0.32
 
 
-def test_year2025_tension_in_confrontation_band():
+def test_base_year_tension_in_confrontation_band():
     c = LevelCoupling()
     tau = c.raw_tension(_actions(), _states())
     assert 0.48 < tau < 0.65
