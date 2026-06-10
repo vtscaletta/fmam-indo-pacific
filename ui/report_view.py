@@ -61,6 +61,17 @@ def _to_html(narr: dict, data: dict, fig, lang: str) -> str:
         if sec["heading"].startswith("Динамика"):
             blocks.append(f'<div class="chart">{chart}</div>')
     body = "\n".join(blocks)
+    # Источники калибровки в конце документа.
+    srcs = data.get("sources", [])
+    if srcs:
+        src_items = []
+        for s in srcs:
+            link = (f'<a href="{s["url"]}">{_html.escape(s["source"])}</a>'
+                    if s.get("url") else _html.escape(s["source"]))
+            src_items.append(
+                f'<li><b>{s["year"]}</b>. {_html.escape(s["fact"])} <span class="src">{link}</span></li>')
+        body += ('\n<h2>Источники калибровки</h2>\n<ul class="sources">\n'
+                 + "\n".join(src_items) + '\n</ul>')
     return f"""<!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8">
 <title>{_html.escape(narr["title"])}</title>
@@ -74,6 +85,8 @@ def _to_html(narr: dict, data: dict, fig, lang: str) -> str:
   p {{ font-size: 17px; margin: 11px 0; text-align: justify; }}
   .sub {{ color: #6b7280; font-style: italic; font-size: 16px; }}
   .chart {{ margin: 18px 0; }}
+  .sources li {{ margin: 8px 0; font-size: 15px; }}
+  .src {{ color: #6b7280; font-size: 13px; }}
   @media print {{ body {{ margin: 0; }} h2 {{ page-break-after: avoid; }} }}
 </style></head><body>
 {body}
@@ -130,6 +143,28 @@ def render_report(traj, title: str, description: str, thresholds: dict,
         f'<th style="padding:8px 14px;text-align:right">{t("report_tension", lang)}</th></tr>'
         f'{rows}</table>', unsafe_allow_html=True)
     panel_close()
+
+    # Источники калибровки. Только состоявшиеся факты с привязкой к году.
+    srcs = data.get("sources", [])
+    if srcs:
+        panel_open(t("report_sources", lang))
+        st.markdown(f'<div style="font-size:14px;color:{PALETTE["text_muted"]};'
+                    f'margin-bottom:10px">{t("report_sources_hint", lang)}</div>',
+                    unsafe_allow_html=True)
+        for s in srcs:
+            link = (f'<a href="{s["url"]}" target="_blank" style="color:{PALETTE["accent"]};'
+                    f'text-decoration:none">{s["source"]}</a>') if s.get("url") else s["source"]
+            mark = (f' <span style="color:{PALETTE["s1"]};font-size:12px">'
+                    f'({t("report_src_verified", lang)})</span>') if s.get("verified") else ""
+            st.markdown(
+                f'<div style="border-left:3px solid {PALETTE["accent"]};padding:7px 14px;'
+                f'margin:7px 0;background:{PALETTE["bg_subtle"]};border-radius:0 8px 8px 0">'
+                f'<span style="font-weight:700;font-size:16px;color:{PALETTE["accent"]}">'
+                f'{s["year"]}</span> '
+                f'<span style="font-size:15px;color:{PALETTE["text_primary"]}">{s["fact"]}</span><br>'
+                f'<span style="font-size:13px;color:{PALETTE["text_muted"]}">{link}{mark}</span></div>',
+                unsafe_allow_html=True)
+        panel_close()
 
     # Выгрузка в самодостаточный HTML с живым графиком.
     html_doc = _to_html(narr, data, fig, lang)
