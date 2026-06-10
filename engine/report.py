@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 from engine.analysis import classify, classify_threat_type
+from engine.sources import sources_until
 
 
 # Порог резкого сдвига напряжения за один год. Подобран так, чтобы отмечать
@@ -174,7 +175,7 @@ def _gaps(traj, thresholds: dict, base_year: int) -> list:
     return gaps
 
 
-def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2025,
+def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
                       baseline=None) -> dict:
     """
     Главная сборка. Возвращает структуру отчёта по разведывательному
@@ -203,8 +204,12 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2025,
         "nodal_years": _nodal_years(timeline),
         "drivers": _drivers(traj, threat_type),
         "comparison": _comparison(traj, baseline, thresholds),
-        # Что знаем. Заданные сценарием толчки.
+        # Что знаем. Заданные сценарием толчки и выверенные источники.
+        # Источники охватывают все состоявшиеся факты вплоть до настоящего,
+        # независимо от стартового года симуляции, поскольку обоснование
+        # калибровки опирается на всё известное на момент сборки.
         "events": _events(traj),
+        "sources": sources_until(2026),
         # Чего не знаем.
         "gaps": _gaps(traj, thresholds, base_year),
     }
