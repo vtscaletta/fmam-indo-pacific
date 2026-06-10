@@ -140,3 +140,61 @@ def classify_threat_type(trajectory, baseline=None) -> dict:
                 f"Избыток{ref} по ведущей оси составляет {top_val:.2f}.")
 
     return {"type": kind, "label": THREAT_TYPES[kind], "text": text, "scores": scores}
+
+
+def axis_scores_by_year(trajectory, baseline=None) -> list:
+    """
+    Погодовая раскладка осей давления для трекинга смены природы давления.
+
+    Та же формула, что и _axis_scores, но без свёртки суммы по годам. Для года t
+    берётся вклад каждой оси, отклонение от старта, взвешенное влиянием агента.
+    Сумма погодовых вкладов в точности равна агрегату _axis_scores, оттого второй
+    источник истины не возникает и раскладка не расходится с доминантой.
+
+    Если задан baseline, по каждому году считается избыток над фоном, тем же
+    вычитанием, что и в classify_threat_type, чтобы лидер года был согласован с
+    общей доминантой сценария.
+
+    Возвращает список по годам, в каждом доли трёх осей и лидер года. В стартовый
+    год отклонений ещё нет, лидер пуст.
+    """
+    from engine.influence import CODES
+    from engine.synthesis import influence_weights
+    w = influence_weights()
+
+    def by_year(traj):
+        starts = {c: traj.agent_states[c][0] for c in CODES}
+        years = len(traj.agent_states[CODES[0]])
+        rows = []
+        for t in range(years):
+            m = tr = er = 0.0
+            for c in CODES:
+                z1_0, z2_0, z3_0 = starts[c]
+                z1, z2, z3 = traj.agent_states[c][t]
+                m += w[c] * max(0.0, z1 - z1_0)
+                tr += w[c] * max(0.0, z2_0 - z2)
+                er += w[c] * max(0.0, z3 - z3_0)
+            rows.append({"material": m, "alliance": tr, "normative": er})
+        return rows
+
+    traj_rows = by_year(trajectory)
+    if baseline is not None:
+        base_rows = by_year(baseline)
+        rows = [{k: max(0.0, tr_[k] - bs_[k]) for k in tr_}
+                for tr_, bs_ in zip(traj_rows, base_rows)]
+    else:
+        rows = traj_rows
+
+    out = []
+    for i, r in enumerate(rows):
+        leader = max(r, key=r.get)
+        if r[leader] <= 0.0:
+            leader = None
+        out.append({
+            "year": trajectory.years[i],
+            "material": round(r["material"], 4),
+            "alliance": round(r["alliance"], 4),
+            "normative": round(r["normative"], 4),
+            "leader": leader,
+        })
+    return out
