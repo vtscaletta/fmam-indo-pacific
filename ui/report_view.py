@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import html as _html
+import re
 
 import streamlit as st
 import plotly.io as pio
@@ -44,6 +45,43 @@ _PLOT_CFG = {"displaylogo": False, "scrollZoom": False,
              "modeBarButtonsToRemove": ["lasso2d", "select2d", "autoScale2d"]}
 
 
+_CITE_RE = re.compile(r"\[\[(.+?)\|\|(.+?)\]\]")
+
+
+def _render_inline(text: str, by_key: dict, color: str) -> str:
+    """
+    Превращает абзац прозы с якорями [[ключ||фраза]] в безопасный HTML, где
+    помеченная фраза становится инлайн-ссылкой на первоисточник. Сегменты
+    экранируются по отдельности, потому спецсимволы текста безвредны.
+
+    Три ветки. Ключ найден и у источника есть ссылка, фраза становится цветной
+    ссылкой со штриховым подчёркиванием. Ключ найден, но публичной ссылки нет,
+    фраза получает пунктир и всплывающее имя источника, без перехода. Ключ не
+    найден, фраза остаётся обычным текстом, а рассинхрон ловится тестом, не
+    падением отрисовки.
+    """
+    out, pos = [], 0
+    for m in _CITE_RE.finditer(text):
+        out.append(_html.escape(text[pos:m.start()]))
+        key, phrase = m.group(1), m.group(2)
+        src = by_key.get(key)
+        esc = _html.escape(phrase)
+        if src and src.get("url"):
+            out.append(
+                f'<a href="{_html.escape(src["url"])}" target="_blank" rel="noopener" '
+                f'style="color:{color};text-decoration:none;'
+                f'border-bottom:1px dashed {color}">{esc}</a>')
+        elif src:
+            out.append(
+                f'<span style="border-bottom:1px dotted {color};cursor:help" '
+                f'title="{_html.escape(src["source"])}">{esc}</span>')
+        else:
+            out.append(esc)
+        pos = m.end()
+    out.append(_html.escape(text[pos:]))
+    return "".join(out)
+
+
 def _to_html(narr: dict, data: dict, fig, lang: str) -> str:
     """
     Самодостаточный HTML отчёта с живым графиком внутри. Печатается в PDF из
@@ -51,27 +89,19 @@ def _to_html(narr: dict, data: dict, fig, lang: str) -> str:
     """
     chart = pio.to_html(fig, include_plotlyjs="inline", full_html=False,
                         config={"displayModeBar": False})
+    by_key = {s["key"]: s for s in data.get("sources", [])}
     blocks = [f'<h1>{_html.escape(narr["title"])}</h1>',
               f'<p class="sub">{_html.escape(narr["subtitle"])}</p>']
     for i, sec in enumerate(narr["sections"]):
         blocks.append(f'<h2>{_html.escape(sec["heading"])}</h2>')
         for p in sec["paragraphs"]:
-            blocks.append(f'<p>{_html.escape(p)}</p>')
+            blocks.append(f'<p>{_render_inline(p, by_key, "#9D2933")}</p>')
         # График после раздела динамики.
         if sec["heading"].startswith("Динамика"):
             blocks.append(f'<div class="chart">{chart}</div>')
     body = "\n".join(blocks)
-    # Источники калибровки в конце документа.
-    srcs = data.get("sources", [])
-    if srcs:
-        src_items = []
-        for s in srcs:
-            link = (f'<a href="{s["url"]}">{_html.escape(s["source"])}</a>'
-                    if s.get("url") else _html.escape(s["source"]))
-            src_items.append(
-                f'<li><b>{s["year"]}</b>. {_html.escape(s["fact"])} <span class="src">{link}</span></li>')
-        body += ('\n<h2>Источники калибровки</h2>\n<ul class="sources">\n'
-                 + "\n".join(src_items) + '\n</ul>')
+    # Источники теперь вплетены в саму прозу инлайн-ссылками, отдельной панели
+    # калибровки в конце документа нет.
     return f"""<!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8">
 <title>{_html.escape(narr["title"])}</title>
@@ -85,8 +115,6 @@ def _to_html(narr: dict, data: dict, fig, lang: str) -> str:
   p {{ font-size: 17px; margin: 11px 0; text-align: justify; }}
   .sub {{ color: #6b7280; font-style: italic; font-size: 16px; }}
   .chart {{ margin: 18px 0; }}
-  .sources li {{ margin: 8px 0; font-size: 15px; }}
-  .src {{ color: #6b7280; font-size: 13px; }}
   @media print {{ body {{ margin: 0; }} h2 {{ page-break-after: avoid; }} }}
 </style></head><body>
 {body}
@@ -99,6 +127,7 @@ def render_report(traj, title: str, description: str, thresholds: dict,
     data = build_report_data(traj, _Meta(title, description), thresholds,
                              baseline=baseline)
     narr = build_narrative(data)
+    by_key = {s["key"]: s for s in data.get("sources", [])}
 
     st.markdown(f'<h2 style="margin-bottom:2px;font-size:26px">{narr["title"]}</h2>'
                 f'<div style="color:{PALETTE["text_muted"]};font-size:16px;'
@@ -116,7 +145,8 @@ def render_report(traj, title: str, description: str, thresholds: dict,
         panel_open(sec["heading"])
         for p in sec["paragraphs"]:
             st.markdown(f'<div style="font-size:17px;line-height:1.65;'
-                        f'color:{PALETTE["text_primary"]};margin-bottom:9px">{p}</div>',
+                        f'color:{PALETTE["text_primary"]};margin-bottom:9px">'
+                        f'{_render_inline(p, by_key, PALETTE["accent"])}</div>',
                         unsafe_allow_html=True)
         # Врезка графика после раздела динамики.
         if sec["heading"].startswith("Динамика"):
@@ -144,27 +174,8 @@ def render_report(traj, title: str, description: str, thresholds: dict,
         f'{rows}</table>', unsafe_allow_html=True)
     panel_close()
 
-    # Источники калибровки. Только состоявшиеся факты с привязкой к году.
-    srcs = data.get("sources", [])
-    if srcs:
-        panel_open(t("report_sources", lang))
-        st.markdown(f'<div style="font-size:14px;color:{PALETTE["text_muted"]};'
-                    f'margin-bottom:10px">{t("report_sources_hint", lang)}</div>',
-                    unsafe_allow_html=True)
-        for s in srcs:
-            link = (f'<a href="{s["url"]}" target="_blank" style="color:{PALETTE["accent"]};'
-                    f'text-decoration:none">{s["source"]}</a>') if s.get("url") else s["source"]
-            mark = (f' <span style="color:{PALETTE["s1"]};font-size:12px">'
-                    f'({t("report_src_verified", lang)})</span>') if s.get("verified") else ""
-            st.markdown(
-                f'<div style="border-left:3px solid {PALETTE["accent"]};padding:7px 14px;'
-                f'margin:7px 0;background:{PALETTE["bg_subtle"]};border-radius:0 8px 8px 0">'
-                f'<span style="font-weight:700;font-size:16px;color:{PALETTE["accent"]}">'
-                f'{s["year"]}</span> '
-                f'<span style="font-size:15px;color:{PALETTE["text_primary"]}">{s["fact"]}</span><br>'
-                f'<span style="font-size:13px;color:{PALETTE["text_muted"]}">{link}{mark}</span></div>',
-                unsafe_allow_html=True)
-        panel_close()
+    # Панели источников калибровки больше нет. Источники вплетены в прозу
+    # инлайн-ссылками, цветное слово ведёт на первоисточник своего утверждения.
 
     # Выгрузка в самодостаточный HTML с живым графиком.
     html_doc = _to_html(narr, data, fig, lang)
