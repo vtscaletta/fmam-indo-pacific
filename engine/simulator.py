@@ -85,7 +85,7 @@ class Simulator:
         self.markov = markov or MARKOV
         self.dynamics = dynamics or DynamicsParams()
 
-    def run(self, scenario, agents: dict, horizon: int = 10, base_year: int = 2025) -> Trajectory:
+    def run(self, scenario, agents: dict, horizon: int = 10, base_year: int = 2026) -> Trajectory:
         """
         Прогоняет сценарий. agents суть словарь код -> объект состояния с
         атрибутами z1, z2, z3. horizon в годах.
