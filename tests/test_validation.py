@@ -6,7 +6,7 @@
 """
 
 from engine.historical import (
-    validate, AGENTS_2012, HISTORICAL_SCENARIO, FORECAST_ANCHOR_2025,
+    validate, AGENTS_2012, HISTORICAL_SCENARIO, FORECAST_ANCHOR_START,
 )
 from engine.influence import CODES
 
@@ -55,7 +55,7 @@ def test_continuity_with_forecast():
     """
     r = validate()
     assert r["continuity_gap"] < 0.06
-    assert abs(r["tension"][-1] - FORECAST_ANCHOR_2025) < 0.06
+    assert abs(r["tension"][-1] - FORECAST_ANCHOR_START) < 0.06
 
 
 def test_overall_verdict_passes():
@@ -64,12 +64,12 @@ def test_overall_verdict_passes():
     assert r["verdict"] is True
 
 
-def test_initial_states_calmer_than_2025():
-    """Состояния 2012 года заметно спокойнее базового 2025."""
-    from engine.agents import AGENTS as A2025
+def test_initial_states_calmer_than_base():
+    """Состояния 2012 года заметно спокойнее базового 2026."""
+    from engine.agents import AGENTS as A_BASE
     for c in CODES:
-        # эрозия 2012 ниже эрозии 2025 у каждого агента
-        assert AGENTS_2012[c].z3 <= A2025[c].z3 + 1e-9
+        # эрозия 2012 ниже эрозии базового 2026 у каждого агента
+        assert AGENTS_2012[c].z3 <= A_BASE[c].z3 + 1e-9
 
 
 def test_states_within_unit_interval_through_run():
