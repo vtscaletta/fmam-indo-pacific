@@ -16,6 +16,7 @@ from __future__ import annotations
 
 from engine.analysis import classify, classify_threat_type
 from engine.sources import sources_until
+from engine.agents import AGENTS
 
 
 # Порог резкого сдвига напряжения за один год. Подобран так, чтобы отмечать
@@ -86,6 +87,61 @@ def _nodal_years(timeline: list) -> list:
                   "note": f"Итог горизонта, напряжение {last['tension']:.3f}, "
                           f"режим {_regime_label(last['regime'])}."})
     return nodes
+
+
+def _actors(traj) -> list:
+    """
+    Протагонисты прогона по сведённому сигналу. Два смысла протагониста сводятся
+    в один ранг, потому что поодиночке каждый врёт. Громкость, совокупная
+    величина действий milex rhet drift за горизонт, поднимает того, кто давил
+    весомо, но раздувает агента, что весь горизонт простоял на старом максимуме.
+    Сдвиг, путь состояния z1 z2 z3 от старта к финалу, поднимает того, кого
+    сценарий переломил, но возносит мелкую дрожь около нуля. Протагонист есть
+    пересечение, кто и действовал весомо, и сдвинулся под сценарием.
+
+    Сведение защитимо, а не подогнано. Обе величины нормируются на свой максимум
+    по агентам прогона, потому становятся сопоставимы в долях от сильнейшего.
+    Вес есть среднее двух нормированных компонент поровну, без вкусовых
+    коэффициентов, ведь паритет говорит честно, что мы не знаем заранее, какой
+    из двух смыслов важнее. Протагонисты суть агенты выше среднего веса,
+    остальные фон, и про фон отчёт обоснований не строит.
+    """
+    states = getattr(traj, "agent_states", {}) or {}
+    actions = getattr(traj, "agent_actions", {}) or {}
+    codes = list(states.keys()) or list(actions.keys())
+    loud, shift = {}, {}
+    for c in codes:
+        acts = actions.get(c, [])
+        loud[c] = sum(abs(a.get("milex", 0)) + abs(a.get("rhet", 0))
+                      + abs(a.get("drift", 0)) for a in acts)
+        st = states.get(c, [])
+        if len(st) >= 2:
+            s0, s1 = st[0], st[-1]
+            shift[c] = sum(abs(s1[k] - s0[k]) for k in range(3))
+        else:
+            shift[c] = 0.0
+    lmax = max(loud.values()) if loud else 0.0
+    smax = max(shift.values()) if shift else 0.0
+    rows = []
+    for c in codes:
+        ln = (loud[c] / lmax) if lmax > 0 else 0.0
+        sn = (shift[c] / smax) if smax > 0 else 0.0
+        rows.append({
+            "code": c,
+            "name": AGENTS[c].name if c in AGENTS else c,
+            "loudness": round(loud[c], 4), "shift": round(shift[c], 4),
+            "loud_norm": round(ln, 4), "shift_norm": round(sn, 4),
+            "weight": round((ln + sn) / 2, 4),
+        })
+    rows.sort(key=lambda r: r["weight"], reverse=True)
+    mean_w = (sum(r["weight"] for r in rows) / len(rows)) if rows else 0.0
+    cand = [r for r in rows if r["weight"] > mean_w] or rows[:2]
+    # Потолок два, главное действующее лицо и его контрагент, прочее в фон.
+    protag = {r["code"] for r in cand[:2]}
+    for i, r in enumerate(rows):
+        r["rank"] = i + 1
+        r["is_protagonist"] = r["code"] in protag
+    return rows
 
 
 def _drivers(traj, threat_type: dict) -> dict:
@@ -203,6 +259,7 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
         "timeline": timeline,
         "nodal_years": _nodal_years(timeline),
         "drivers": _drivers(traj, threat_type),
+        "actors": _actors(traj),
         "comparison": _comparison(traj, baseline, thresholds),
         # Что знаем. Заданные сценарием толчки и выверенные источники.
         # Источники охватывают все состоявшиеся факты вплоть до настоящего,
