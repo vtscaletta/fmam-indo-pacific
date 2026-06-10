@@ -14,9 +14,10 @@
 
 from __future__ import annotations
 
-from engine.analysis import classify, classify_threat_type
+from engine.analysis import classify, classify_threat_type, axis_scores_by_year
 from engine.sources import sources_until
 from engine.agents import AGENTS
+from engine.judgment import read_axes
 
 
 # Порог резкого сдвига напряжения за один год. Подобран так, чтобы отмечать
@@ -213,8 +214,6 @@ def _gaps(traj, thresholds: dict, base_year: int) -> list:
     gaps = [
         "Параметры агентов заморожены на исторической калибровке. При шоках "
         "за пределами заданного каталога реальные траектории могут отклоняться.",
-        "Годы за пределами настоящего суть сценарные допущения при оговорённых "
-        "условиях, а не безусловный прогноз единственного будущего.",
         "Перцептивный контур и веса влияния калиброваны экспертно по таблице "
         "источников, а не извлечены автоматически, что вносит неустранимую "
         "субъективность параметризации.",
@@ -242,7 +241,7 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
     timeline = _timeline(traj, thresholds)
     verdict = classify(traj, thresholds)
     threat_type = classify_threat_type(traj, baseline=baseline)
-    return {
+    data = {
         "meta": {
             "scenario": getattr(scenario, "name", "сценарий"),
             "scenario_description": getattr(scenario, "description", ""),
@@ -270,3 +269,9 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
         # Чего не знаем.
         "gaps": _gaps(traj, thresholds, base_year),
     }
+    # Погодовая раскладка осей давления для оси смены природы давления.
+    data["axis_by_year"] = axis_scores_by_year(traj, baseline=baseline)
+    # Суждение по решётке. Читается из уже собранных данных, оттого ставится
+    # последним, когда timeline, comparison, drivers, actors и thresholds готовы.
+    data["judgment"] = read_axes(data)
+    return data
