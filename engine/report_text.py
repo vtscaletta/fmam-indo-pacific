@@ -74,20 +74,30 @@ def _join_ru(items: list) -> str:
 
 def _start_anchors(code: str, data: dict, dominant_axis: str) -> list:
     """
-    Якоря стартовой позиции одного агента, отобранные сценарно. Берутся факты
-    реестра, помеченные этим агентом, приоритет фактам доминирующей оси, свежие
-    важнее, дозировано до двух. Если фразы для ключа нет в словаре, ключ
-    пропускается, сырой факт в прозу не лезет.
+    Якоря позиции одного агента, отобранные сценарно. Берутся факты реестра,
+    помеченные этим агентом, приоритет фактам доминирующей оси, свежие важнее,
+    дозировано до двух. Если фразы для ключа нет в словаре, ключ пропускается,
+    сырой факт в прозу не лезет.
+
+    Дедупликация в пределах отчёта. Раз показанный якорь не всплывает снова на
+    другом уровне цитирования, потому стартовый блок и объяснительный слой берут
+    разные факты, а одна новость не повторяется по три раза. Учёт показанного
+    ведётся в рабочем множестве отчёта, оттого функция имеет побочный эффект и
+    зовётся по ходу сборки прозы один раз на место.
     """
+    used = data.setdefault("_used_keys", set())
     srcs = [s for s in data.get("sources", []) if s.get("agent") == code]
     on_axis = [s for s in srcs if s.get("axis") == dominant_axis]
     pool = on_axis if on_axis else srcs
     pool = sorted(pool, key=lambda s: s["year"], reverse=True)
     out = []
     for s in pool:
+        if s["key"] in used:
+            continue
         phrase = _START_ANCHOR.get(s["key"])
         if phrase:
             out.append(_cite(phrase, s["key"]))
+            used.add(s["key"])
         if len(out) >= 2:
             break
     return out
@@ -184,19 +194,19 @@ def _actors_prose(data: dict) -> str:
     names = [a["name"] for a in protag]
     dominant_axis = data.get("drivers", {}).get("dominant_axis")
     if len(protag) == 2:
-        head = (f"Ход сценария ведут {names[0]} и {names[1]}, их положением и "
-                f"очерчен остальной расклад.")
+        head = (f"Ход сценария ведут {names[0]} и {names[1]}, и от их положения "
+                f"разворачивается остальное.")
         segs = []
         for ref, a in zip(("первого", "второго"), protag):
             anchors = _start_anchors(a["code"], data, dominant_axis)
-            segs.append(f"{ref} опирается на {_join_ru(anchors)}" if anchors
-                        else f"{ref} пока не находит документального якоря в реестре")
-        return head + " Исходное положение " + ", ".join(segs) + "."
+            segs.append(f"{ref} опираются на {_join_ru(anchors)}" if anchors
+                        else f"{ref} пока не находят документального якоря в реестре")
+        return head + " Исходные показатели " + ", ".join(segs) + "."
     head = f"Ход сценария ведёт {names[0]}."
     anchors = _start_anchors(protag[0]["code"], data, dominant_axis)
-    return (head + f" Его исходное положение опирается на {_join_ru(anchors)}."
+    return (head + f" Его исходные показатели опираются на {_join_ru(anchors)}."
             if anchors else
-            head + " Его исходное положение пока не находит документального "
+            head + " Его исходные показатели пока не находят документального "
             "якоря в реестре.")
 
 
@@ -242,28 +252,7 @@ def _drivers_text(data: dict) -> list:
             parts.append(f"{name} {int(round(share * 100))}%")
     p1 = ("Раскладка системного давления по трём осям обнаруживает следующее "
           "соотношение вкладов, где " + ", ".join(parts) + ".")
-    paras = [p1]
-    if dr.get("japan_mean_erosion") is not None:
-        by_key = {s["key"]: s for s in data.get("sources", [])}
-        jpn_protag = any(a.get("code") == "jpn" and a.get("is_protagonist")
-                         for a in data.get("actors", []))
-        # Японская привязка эрозии уместна лишь там, где Япония протагонист.
-        # В чужом сценарии, где она только воспринимает угрозу, этот абзац молчит.
-        if jpn_protag:
-            tail = (f"Средняя нормативная эрозия Японии за горизонт держится на "
-                    f"уровне {dr['japan_mean_erosion']}, что подтверждает её роль "
-                    f"того узла, через который сценарий передаётся всей подсистеме.")
-            if "jpn_peace_security_laws_2015" in by_key and "jpn_arms_export_2026" in by_key:
-                tail += (" Эта эрозия не абстракция модели, а отражённый числом итог "
-                         "задокументированного курса, от "
-                         + _cite("законодательного закрепления коллективной самообороны в 2015 году",
-                                 "jpn_peace_security_laws_2015")
-                         + " до "
-                         + _cite("снятия экспортных ограничений в 2026",
-                                 "jpn_arms_export_2026")
-                         + ".")
-            paras.append(tail)
-    return paras
+    return [p1]
 
 
 def _comparison_text(data: dict) -> list:
@@ -386,23 +375,6 @@ def _say_tempo(t: dict) -> str:
     return ""
 
 
-def _say_shift(sf: dict) -> str:
-    v = sf.get("value")
-    if v == "handover":
-        f_ = _AXIS_GEN.get(sf["from_axis"], "одной оси")
-        t_ = _AXIS_DAT.get(sf["to_axis"], "другой")
-        return (f"По ходу горизонта верх берёт другая ось, давление переходит от "
-                f"{f_} к {t_}, и к финалу система болеет не тем, чем заболела вначале.")
-    if v == "swing":
-        if sf.get("normative_anomaly"):
-            return ("Доминанта мечется, и нормативная ось уходит и возвращается. По "
-                    "механике модели нормативный откат почти исключён, асимметричное "
-                    "забывание дрейфа работает как храповик, потому качель здесь "
-                    "сигналит о пограничном прогоне, а не о рядовой динамике.")
-        return "Доминанта мечется между осями, устойчивого профиля давления нет."
-    return ""
-
-
 def _say_actors(a: dict) -> str:
     v = a.get("value")
     if v == "hegemon":
@@ -418,7 +390,7 @@ def _say_counterfactual(c: dict) -> str:
     куда пришла система, или она пришла бы туда и без него."""
     v = c.get("value")
     if v == "aggravating":
-        return ("Вина за подъём лежит на самом сценарии, против инерции он гонит "
+        return ("Подъём создан самим сценарием, против инерции он гонит "
                 "напряжение вверх, а не плывёт по течению.")
     if v == "mitigating":
         return ("Парадокс прогона в том, что сценарий работает против срыва, инерция "
@@ -499,6 +471,178 @@ def _say_prescription(s: dict, d: dict) -> str:
     return ""
 
 
+def _axis_phases(data: dict) -> list:
+    """Фазы лидерства осей по годам из погодовой раскладки. Возвращает список
+    [ось, год_начала, год_конца], сжимая подряд идущие годы одного лидера."""
+    phases = []
+    for row in data.get("axis_by_year", []):
+        ld = row.get("leader")
+        if ld is None:
+            continue
+        if phases and phases[-1][0] == ld:
+            phases[-1][2] = row["year"]
+        else:
+            phases.append([ld, row["year"], row["year"]])
+    return phases
+
+
+def _shock_in_window(data: dict, lo, hi, prefer_name=None):
+    """Шок сценария в окне годов, ближайшая причина перелома. Перехват
+    доминанты приходит с лагом памяти, потому триггером служит не первый шок
+    окна, а последний перед точкой пересменки. Если задано имя носителя
+    победившей оси, предпочитается шок, бьющий именно по нему, ибо перерождение
+    запускает удар по тому, кто несёт новую доминанту, а не случайный сосед.
+    Описание берётся как есть из лога траектории, единого источника."""
+    if lo is None or hi is None:
+        return None
+    in_window = [ev for ev in data.get("events", []) if lo <= ev["year"] <= hi]
+    if not in_window:
+        return None
+    if prefer_name:
+        on_carrier = [ev for ev in in_window if prefer_name in ev["description"]]
+        if on_carrier:
+            return on_carrier[-1]
+    return in_window[-1]
+
+
+def _axis_carrier(data: dict, axis: str):
+    """Протагонист, несущий ось, тот из ведущих, под чью ось реестр держит
+    улики. Возвращает код агента либо None. Проверка идёт по сырому реестру без
+    вызова отбора якорей, чтобы не пометить их использованными впустую, иначе
+    уликовая фраза останется без источников."""
+    srcs = data.get("sources", [])
+    for a in sorted(data.get("actors", []), key=lambda r: r.get("weight", 0), reverse=True):
+        if not a.get("is_protagonist"):
+            continue
+        has = any(s.get("agent") == a["code"] and s.get("axis") == axis
+                  and s["key"] in _START_ANCHOR for s in srcs)
+        if has:
+            return a["code"]
+    return None
+
+
+def _ratchet_note(axis: str) -> str:
+    """Оговорка необратимости только для нормативной оси, где работает храповик
+    памяти. Для прочих осей пусто, чтобы не приписывать им чужое свойство."""
+    if axis == "normative":
+        return ("Каждый шаг здесь необратим по механике памяти, и нормативный "
+                "дрейф, единожды разогнавшись, не откатывается.")
+    return ""
+
+
+def _explain(data: dict) -> list:
+    """
+    Объяснительный слой. Доказывает доминанту цепочкой улик, а не объявляет
+    долей. Читает фактические фазы лидерства осей по годам, точку пересменки и
+    шок рядом с ней, вплетает улики реестра по ведущей оси. Доля выносится в
+    конец как вывод, не в начало как декларация. На сценарных годах цитат нет,
+    реестр держит лишь состоявшиеся факты, потому поведение проекции подпирается
+    реальным курсом, видимым до настоящего, а не выдуманной ссылкой на будущее.
+    """
+    j = data.get("judgment", {})
+    shift = j.get("shift", {})
+    dr = data.get("drivers", {})
+    shares = dr.get("axis_shares", {})
+    phases = _axis_phases(data)
+    val = shift.get("value")
+
+    def share_pct(ax):
+        return int(round(shares.get(ax, 0.0) * 100))
+
+    def woven_evidence(axis):
+        carrier = _axis_carrier(data, axis)
+        if not carrier:
+            return ""
+        anchors = _start_anchors(carrier, data, axis)
+        if not anchors:
+            return ""
+        return (f"Здесь сценарная проекция смыкается с задокументированным "
+                f"курсом, видимым через {_join_ru(anchors)}.")
+
+    def erosion_note(axis):
+        if axis != "normative":
+            return ""
+        er = dr.get("japan_mean_erosion")
+        jpn = any(a.get("code") == "jpn" and a.get("is_protagonist")
+                  for a in data.get("actors", []))
+        if er is None or not jpn:
+            return ""
+        return (f"Средняя нормативная эрозия Японии застывает на уровне {er}, "
+                f"числовой след того же разворота.")
+
+    # Перерождение природы давления. Главный доказательный сюжет.
+    if val == "handover" and len(phases) >= 2:
+        fa, ta = shift["from_axis"], shift["to_axis"]
+        early = next((p for p in phases if p[0] == fa), None)
+        late = next((p for p in reversed(phases) if p[0] == ta), None)
+        fn = _AXIS_NAME.get(fa, "одна ось")
+        tn = _AXIS_NAME.get(ta, "другая ось")
+        carrier = _axis_carrier(data, ta)
+        carrier_name = next((a["name"] for a in data.get("actors", [])
+                             if a["code"] == carrier), None)
+        s = ["Доминанта сложилась не сразу, и путь к ней важнее итоговой доли."]
+        if early:
+            if early[1] == early[2]:
+                s.append(f"В {early[1]} году систему ведёт {fn}.")
+            else:
+                s.append(f"В ранние годы, с {early[1]} по {early[2]}, систему ведёт {fn}.")
+        pivot = late[1] if late else None
+        shock = _shock_in_window(data, early[1] if early else pivot, pivot, carrier_name)
+        head = f"Перелом наступает к {pivot} году" if pivot else "Затем верх берёт другая ось"
+        if shock:
+            head += f", когда срабатывает толчок, {shock['description'].rstrip('.')},"
+        head += f" и вперёд выходит {tn}."
+        s.append(head)
+        ev = woven_evidence(ta)
+        if ev:
+            s.append(ev)
+        rn = _ratchet_note(ta)
+        if rn:
+            s.append(rn)
+        tail = (f"К финалу {tn.lower()} держит {share_pct(ta)} процентов системного "
+                f"давления против {share_pct(fa)} у {_AXIS_GEN.get(fa, fn.lower())}.")
+        en = erosion_note(ta)
+        if en:
+            tail += " " + en
+        tail += " Система болеет не тем, чем заболела вначале."
+        s.append(tail)
+        return [" ".join(s)]
+
+    # Качель доминанты. Первенство по приросту над фоном переходит от оси к оси.
+    if val == "swing":
+        s = ["Доминанта не устоялась, первенство по приросту над инерционным "
+             "фоном переходит от оси к оси по ходу горизонта."]
+        if shift.get("normative_anomaly"):
+            s.append("Нормативная ось при этом теряет и вновь перехватывает "
+                     "лидерство, но колеблется здесь прирост над фоном, а не сама "
+                     "норма. Абсолютная эрозия растёт храповиком и назад не "
+                     "отступает, просто в отдельные годы сценарий прибавляет к "
+                     "восприятию угрозы больше, чем к норме, оттого нормативный "
+                     "избыток над инерцией временно уступает материальному.")
+        return [" ".join(s)]
+
+    # Устойчивая доминанта. Доказать, почему ось держит первенство весь горизонт.
+    dom = dr.get("dominant_axis")
+    if dom and dom in shares:
+        dn = _AXIS_NAME.get(dom, "ведущая ось")
+        s = [f"Доминанта устойчива весь горизонт, систему ведёт {dn}, и доля её "
+             f"не итог усреднения, а след непрерывного давления."]
+        ev = woven_evidence(dom)
+        if ev:
+            s.append(ev)
+        rn = _ratchet_note(dom)
+        if rn:
+            s.append(rn)
+        tail = (f"К финалу {dn.lower()} держит {share_pct(dom)} процентов "
+                f"системного давления, прочие оси вторичны.")
+        en = erosion_note(dom)
+        if en:
+            tail += " " + en
+        s.append(tail)
+        return [" ".join(s)]
+    return []
+
+
 def _judgment_prose(data: dict) -> list:
     """
     Собирает суждение по решётке в связную прозу двумя блоками. Блок ядра отвечает
@@ -522,9 +666,9 @@ def _judgment_prose(data: dict) -> list:
                                   _say_counterfactual(j.get("counterfactual", {}))) if p)
     if block1:
         paras.append(block1)
-    # Блок механики прогона.
+    # Блок механики прогона. Пересменка осей вынесена в объяснительный слой,
+    # где она доказывается уликами, а не констатируется сухой строкой.
     block2 = " ".join(p for p in (_say_shape_tempo(j.get("shape", {}), j.get("tempo", {})),
-                                  _say_shift(j.get("shift", {})),
                                   _say_actors(j.get("actors", {}))) if p)
     if block2:
         paras.append(block2)
@@ -541,6 +685,9 @@ def _thought(data: dict) -> list:
     paras = []
     paras += _dynamics(data)
     paras += _drivers_text(data)
+    # Объяснительный слой. Доказывает доминанту цепочкой улик в духе CSIS,
+    # превращая сухую раскладку в обоснованный сюжет перерождения осей.
+    paras += _explain(data)
     paras += _comparison_text(data)
     # Суждение по решётке вместо шаблонной концовки по уровню риска. Вывод
     # выводится из самого прогона, а резкость тона привязана к близости к порогу.
