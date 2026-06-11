@@ -123,7 +123,9 @@ def _summary(data: dict) -> list:
 
 
 def _known(data: dict) -> list:
-    """Исходная обстановка и заданные условия эксперимента."""
+    """Исходная обстановка. Чистый срез базового года и заданные толчки. Без
+    действующих лиц, ибо на старте сценарий ещё не разошёлся с инерцией, а
+    протагонисты проявляются лишь в ходе прогона, не в отправной точке."""
     m = data["meta"]
     start = data["timeline"][0]
     paras = [
@@ -131,32 +133,6 @@ def _known(data: dict) -> list:
         f"в регионе оценивается величиной {start['tension']:.3f}, и по совокупности "
         f"показателей {_REGIME_VERB.get(_full_regime(start), 'система сохраняет текущий режим')}."
     ]
-    # Обоснование отправной точки через протагонистов прогона, а не через
-    # зашитого агента. Тон диагностический, не оправдательный. Источник лезет в
-    # прозу лишь под активного агента сценария, под доминирующую ось. Если якоря
-    # нет, отчёт честно говорит об этом, а не молчит и не подставляет чужое.
-    actors = data.get("actors", [])
-    protag = [a for a in actors if a.get("is_protagonist")][:2]
-    dominant_axis = data.get("drivers", {}).get("dominant_axis")
-    if protag:
-        names = [a["name"] for a in protag]
-        if len(protag) == 2:
-            head = (f"Сцену с самого начала держат {names[0]} и {names[1]}, и от "
-                    f"их положения разворачивается остальное.")
-            segs = []
-            for ref, a in zip(("первого", "второго"), protag):
-                anchors = _start_anchors(a["code"], data, dominant_axis)
-                segs.append(f"{ref} опирается на {_join_ru(anchors)}" if anchors
-                            else f"{ref} пока не находит документального якоря в реестре")
-            body = head + " Исходное положение " + ", ".join(segs) + "."
-        else:
-            head = f"Сцену с самого начала держит {names[0]}."
-            anchors = _start_anchors(protag[0]["code"], data, dominant_axis)
-            body = (head + f" Его исходное положение опирается на {_join_ru(anchors)}."
-                    if anchors else
-                    head + " Его исходное положение пока не находит "
-                    "документального якоря в реестре.")
-        paras.append(body)
     events = data.get("events", [])
     if events:
         listing = "; ".join(
@@ -174,21 +150,53 @@ def _known(data: dict) -> list:
     return paras
 
 
+def _actors_prose(data: dict) -> str:
+    """
+    Действующие лица прогона для раздела динамики. Здесь, в ходе сценария, а не
+    в стартовом срезе, корректно назвать тех, кто его вёл. Имена даются в
+    именительном через связку, чтобы не склонять их в косвенные падежи. Реагенты
+    сюда не попадают, отбор отсеял их ещё в данных.
+    """
+    protag = [a for a in data.get("actors", []) if a.get("is_protagonist")][:2]
+    if not protag:
+        return ""
+    names = [a["name"] for a in protag]
+    dominant_axis = data.get("drivers", {}).get("dominant_axis")
+    if len(protag) == 2:
+        head = (f"Ход сценария ведут {names[0]} и {names[1]}, их положением и "
+                f"очерчен остальной расклад.")
+        segs = []
+        for ref, a in zip(("первого", "второго"), protag):
+            anchors = _start_anchors(a["code"], data, dominant_axis)
+            segs.append(f"{ref} опирается на {_join_ru(anchors)}" if anchors
+                        else f"{ref} пока не находит документального якоря в реестре")
+        return head + " Исходное положение " + ", ".join(segs) + "."
+    head = f"Ход сценария ведёт {names[0]}."
+    anchors = _start_anchors(protag[0]["code"], data, dominant_axis)
+    return (head + f" Его исходное положение опирается на {_join_ru(anchors)}."
+            if anchors else
+            head + " Его исходное положение пока не находит документального "
+            "якоря в реестре.")
+
+
 def _dynamics(data: dict) -> list:
     """Погодовая динамика напряжения, ход системы по годам."""
     tl = data["timeline"]
     if len(tl) < 2:
         return []
+    paras = []
+    lead = _actors_prose(data)
+    if lead:
+        paras.append(lead)
     start, end = tl[0], tl[-1]
     trend = end["tension"] - start["tension"]
     direction = ("нарастающей" if trend > 0.01 else
                  "спадающей" if trend < -0.01 else "стабильной")
-    paras = [
+    paras.append(
         f"На протяжении горизонта напряжение движется по {direction} траектории, "
         f"от {start['tension']:.3f} в {start['year']} году к {end['tension']:.3f} "
         f"в {end['year']}, с пиком {data['comparison']['peak']}. Динамика не "
-        f"равномерна, и её переломы сосредоточены в узловых годах."
-    ]
+        f"равномерна, и её переломы сосредоточены в узловых годах.")
     # Переломы по узловым годам, связной прозой.
     breaks = [n for n in data["nodal_years"] if n["kind"] not in ("старт", "финал")]
     if breaks:
@@ -384,20 +392,80 @@ def _say_actors(a: dict) -> str:
     return ""
 
 
-def _say_verdict(s: dict, d: dict) -> str:
-    """Точка приложения силы из доминанты, с предохранителем резкости от
-    близости к порогу. У кромки тон сдержан, за порогом твёрд, в запасе спокоен."""
+def _say_counterfactual(c: dict) -> str:
+    """Суждение о вкладе сценария сверх инерции. Виноват ли сам сценарий в том,
+    куда пришла система, или она пришла бы туда и без него."""
+    v = c.get("value")
+    if v == "aggravating":
+        return ("Вина за подъём лежит на самом сценарии, против инерции он гонит "
+                "напряжение вверх, а не плывёт по течению.")
+    if v == "mitigating":
+        return ("Парадокс прогона в том, что сценарий работает против срыва, инерция "
+                "вела к каскаду, а заданные толчки систему удержали.")
+    if v == "inertial" and c.get("soft"):
+        return ("Сценарий чуть смягчает фон, но от срыва не спасает, и видимое "
+                "облегчение обманчиво.")
+    if v == "inertial":
+        return ("Сценарий почти не отклоняет систему от инерции, его толчки тонут "
+                "в уже накопленном дрейфе.")
+    return ""
+
+
+def _say_shape_tempo(sh: dict, t: dict) -> str:
+    """Форма и темп одной увязанной фразой, чтобы резкое и медленно зреющее не
+    стояли рядом как противоречие. Резкий поздний скачок это не парадокс, а
+    тихое накопление с прорывом под конец."""
+    shv, tv, yr = sh.get("value"), t.get("value"), t.get("year")
+    if shv == "sharp":
+        if tv == "delayed":
+            return (f"Почти весь сдвиг забирает один год, и приходит он поздно, "
+                    f"к {yr}, обострение копится тихо и прорывается рывком под конец.")
+        if tv == "explosive":
+            return (f"Удар резкий и ранний, к {yr} году, дальше система живёт с уже "
+                    f"состоявшимся обострением.")
+        return (f"Сдвиг резкий и ложится к середине горизонта, к {yr} году, исход "
+                f"решается в коротком окне, а не вызревает постепенно.")
+    if shv == "creeping":
+        when = {"explosive": f"ранним пиком к {yr}", "linear": f"пиком к середине, {yr}",
+                "delayed": f"пиком под конец, к {yr}"}.get(tv, "")
+        tail = f", с {when}" if when else ""
+        return (f"Движение ползучее, сдвиг растянут по горизонту{tail}, и исход "
+                f"накопительный, а не точечный.")
+    if shv == "oscillating":
+        return "Траектория колеблется вверх и вниз без устойчивого направления."
+    return ""
+
+
+def _say_prescription(s: dict, d: dict) -> str:
+    """
+    Управленческое предписание. Сопоставляет уязвимость с доминантой и называет
+    рычаг удержания. При двухфакторном давлении нормативной и материальной осей у
+    порога вводит антирычаг, балансировать материальным здесь значит детонировать
+    каскад. Предохранитель резкости сохранён, у кромки тон сдержан, рычаг назван
+    без бахвальства уверенностью, которой в тонком зазоре нет.
+    """
     sv = s.get("value")
-    axis = d.get("axis") if d.get("value") == "single" else (
-        d.get("axes", [None])[0] if d.get("value") == "duo" else None)
+    val = d.get("value")
+    axis = d.get("axis") if val == "single" else (
+        d.get("axes", [None])[0] if val == "duo" else None)
     lever = _AXIS_LEVER.get(axis)
+    # Антирычаг. Двухфакторное норм плюс мат у порога, материальный путь губителен.
+    if sv in ("breached", "revived", "edge") and val == "duo":
+        if {"normative", "material"} <= set(d.get("axes", [])):
+            core = ("Балансировать через гонку потенциалов здесь значит подтолкнуть "
+                    "детонацию, материальная ось уже на пределе. Единственный рычаг "
+                    "удержания лежит на искусственной заморозке нормативной оси, "
+                    "возврате правовых ограничений на применение силы.")
+            if sv == "edge":
+                return core + " Зазор тонок, и цена промаха в выборе рычага высока."
+            return core
     if sv in ("breached", "revived"):
         if lever:
             return (f"Рычаг удержания лежит {lever}, давление по ней уводит систему "
-                    f"с траектории срыва вернее, чем усилия по второстепенным. "
-                    f"Удержание баланса перестаёт быть делом одной сдержанности.")
-        return ("Удержание баланса перестаёт быть делом одной сдержанности, систему "
-                "тянет за порог по совокупности осей сразу.")
+                    f"с траектории срыва вернее усилий по второстепенным. Удержание "
+                    f"баланса перестаёт быть делом одной сдержанности.")
+        return ("Систему тянет за порог по совокупности осей сразу, и удержание "
+                "баланса перестаёт быть делом одной сдержанности.")
     if sv == "edge":
         tail = ("и вблизи порога вывод держится на тонком, где резкость суждения "
                 "была бы самонадеянностью.")
@@ -412,11 +480,11 @@ def _say_verdict(s: dict, d: dict) -> str:
 
 def _judgment_prose(data: dict) -> list:
     """
-    Собирает суждение по решётке в связную прозу, а не в перечень. Три ведущие
-    оси несут диагноз, безопасность, доминанта и форма. Уточняют его смена
-    природы давления, темп и расстановка. Завершает вывод о точке приложения
-    силы с предохранителем резкости. Молчит честно там, где сценарий не родил
-    динамики.
+    Собирает суждение по решётке в связную прозу двумя блоками. Блок ядра отвечает
+    по порядку важности, погибнет ли система, кто её давит, виновен ли сценарий.
+    Блок механики описывает, как именно система шла к финалу, форму с темпом,
+    смену природы давления и расстановку. Завершает управленческое предписание.
+    Молчит честно там, где сценарий не родил динамики.
     """
     j = data.get("judgment", {})
     if not j:
@@ -427,19 +495,22 @@ def _judgment_prose(data: dict) -> list:
         return ["Сценарий не порождает собственной динамики, система идёт по "
                 "инерции, и судить сверх самого фона не о чем."]
     paras = []
-    core = " ".join(p for p in (_say_safety(j.get("safety", {})),
-                                _say_dominance(j.get("dominance", {})),
-                                _say_shape(j.get("shape", {}))) if p)
-    if core:
-        paras.append(core)
-    mech = " ".join(p for p in (_say_shift(j.get("shift", {})),
-                                _say_tempo(j.get("tempo", {})),
-                                _say_actors(j.get("actors", {}))) if p)
-    if mech:
-        paras.append(mech)
-    verdict = _say_verdict(j.get("safety", {}), j.get("dominance", {}))
-    if verdict:
-        paras.append(verdict)
+    # Блок ядра суждения.
+    block1 = " ".join(p for p in (_say_safety(j.get("safety", {})),
+                                  _say_dominance(j.get("dominance", {})),
+                                  _say_counterfactual(j.get("counterfactual", {}))) if p)
+    if block1:
+        paras.append(block1)
+    # Блок механики прогона.
+    block2 = " ".join(p for p in (_say_shape_tempo(j.get("shape", {}), j.get("tempo", {})),
+                                  _say_shift(j.get("shift", {})),
+                                  _say_actors(j.get("actors", {}))) if p)
+    if block2:
+        paras.append(block2)
+    # Управленческое предписание.
+    presc = _say_prescription(j.get("safety", {}), j.get("dominance", {}))
+    if presc:
+        paras.append(presc)
     return paras
 
 
