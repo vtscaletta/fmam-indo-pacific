@@ -140,9 +140,12 @@ def _actors(traj) -> list:
     for c in codes:
         ln = (loud[c] / lmax) if lmax > 0 else 0.0
         sn = (shift[c] / smax) if smax > 0 else 0.0
+        st = states.get(c, [])
+        start_z = [round(float(v), 3) for v in st[0]] if st else None
         rows.append({
             "code": c,
             "name": AGENTS[c].name if c in AGENTS else c,
+            "start_z": start_z,
             "loudness": round(loud[c], 4), "shift": round(shift[c], 4),
             "loud_norm": round(ln, 4), "shift_norm": round(sn, 4),
             "weight": round((ln + sn) / 2, 4),
