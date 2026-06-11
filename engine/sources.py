@@ -125,6 +125,226 @@ SOURCES = [
         "url": "https://thediplomat.com/2026/04/breaking-the-postwar-taboo-japan-lifts-its-ban-on-lethal-arms-exports/",
         "verified": True,
     },
+
+    # --- Тайвань. M-C ---
+    {
+        "key": "twn_conscription_2024",
+        "agent": "twn", "year": 2024, "axis": "normative",
+        "fact": "Возврат годичной воинской повинности с января 2024 года, "
+                "объявлен в декабре 2022, разворот к всеобщей обороне против КНР.",
+        "source": "Канцелярия президента Китайской Республики, Тайвань",
+        "url": "https://english.president.gov.tw/News/6417",
+        "verified": True,
+    },
+    {
+        "key": "twn_pla_pressure_2024",
+        "agent": "twn", "year": 2024, "axis": "material",
+        "fact": "Рекорд давления НОАК, 3615 самолётовылетов в зону опознавания "
+                "за 2024 год, вдвое выше 2023, учения Joint Sword после "
+                "инаугурации президента Лая.",
+        "source": "Janes, по данным Министерства обороны Тайваня",
+        "url": "https://www.janes.com/osint-insights/defence-and-national-security-analysis/china-sets-new-records-in-air-sea-operations-around-taiwan",
+        "verified": True,
+    },
+    {
+        "key": "twn_defense_budget_2026",
+        "agent": "twn", "year": 2026, "axis": "material",
+        "fact": "Рекордный оборонный бюджет на 2026 год, 949,5 млрд тайваньских "
+                "долларов, 3,32 процента ВВП, впервые выше 3 процентов с 2009 года.",
+        "source": "The Diplomat, Focus Taiwan",
+        "url": "https://thediplomat.com/2025/08/taiwans-government-eyes-expanded-defense-budget-at-3-3-of-gdp/",
+        "verified": True,
+    },
+    {
+        "key": "twn_special_budget_split_2026",
+        "agent": "twn", "year": 2026, "axis": "material",
+        "fact": "Особый оборонный бюджет около 40 млрд долларов на асимметричные "
+                "средства, урезан оппозиционным Законодательным Юанем на "
+                "38 процентов в мае 2026, годовой бюджет к июню не принят.",
+        "source": "Congressional Research Service, IF12481",
+        "url": "https://www.congress.gov/crs-product/IF12481",
+        "verified": True,
+    },
+
+    # --- Республика Корея. M-C ---
+    {
+        "key": "kor_martial_law_2024",
+        "agent": "kor", "year": 2024, "axis": "normative",
+        "fact": "Объявление военного положения президентом Юном 3 декабря 2024 "
+                "года, первое с демократизации 1987 года, импичмент 14 декабря.",
+        "source": "Congressional Research Service, IN12474",
+        "url": "https://www.congress.gov/crs-product/IN12474",
+        "verified": True,
+    },
+    {
+        "key": "kor_three_axis_2025",
+        "agent": "kor", "year": 2025, "axis": "normative",
+        "fact": "Трёхосевая система сдерживания против КНДР, упреждающий удар "
+                "Kill Chain, ПРО KAMD и обезглавливающее возмездие KMPR, "
+                "наступательный разворот доктрины за десятилетие.",
+        "source": "CSIS",
+        "url": "https://www.csis.org/analysis/south-koreas-offensive-military-strategy-and-its-dilemma",
+        "verified": True,
+    },
+    {
+        "key": "kor_defense_budget_2026",
+        "agent": "kor", "year": 2026, "axis": "material",
+        "fact": "Оборонный бюджет на 2026 год, 66,3 трлн вон около 47,6 млрд "
+                "долларов, рост 8,2 процента, крупнейший за семь лет, расходы на "
+                "трёхосевую систему выше на 22 процента.",
+        "source": "The Korea Herald",
+        "url": "https://www.koreaherald.com/article/10567523",
+        "verified": True,
+    },
+    {
+        "key": "kor_nuclear_debate_2025",
+        "agent": "kor", "year": 2025, "axis": "alliance",
+        "fact": "Дебаты о собственном ядерном вооружении перестали быть табу, "
+                "дилемма между опорой на расширенное сдерживание США и "
+                "автономной ядерной защитой от КНДР.",
+        "source": "Defense News",
+        "url": "https://www.defensenews.com/opinion/2025/11/25/south-koreas-nuclear-debate-is-no-longer-taboo/",
+        "verified": True,
+    },
+
+    # --- КНР. M-C-2 ---
+    {
+        "key": "chn_defense_budget_2026",
+        "agent": "chn", "year": 2026, "axis": "material",
+        "fact": "Оборонный бюджет на 2026 год 1,91 трлн юаней около 277 млрд "
+                "долларов, рост 7 процентов, объявлен на сессии ВСНП 5 марта "
+                "2026 года на фоне чистки военного руководства.",
+        "source": "Министерство обороны КНР, CNBC",
+        "url": "http://eng.mod.gov.cn/2025xb/P/16447711.html",
+        "verified": True,
+    },
+    {
+        "key": "chn_military_buildup_2025",
+        "agent": "chn", "year": 2025, "axis": "material",
+        "fact": "Оценка SIPRI военных расходов КНР за 2025 год 336 млрд "
+                "долларов, тридцатый год роста подряд, ядерный арсенал около "
+                "600 боеголовок, ввод авианосца Фуцзянь в ноябре 2025 года.",
+        "source": "SIPRI, по сводке militaryspend",
+        "url": "https://militaryspend.org/country-profiles/china",
+        "verified": True,
+    },
+    {
+        "key": "chn_philippines_shoal_2024",
+        "agent": "chn", "year": 2024, "axis": "material",
+        "fact": "Силовое давление у рифа Второй Томас, водомёты по филиппинским "
+                "судам в марте 2024 и силовой захват катера с ранениями "
+                "17 июня 2024 года, эрозия операционных норм Южно-Китайского моря.",
+        "source": "Asia Maritime Transparency Initiative, CSIS",
+        "url": "https://amti.csis.org/shifting-tactics-at-second-thomas-shoal/",
+        "verified": True,
+    },
+    {
+        "key": "chn_pla_purge_2026",
+        "agent": "chn", "year": 2026, "axis": "material",
+        "fact": "Чистка военного руководства, девять генералов смещены в "
+                "октябре 2025, генерал Чжан Юся и начальник штаба в январе "
+                "2026, Центральный военный совет урезан с семи до двух.",
+        "source": "ChinaPower, CSIS",
+        "url": "https://chinapower.csis.org/china-pla-military-purges/",
+        "verified": True,
+    },
+
+    # --- США. M-C-2 ---
+    {
+        "key": "usa_defense_budget_2025",
+        "agent": "usa", "year": 2025, "axis": "material",
+        "fact": "Крупнейший в мире оборонный бюджет, около 850 млрд долларов "
+                "по плану 2025 финансового года и около 919 млрд по факту "
+                "расходов, порядка 13 процентов федеральных трат.",
+        "source": "CNBC, USAFacts",
+        "url": "https://www.cnbc.com/2026/03/05/china-defense-spending-7-percent-2026-budget.html",
+        "verified": True,
+    },
+    {
+        "key": "usa_allies_pressure_2025",
+        "agent": "usa", "year": 2025, "axis": "alliance",
+        "fact": "Администрация Трампа требует от союзников поднять расходы до "
+                "5 процентов ВВП, кандидат в Пентагон Колби настаивает на "
+                "10 процентах для Тайваня, разворот к разделению бремени.",
+        "source": "Центральное информагентство Китайской Республики",
+        "url": "https://www.globalsecurity.org/wmd/library/news/taiwan/2025/taiwan-250305-cna01.htm",
+        "verified": True,
+    },
+    {
+        "key": "usa_strategic_ambiguity_2025",
+        "agent": "usa", "year": 2025, "axis": "alliance",
+        "fact": "Обязательство США по Тайваню названо подразумеваемым, "
+                "косвенным и обычным, военный баланс с КНР, по оценке "
+                "Колби, резко сместился, стратегическая неопределённость сохранена.",
+        "source": "Taiwan News",
+        "url": "https://www.taiwannews.com.tw/news/6051873",
+        "verified": True,
+    },
+    {
+        "key": "usa_trump_xi_busan_2025",
+        "agent": "usa", "year": 2025, "axis": "alliance",
+        "fact": "Встреча Трампа и Си в Пусане 30 октября 2025, первая очная во "
+                "втором сроке, разрядка торговой войны, снижение пошлин в обмен "
+                "на редкоземельные металлы и закупки сои.",
+        "source": "Atlantic Council",
+        "url": "https://www.atlanticcouncil.org/blogs/new-atlanticist/experts-react/experts-react-what-does-the-trump-xi-meeting-mean-for-trade-technology-security-and-beyond/",
+        "verified": True,
+    },
+
+    # --- Союзная опора Тайваня и Кореи. M-C-2 ---
+    {
+        "key": "twn_us_arms_2025",
+        "agent": "twn", "year": 2025, "axis": "alliance",
+        "fact": "Пакет американских вооружений по уведомлению Конгресса декабря "
+                "2025, ракеты TOW-2B и Javelin, гаубицы M109A7 и системы "
+                "HIMARS, опора асимметричной обороны при дефиците гарантий.",
+        "source": "Brookings",
+        "url": "https://www.brookings.edu/articles/defense-in-a-democracy-political-competition-and-taiwans-special-defense-budget/",
+        "verified": True,
+    },
+    {
+        "key": "kor_us_submarine_2025",
+        "agent": "kor", "year": 2025, "axis": "alliance",
+        "fact": "Саммит Трампа и Ли 30 октября 2025, согласие США поделиться "
+                "технологией атомной подводной лодки для Республики Корея, "
+                "укрепление союзной опоры на фоне ядерных дебатов.",
+        "source": "PBS NewsHour",
+        "url": "https://www.pbs.org/newshour/world/chinas-xi-promises-to-protect-free-trade-at-apec-as-trump-snubs-major-summit",
+        "verified": True,
+    },
+
+    # --- Япония. Глубокая интеграция. M-C-3 ---
+    {
+        "key": "jpn_camp_david_2023",
+        "agent": "jpn", "year": 2023, "axis": "alliance",
+        "fact": "Трёхсторонний саммит США, Японии и Республики Корея в "
+                "Кэмп-Дэвиде 18 августа 2023, первый отдельный в истории, дух "
+                "Кэмп-Дэвида и обязательство о консультациях при угрозах.",
+        "source": "Белый дом, совместное заявление",
+        "url": "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2023/08/18/the-spirit-of-camp-david-joint-statement-of-japan-the-republic-of-korea-and-the-united-states/",
+        "verified": True,
+    },
+    {
+        "key": "jpn_type12_deployment_2026",
+        "agent": "jpn", "year": 2026, "axis": "material",
+        "fact": "Развёртывание модернизированной противокорабельной ракеты "
+                "Type-12 дальностью около 1000 км в лагере Кенгун на Кюсю "
+                "31 марта 2026, ввод HVGP Block I, обретение потенциала "
+                "ответного удара.",
+        "source": "Stars and Stripes",
+        "url": "https://www.stripes.com/theaters/asia_pacific/2026-03-12/japan-type-12-missile-deployment-21036511.html",
+        "verified": True,
+    },
+    {
+        "key": "jpn_balikatan_2026",
+        "agent": "jpn", "year": 2026, "axis": "normative",
+        "fact": "Первый с 1945 года пуск наступательной ракеты Силами "
+                "самообороны с чужой земли на учениях Баликатан на Филиппинах "
+                "в мае 2026, выход военной активности за пределы территории.",
+        "source": "Global Defense Corp",
+        "url": "https://www.globaldefensecorp.com/2026/05/13/japan-fires-a-type-88-anti-ship-missile-during-the-balikatan-2026-exercise-in-the-philippines/",
+        "verified": True,
+    },
 ]
 
 
