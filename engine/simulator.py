@@ -57,7 +57,8 @@ class Trajectory:
     regime_dist: list = field(default_factory=list)
     agent_states: dict = field(default_factory=dict)   # код -> список [z1, z2, z3]
     agent_actions: dict = field(default_factory=dict)  # код -> список векторов действия
-    events_log: list = field(default_factory=list)     # (год, описание, переменная)
+    events_log: list = field(default_factory=list)     # (год, описание)
+    event_vars: list = field(default_factory=list)     # переменная z по порядку events_log
 
     def to_dict(self) -> dict:
         return {
@@ -72,6 +73,7 @@ class Trajectory:
             "agent_actions": {c: [dict(a) for a in v]
                               for c, v in self.agent_actions.items()},
             "events_log": list(self.events_log),
+            "event_vars": list(self.event_vars),
         }
 
 
@@ -110,7 +112,8 @@ class Simulator:
             # Стадия 1. Шоки сценария в состояния текущего года.
             applied = scenario.apply(k, states)
             for desc, var in applied:
-                traj.events_log.append((year, desc, var))
+                traj.events_log.append((year, desc))
+                traj.event_vars.append(var)
 
             # Стадия 2. Действия агентов.
             actions = {c: self.controller.step(*states[c]) for c in CODES}
