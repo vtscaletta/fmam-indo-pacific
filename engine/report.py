@@ -218,16 +218,16 @@ def _comparison(traj, baseline, thresholds: dict) -> dict:
 def _events(traj) -> list:
     """
     Шоки сценария по годам из лога траектории. Год абсолютный, описание
-    человекочитаемое, переменная z указывает дёрнутый параметр. Лог траектории
-    есть единственный источник, что исключает рассинхрон с объектом сценария.
-    Поддержан и старый формат лога без переменной, на случай прежних прогонов.
+    человекочитаемое. Дёрнутая переменная z идёт параллельным списком event_vars
+    в том же порядке, чтобы основной лог остался двухэлементным и не ломал
+    распаковку на дашборде. Если параллельного списка нет, переменная пуста.
     """
+    log = list(getattr(traj, "events_log", []))
+    evars = list(getattr(traj, "event_vars", []))
     out = []
-    for rec in getattr(traj, "events_log", []):
-        if len(rec) >= 3:
-            year, description, variable = rec[0], rec[1], rec[2]
-        else:
-            year, description, variable = rec[0], rec[1], None
+    for i, rec in enumerate(log):
+        year, description = rec[0], rec[1]
+        variable = evars[i] if i < len(evars) else None
         out.append({"year": year, "description": description, "variable": variable})
     return out
 
