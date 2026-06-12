@@ -62,7 +62,7 @@ class Scenario:
             idx = _VAR_INDEX[ev.variable]
             vec = states[ev.target]
             vec[idx] = _clip(vec[idx] + ev.delta)
-            fired.append(ev.description)
+            fired.append((ev.description, ev.variable))
         return fired
 
 
