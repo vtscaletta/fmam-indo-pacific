@@ -263,32 +263,18 @@ def _gaps(traj, thresholds: dict, base_year: int) -> list:
     return gaps
 
 
-def _synthesis_trace(traj) -> dict:
+def _trace_at(traj, k: int) -> dict:
     """
-    Восстанавливает разбор синтеза для одного показательного года, текстовый
-    двойник приложения с выкладкой. Движок не правится, разбор воспроизводится
-    прокруткой свежей связки по сохранённым действиям траектории, и совпадает с
-    живым напряжением до машинной точности.
-
-    Выбор года робастен к любому горизонту, чтобы перенос не давал казусов ни
-    на коротком, ни на длинном прогоне. Берётся год наибольшего скачка
-    напряжения как самый показательный, при ровной динамике срединный, при
-    единственном шаге он сам. Так разбор всегда падает на содержательный год.
+    Разбор синтеза для заданного шага k. Движок не правится, разбор
+    воспроизводится прокруткой свежей связки по сохранённым действиям и
+    совпадает с живым напряжением до машинной точности.
     """
     actions_log = getattr(traj, "agent_actions", {}) or {}
     states_log = getattr(traj, "agent_states", {}) or {}
     years = list(traj.years)
-    tens = list(traj.tension)
-    H = len(years)
     codes = [c for c in CODES if c in actions_log and c in states_log]
-    if H == 0 or not codes:
+    if not codes or k < 0 or k >= len(years):
         return None
-    if H == 1:
-        k = 0
-    else:
-        deltas = [abs(tens[i] - tens[i - 1]) for i in range(1, H)]
-        mx = max(deltas) if deltas else 0.0
-        k = (deltas.index(mx) + 1) if mx > 1e-6 else H // 2
     coup = LevelCoupling()
     warm = {c: {kk: actions_log[c][0][kk] for kk in ("milex", "rhet", "drift")}
             for c in codes}
@@ -304,14 +290,41 @@ def _synthesis_trace(traj) -> dict:
     pressure_term = b["pressure"] * ex["perceptual_pressure"]
     return {
         "year": years[k],
-        "components": {kk: round(ex["components"][kk], 4) for kk in ex["components"]},
-        "smoothed": {kk: round(sm[kk], 4) for kk in sm},
         "perceptual_pressure": round(ex["perceptual_pressure"], 4),
         "material_term": round(material_term, 4),
         "pressure_term": round(pressure_term, 4),
         "sigmoid_arg": round(ex["sigmoid_arg"], 4),
         "tension": round(ex["tension"], 4),
     }
+
+
+# Порог содержательного перелома. Скачок ниже него считается прогревом памяти
+# или плавной динамикой, а не структурным переломом, и расчёт к нему не вяжется.
+_PIVOT_JUMP = 0.035
+
+
+def _synthesis_points(traj) -> dict:
+    """
+    Дозированный расчётный слой. Разбор итогового напряжения присутствует
+    всегда, ибо итог есть главный довод отчёта. Разбор переломного года
+    добавляется только при содержательном резком переломе, не в годы прогрева и
+    не на финале, иначе он сел бы на искусственный ранний скачок ровного
+    сценария. Робастно к горизонту, на коротком прогоне перелом просто пуст.
+    """
+    years = list(traj.years)
+    tens = list(traj.tension)
+    H = len(years)
+    if H == 0:
+        return {"final": None, "pivot": None}
+    final = _trace_at(traj, H - 1)
+    pivot = None
+    if H >= 4:
+        deltas = [abs(tens[i] - tens[i - 1]) for i in range(1, H)]
+        mx = max(deltas) if deltas else 0.0
+        kmax = deltas.index(mx) + 1
+        if mx >= _PIVOT_JUMP and 2 <= kmax <= H - 2:
+            pivot = _trace_at(traj, kmax)
+    return {"final": final, "pivot": pivot}
 
 
 def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
@@ -355,9 +368,9 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
     }
     # Погодовая раскладка осей давления для оси смены природы давления.
     data["axis_by_year"] = axis_scores_by_year(traj, baseline=baseline)
-    # Разбор синтеза для показательного года. Текстовый двойник приложения с
-    # полной выкладкой, восстановлен из траектории без правки движка.
-    data["synthesis_trace"] = _synthesis_trace(traj)
+    # Дозированный расчётный слой. Разбор итогового напряжения всегда, разбор
+    # переломного года при содержательном переломе. Восстановлен из траектории.
+    data["synthesis"] = _synthesis_points(traj)
     # Суждение по решётке. Читается из уже собранных данных, оттого ставится
     # последним, когда timeline, comparison, drivers, actors и thresholds готовы.
     data["judgment"] = read_axes(data)
