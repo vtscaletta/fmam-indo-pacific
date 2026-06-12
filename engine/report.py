@@ -18,6 +18,8 @@ from engine.analysis import classify, classify_threat_type, axis_scores_by_year
 from engine.sources import sources_until
 from engine.agents import AGENTS
 from engine.judgment import read_axes
+from engine.synthesis import LevelCoupling, aggregate, DEFAULT_BETA
+from engine.influence import CODES
 
 
 # Порог резкого сдвига напряжения за один год. Подобран так, чтобы отмечать
@@ -73,13 +75,15 @@ def _nodal_years(timeline: list) -> list:
         kinds = []
         if prev["zone"] != row["zone"]:
             arrow = "вверх" if row["zone"] > prev["zone"] else "вниз"
-            kinds.append(f"переход порога {arrow}, {_regime_label(prev['zone'])} "
-                         f"→ {_regime_label(row['zone'])}")
+            kinds.append(f"транзит через критический порог {arrow}, "
+                         f"{_regime_label(prev['zone'])} → {_regime_label(row['zone'])}")
         if prev["regime"] != row["regime"]:
             kinds.append(f"смена доминирующего режима на {_regime_label(row['regime'])}")
         if abs(row["delta"]) >= _JUMP:
-            direction = "рост" if row["delta"] > 0 else "спад"
-            kinds.append(f"резкий {direction} напряжения на {abs(row['delta']):.3f}")
+            sign = "+" if row["delta"] > 0 else "−"
+            term = "приращение" if row["delta"] > 0 else "редукция"
+            kinds.append(f"экстремальное {term} системного напряжения "
+                         f"(Δ = {sign}{abs(row['delta']):.3f})")
         if kinds:
             nodes.append({"year": row["year"], "kind": "; ".join(kinds),
                           "note": f"Напряжение {row['tension']:.3f}."})
@@ -248,6 +252,57 @@ def _gaps(traj, thresholds: dict, base_year: int) -> list:
     return gaps
 
 
+def _synthesis_trace(traj) -> dict:
+    """
+    Восстанавливает разбор синтеза для одного показательного года, текстовый
+    двойник приложения с выкладкой. Движок не правится, разбор воспроизводится
+    прокруткой свежей связки по сохранённым действиям траектории, и совпадает с
+    живым напряжением до машинной точности.
+
+    Выбор года робастен к любому горизонту, чтобы перенос не давал казусов ни
+    на коротком, ни на длинном прогоне. Берётся год наибольшего скачка
+    напряжения как самый показательный, при ровной динамике срединный, при
+    единственном шаге он сам. Так разбор всегда падает на содержательный год.
+    """
+    actions_log = getattr(traj, "agent_actions", {}) or {}
+    states_log = getattr(traj, "agent_states", {}) or {}
+    years = list(traj.years)
+    tens = list(traj.tension)
+    H = len(years)
+    codes = [c for c in CODES if c in actions_log and c in states_log]
+    if H == 0 or not codes:
+        return None
+    if H == 1:
+        k = 0
+    else:
+        deltas = [abs(tens[i] - tens[i - 1]) for i in range(1, H)]
+        mx = max(deltas) if deltas else 0.0
+        k = (deltas.index(mx) + 1) if mx > 1e-6 else H // 2
+    coup = LevelCoupling()
+    warm = {c: {kk: actions_log[c][0][kk] for kk in ("milex", "rhet", "drift")}
+            for c in codes}
+    coup.memory.seed(aggregate(warm, coup.weights))
+    for j in range(k):
+        coup.memory.update(aggregate({c: actions_log[c][j] for c in codes}, coup.weights))
+    a = {c: actions_log[c][k] for c in codes}
+    s = {c: states_log[c][k] for c in codes}
+    ex = coup.explain(a, s)
+    b = DEFAULT_BETA
+    sm = ex["smoothed"]
+    material_term = b["milex"] * sm["milex"] + b["rhet"] * sm["rhet"] + b["drift"] * sm["drift"]
+    pressure_term = b["pressure"] * ex["perceptual_pressure"]
+    return {
+        "year": years[k],
+        "components": {kk: round(ex["components"][kk], 4) for kk in ex["components"]},
+        "smoothed": {kk: round(sm[kk], 4) for kk in sm},
+        "perceptual_pressure": round(ex["perceptual_pressure"], 4),
+        "material_term": round(material_term, 4),
+        "pressure_term": round(pressure_term, 4),
+        "sigmoid_arg": round(ex["sigmoid_arg"], 4),
+        "tension": round(ex["tension"], 4),
+    }
+
+
 def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
                       baseline=None) -> dict:
     """
@@ -289,6 +344,9 @@ def build_report_data(traj, scenario, thresholds: dict, base_year: int = 2026,
     }
     # Погодовая раскладка осей давления для оси смены природы давления.
     data["axis_by_year"] = axis_scores_by_year(traj, baseline=baseline)
+    # Разбор синтеза для показательного года. Текстовый двойник приложения с
+    # полной выкладкой, восстановлен из траектории без правки движка.
+    data["synthesis_trace"] = _synthesis_trace(traj)
     # Суждение по решётке. Читается из уже собранных данных, оттого ставится
     # последним, когда timeline, comparison, drivers, actors и thresholds готовы.
     data["judgment"] = read_axes(data)
