@@ -86,7 +86,9 @@ def render_transparency(traj, lang: str) -> None:
         with col:
             st.plotly_chart(
                 membership_figure(t(vkey, lang), zmap[zkey], params, fz[zkey], lang),
-                use_container_width=True, config={"displayModeBar": False},
+                use_container_width=True,
+                config={"displaylogo": False, "scrollZoom": False,
+                        "modeBarButtonsToRemove": ["lasso2d", "select2d", "autoScale2d"]},
                 key=f"trn_mf_{zkey}",
             )
 
