@@ -201,29 +201,6 @@ def agents(traj, lang):
             st.plotly_chart(agent_radar_figure(start, final, a.name, lang),
                             use_container_width=True, config=PLOT_CFG)
 
-    # Холмы функций принадлежности. Делают зримым первый шаг нечёткого вывода,
-    # превращение сырого z в лингвистический терм. Агент выбирается, состояние
-    # берётся финальное, контроллер общий для подсистемы.
-    st.write("")
-    from ui.membership import membership_figure
-    from engine.fuzzy_agent import JAPAN
-    panel_open("Функции принадлежности входов" if lang == "ru" else "Input membership functions")
-    st.markdown(
-        f'<div style="font-size:14px;color:{PALETTE["text_secondary"]};margin-bottom:8px">'
-        + ("Холмы термов с маркером текущего значения переменной. Точка на холме "
-           "есть степень принадлежности, с которой число входит в терм."
-           if lang == "ru" else
-           "Term hills with a marker at the current value. The dot is the "
-           "membership degree of that value in the term.")
-        + "</div>", unsafe_allow_html=True)
-    codes = list(AGENTS)
-    sel = st.selectbox("mf_agent", codes, format_func=lambda c: AGENTS[c].name,
-                       label_visibility="collapsed", key="mf_agent_sel")
-    z_state = tuple(traj.agent_states[sel][-1])
-    st.plotly_chart(membership_figure(JAPAN, z_state, lang),
-                    use_container_width=True, config=PLOT_CFG)
-    panel_close()
-
 
 def render_dashboard(traj, title, lang, description=None):
     thresholds = cached_thresholds()
