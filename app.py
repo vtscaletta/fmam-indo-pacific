@@ -67,7 +67,7 @@ def sidebar():
             run = st.button(t("run_button", lang), use_container_width=True, type="primary")
         st.markdown("---")
         if st.button(t("reset_button", lang), use_container_width=True):
-            for k in ("active", "custom_traj", "builder_spec"):
+            for k in ("active", "custom_traj", "builder_spec", "jump_to"):
                 st.session_state.pop(k, None)
             st.rerun()
     return lang, mode, key, horizon, run
@@ -244,8 +244,12 @@ def compare_view(lang, horizon):
         trajs["custom"] = custom
         labels["custom"] = t("custom_name", lang)
 
+    horizon_note = (f"горизонт {horizon} лет, {trajs[next(iter(trajs))].years[0]}\u2013"
+                    f"{trajs[next(iter(trajs))].years[-1]}" if lang == "ru"
+                    else f"horizon {horizon} years")
     st.markdown(f'<h1>{t("cmp_title", lang)}</h1>'
-                f'<div class="dash-sub">{t("app_subtitle", lang)}</div>', unsafe_allow_html=True)
+                f'<div class="dash-sub">{t("app_subtitle", lang)} \u00b7 {horizon_note}</div>',
+                unsafe_allow_html=True)
     if not has_custom:
         st.markdown(
             f'<div style="font-size:14px;color:{PALETTE["text_muted"]};margin-bottom:6px">'
@@ -280,10 +284,47 @@ def compare_view(lang, horizon):
                         use_container_width=True, config=PLOT_CFG)
         panel_close()
 
+    # Мост из обзора в глубокий разбор. Клик по сценарию забрасывает в его полный
+    # дашборд на том же горизонте, обратный путь возвращает к сравнению. Горизонт
+    # несётся явно, чтобы разбор открылся ровно на тех же годах, что и обзор.
+    st.write("")
+    st.markdown(
+        f'<div style="font-size:14px;color:{PALETTE["text_secondary"]};margin-bottom:6px">'
+        + ("Откройте глубокий разбор любого сценария на том же горизонте."
+           if lang == "ru" else
+           "Open the deep dive for any scenario at the same horizon.")
+        + "</div>", unsafe_allow_html=True)
+    jump_keys = [k for k in trajs if k in SCENARIO_LABELS]
+    cols = st.columns(len(jump_keys))
+    for col, k in zip(cols, jump_keys):
+        with col:
+            if st.button(labels[k], key=f"jump_{k}", use_container_width=True):
+                st.session_state["jump_to"] = (k, horizon)
+                st.rerun()
+
 
 def main():
     lang, mode, key, horizon, run = sidebar()
     st.markdown(f'<div class="dash-eyebrow">{t("app_title", lang)}</div>', unsafe_allow_html=True)
+
+    # Явный запуск сценария из боковой панели перебивает прыжок из сравнения,
+    # чтобы пользователь не застрял в разборе после смены выбора.
+    if run:
+        st.session_state.pop("jump_to", None)
+
+    # Мост из сравнения. Если задан прыжок, показываем глубокий разбор выбранного
+    # сценария и кнопку возврата к обзору, минуя режим из боковой панели. Прыжок
+    # одноразовый, по нему же возвращаемся, потому навигация остаётся в одном потоке.
+    jump = st.session_state.get("jump_to")
+    if jump:
+        jkey, jhor = jump
+        back = ("\u2190 Назад к сравнению" if lang == "ru" else "\u2190 Back to comparison")
+        if st.button(back):
+            st.session_state.pop("jump_to", None)
+            st.rerun()
+        render_dashboard(cached_run(jkey, jhor), t(SCENARIO_LABELS[jkey], lang), lang,
+                         description=t(f"desc_{jkey}", lang))
+        return
 
     if mode == "compare":
         compare_view(lang, horizon)
