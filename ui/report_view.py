@@ -138,6 +138,31 @@ def render_report(traj, title: str, description: str, thresholds: dict,
 
     fig = tension_area_figure(traj, thresholds, lang)
 
+    # Подписи осей и порогов, чтобы график читался без догадок. Правка ложится на
+    # ту же фигуру, что идёт и на экран, и в выгрузку, потому едина для обоих.
+    hi = thresholds.get("S2->S3")
+    lo = thresholds.get("S1->S2")
+    fig.update_layout(
+        xaxis_title=("Год" if lang == "ru" else "Year"),
+        yaxis_title=("Системное напряжение \u03c4" if lang == "ru" else "System tension \u03c4"),
+    )
+    if hi is not None:
+        fig.add_annotation(
+            xref="paper", x=0.995, y=hi, yref="y",
+            text=(f"порог каскадного срыва {hi:.3f}" if lang == "ru"
+                  else f"collapse threshold {hi:.3f}"),
+            showarrow=False, font=dict(size=11, color=PALETTE["s3"]),
+            xanchor="right", yanchor="bottom",
+            bgcolor="rgba(255,255,255,0.75)")
+    if lo is not None:
+        fig.add_annotation(
+            xref="paper", x=0.995, y=lo, yref="y",
+            text=(f"порог разрядки {lo:.3f}" if lang == "ru"
+                  else f"de-escalation threshold {lo:.3f}"),
+            showarrow=False, font=dict(size=11, color=PALETTE["s1"]),
+            xanchor="right", yanchor="bottom",
+            bgcolor="rgba(255,255,255,0.75)")
+
     # Текстовые разделы. Резюме отражено баннером выше, потому пропускаем.
     for sec in narr["sections"]:
         if sec["heading"] == "Сводное заключение":
