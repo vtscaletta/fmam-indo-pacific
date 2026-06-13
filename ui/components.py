@@ -59,7 +59,7 @@ def agent_card(name: str, adversary: str, start: tuple, final: tuple, action: di
             f'<div class="barrow"><span title="{tip}" style="border-bottom:1px dotted {PALETTE["text_muted"]}">'
             f'{t(label_key, lang)}</span><span style="font-weight:700;color:{PALETTE["text_primary"]}">{f_val:.2f}</span></div>'
             f'<div class="bartrack"><div class="barfill" style="width:{pct}%;background:{color}"></div></div>'
-            f'<div style="font-size:11px;color:{PALETTE["text_muted"]};margin-top:2px">'
+            f'<div style="font-size:13px;color:{PALETTE["text_muted"]};margin-top:2px">'
             f'{t("agent_start", lang)} {s_val:.2f} · {sign}{abs(delta):.2f}</div>'
         )
 
@@ -73,9 +73,9 @@ def agent_card(name: str, adversary: str, start: tuple, final: tuple, action: di
         <div class="agentcard-name">{name}</div>
         <div class="agentcard-adv">противник · {adversary}</div>
         {body}
-        <div style="margin-top:12px;font-size:12px;color:{PALETTE['text_muted']};font-weight:600">
+        <div style="margin-top:12px;font-size:13px;color:{PALETTE['text_muted']};font-weight:600">
         {t('out_milex', lang)} · {t('out_rhet', lang)} · {t('out_drift', lang)}</div>
-        <div style="font-weight:700;color:{PALETTE['text_secondary']};font-size:14px">
+        <div style="font-weight:700;color:{PALETTE['text_secondary']};font-size:15px">
         {action['milex']:.2f} · {action['rhet']:.2f} · {action['drift']:.2f}</div>
         </div>""",
         unsafe_allow_html=True,
@@ -94,7 +94,7 @@ def threat_type_badge(classification: dict, lang="ru") -> None:
     st.markdown(
         f"""<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0 10px 0">
         <span class="pill" style="background:{color};color:#fff">{classification['label']}</span>
-        <span style="font-size:14px;color:{PALETTE['text_secondary']}">{classification['text']}</span>
+        <span style="font-size:15px;color:{PALETTE['text_secondary']}">{classification['text']}</span>
         </div>""",
         unsafe_allow_html=True,
     )
@@ -104,7 +104,7 @@ def threat_type_badge(classification: dict, lang="ru") -> None:
 def comparison_matrix(rows: list, lang="ru") -> None:
     """Сводная таблица сравнения сценариев со светофорными точками вердикта."""
     from ui.theme import verdict_color
-    head = (f'<tr style="text-align:left;color:{PALETTE["text_muted"]};font-size:12px;'
+    head = (f'<tr style="text-align:left;color:{PALETTE["text_muted"]};font-size:13px;'
             f'letter-spacing:1px;text-transform:uppercase">'
             f'<th style="padding:10px 14px">{t("col_scenario", lang)}</th>'
             f'<th style="padding:10px 14px">{t("col_verdict", lang)}</th>'
