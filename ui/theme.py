@@ -48,9 +48,10 @@ VERDICT_COLORS = {
 }
 
 FONTS = {
-    "sans": "'Inter', 'Helvetica Neue', system-ui, sans-serif",
+    "sans": "'Manrope', 'Helvetica Neue', system-ui, sans-serif",
+    "serif": "'Spectral', Georgia, 'Times New Roman', serif",
     "mono": "'JetBrains Mono', 'SFMono-Regular', Consolas, monospace",
-    "import_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
+    "import_url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Spectral:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap",
 }
 
 
@@ -80,7 +81,7 @@ def plotly_layout() -> dict:
     return dict(
         paper_bgcolor=PALETTE["bg_panel"],
         plot_bgcolor=PALETTE["bg_panel"],
-        font=dict(family="Inter, sans-serif", color=PALETTE["text_secondary"], size=13),
+        font=dict(family="Manrope, sans-serif", color=PALETTE["text_secondary"], size=13),
         margin=dict(l=48, r=20, t=30, b=40),
         colorway=[PALETTE["accent"], PALETTE["accent2"], PALETTE["s2"], PALETTE["s3"]],
     )
@@ -91,11 +92,24 @@ def build_css() -> str:
     return f"""
 @import url('{FONTS["import_url"]}');
 
-.stApp {{ background: {p["bg_page"]}; font-family: {FONTS["sans"]}; color: {p["text_primary"]}; }}
-.block-container {{ padding-top: 2rem; padding-bottom: 2rem; max-width: 1320px; }}
+.stApp {{ background: {p["bg_page"]}; font-family: {FONTS["sans"]};
+          color: {p["text_primary"]}; font-size: 16px; }}
+.block-container {{ padding-top: 1.4rem; padding-bottom: 2rem; max-width: 1320px; }}
 
-h1, h2, h3 {{ font-family: {FONTS["sans"]}; color: {p["text_primary"]}; letter-spacing: -0.02em; }}
-h1 {{ font-size: 38px; font-weight: 800; }}
+/* Вторая линия обороны против тёмной темы браузера. Конфиг прибивает светлую
+   базу, а это перекрывает цвета текста виджетов на случай, если тема просочится. */
+.stApp, .stApp p, .stApp li, .stApp label,
+.stMarkdown, .stMarkdown p {{ color: {p["text_primary"]}; }}
+.stTabs [data-baseweb="tab"] {{ color: {p["text_secondary"]}; font-weight: 600; }}
+.stTabs [aria-selected="true"] {{ color: {p["accent"]}; }}
+.stRadio label, .stRadio div, .stSelectbox label, .stSlider label {{ color: {p["text_primary"]}; }}
+section[data-testid="stSidebar"] {{ background: {p["bg_panel"]}; }}
+section[data-testid="stSidebar"] * {{ color: {p["text_primary"]}; }}
+
+h1, h2, h3 {{ font-family: {FONTS["serif"]}; color: {p["text_primary"]}; letter-spacing: -0.01em; }}
+h1 {{ font-size: 40px; font-weight: 800; }}
+h2 {{ font-size: 27px; font-weight: 700; }}
+h3 {{ font-size: 21px; font-weight: 700; }}
 
 #MainMenu, header, footer {{ visibility: hidden; }}
 
@@ -103,19 +117,19 @@ h1 {{ font-size: 38px; font-weight: 800; }}
 .dash-sub {{ font-size: 17px; color: {p["text_secondary"]}; margin-bottom: 4px; }}
 
 .kpi {{ background: {p["bg_panel"]}; border: 1px solid {p["border"]}; border-radius: 16px;
-        padding: 18px 20px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
+        padding: 16px 20px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
 .kpi-label {{ font-size: 12px; letter-spacing: 1px; font-weight: 600; color: {p["text_muted"]}; text-transform: uppercase; }}
-.kpi-value {{ font-size: 44px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; color: {p["text_primary"]}; }}
+.kpi-value {{ font-size: 44px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; color: {p["text_primary"]}; font-family: {FONTS["serif"]}; }}
 .kpi-delta {{ font-size: 13px; font-weight: 600; }}
 
-.verdict {{ border-radius: 18px; padding: 24px 28px; box-shadow: 0 2px 10px rgba(15,27,45,.08); }}
-.verdict-title {{ font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 12px; }}
+.verdict {{ border-radius: 18px; padding: 22px 26px; box-shadow: 0 2px 10px rgba(15,27,45,.08); }}
+.verdict-title {{ font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 12px; font-family: {FONTS["serif"]}; }}
 .verdict-text {{ font-size: 17px; line-height: 1.55; margin-top: 8px; }}
 .verdict-dot {{ width: 16px; height: 16px; border-radius: 50%; }}
 
 .panel {{ background: {p["bg_panel"]}; border: 1px solid {p["border"]}; border-radius: 16px;
-          padding: 18px 20px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
-.panel-title {{ font-size: 17px; font-weight: 700; color: {p["text_primary"]}; margin-bottom: 12px; }}
+          padding: 14px 20px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
+.panel-title {{ font-size: 18px; font-weight: 700; color: {p["text_primary"]}; margin-bottom: 7px; font-family: {FONTS["serif"]}; }}
 
 .agentcard {{ background: {p["bg_panel"]}; border: 1px solid {p["border"]}; border-radius: 14px;
              padding: 16px; box-shadow: 0 1px 3px rgba(15,27,45,.06); }}
@@ -128,7 +142,10 @@ h1 {{ font-size: 38px; font-weight: 800; }}
 
 .pill {{ display:inline-block; padding:6px 14px; border-radius:999px; font-weight:700; font-size:14px; }}
 
+/* Ужать вертикальный воздух между блоками Streamlit, плашки больше не раздуты. */
 .stButton > button, .stDownloadButton > button {{
     padding: 0.3rem 0.9rem !important; min-height: 0 !important;
     line-height: 1.3 !important; }}
+div[data-testid="stVerticalBlock"] {{ gap: 0.6rem; }}
+div[data-testid="stElementContainer"]:empty {{ display: none; }}
 """
