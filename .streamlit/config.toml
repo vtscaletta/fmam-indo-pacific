@@ -1,0 +1,11 @@
+[theme]
+# Светлая тема прибита намертво. Дашборд выглядит одинаково при любой теме
+# браузера зрителя, тёмный режим больше не съедает текст виджетов.
+base = "light"
+primaryColor = "#2563EB"
+backgroundColor = "#F4F6FA"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#0F1B2D"
+
+[client]
+showErrorDetails = true
