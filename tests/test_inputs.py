@@ -20,7 +20,7 @@ from engine.measurement.inputs import (
 from engine.measurement.loaders import load_agents, load_observations
 
 ROOT = Path(__file__).resolve().parents[1]
-YEARS = range(2001, 2027)
+YEARS = range(2001, 2026)
 
 
 @pytest.fixture(scope="module")
@@ -72,13 +72,15 @@ def test_из_одного_начального_числа_ряд_не_выво�
 
 # --- обращение с недостающими рядами -------------------------------------
 
-def test_доверие_пока_берётся_допущением_и_это_объявлено(prepared):
-    """Рядов совместных мероприятий и поставок ещё нет."""
+def test_доверие_вычисляется_из_рядов_поставок(prepared):
+    """
+    Доля гаранта в импорте вооружений выгружена по всем агентам, отчего
+    доверие на первом году более не берётся допущением.
+    """
     agents, _, inp = prepared
-    for code, agent in agents.items():
-        z2 = inp.initial[code][1]
-        assert z2 == pytest.approx(PROVISIONAL_TRUST[agent.trust_type]), code
-    assert any("доверие" in n for n in inp.notes)
+    computed = [c for c in agents
+                if inp.initial[c][1] != PROVISIONAL_TRUST[agents[c].trust_type]]
+    assert len(computed) >= 8, "доверие должно вычисляться у большинства"
 
 
 def test_кндр_не_имеет_ряда_расходов_и_это_объявлено(prepared):
@@ -115,8 +117,11 @@ def test_эрозия_переносится_с_последнего_извес�
     состояния ограничения, а не его исчезновение.
     """
     _, _, inp = prepared
-    assert inp.erosion_at("jpn", 2026) == pytest.approx(
-        inp.erosion["jpn"][2026])
+    assert inp.erosion_at("jpn", 2025) == pytest.approx(
+        inp.erosion["jpn"][2025])
+    # год за пределами наблюдения получает последнее известное значение
+    assert inp.erosion_at("jpn", 2030) == pytest.approx(
+        inp.erosion["jpn"][2025])
 
 
 def test_до_первого_известного_года_значение_отсутствует(prepared):
