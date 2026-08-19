@@ -21,7 +21,7 @@ AGENTS_CSV = ROOT / "data" / "agents.csv"
 OBS_CSV = ROOT / "data" / "observations.csv"
 
 HEAD_A = "code,name,adversary,guarantor,trust_type,note\n"
-HEAD_O = "agent,year,key,value,source\n"
+HEAD_O = "agent,year,key,value,quality,source\n"
 
 
 def _write(tmp_path, name, text):
@@ -75,46 +75,47 @@ def test_отсутствие_столбца_есть_ошибка(tmp_path):
 # --- обнаружение порчи в наблюдениях ------------------------------------
 
 def test_неизвестный_агент_есть_ошибка(tmp_path, agents):
-    p = _write(tmp_path, "o.csv", HEAD_O + "rus,2010,milex,50,SIPRI\n")
+    p = _write(tmp_path, "o.csv", HEAD_O + "rus,2010,milex,50,наблюдение,SIPRI\n")
     with pytest.raises(DataError, match="неизвестный агент"):
         load_observations(p, agents)
 
 
 def test_показатель_вне_реестра_есть_ошибка(tmp_path, agents):
-    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,мощь,50,x\n")
-    with pytest.raises(DataError, match="в реестре не объявлен"):
+    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,мощь,50,наблюдение,x\n")
+    with pytest.raises(DataError, match="не объявлен"):
         load_observations(p, agents)
 
 
 def test_показатель_неприменимый_к_агенту_есть_ошибка(tmp_path, agents):
     """Аффективный показатель существует только для Японии."""
-    p = _write(tmp_path, "o.csv", HEAD_O + "chn,2010,affinity,30,x\n")
+    p = _write(tmp_path, "o.csv", HEAD_O + "chn,2010,affinity,30,наблюдение,x\n")
     with pytest.raises(DataError, match="не применяется"):
         load_observations(p, agents)
 
 
 def test_год_вне_периода_есть_ошибка(tmp_path, agents):
-    p = _write(tmp_path, "o.csv", HEAD_O + f"jpn,{YEAR_MIN - 1},milex,50,x\n")
+    p = _write(tmp_path, "o.csv", HEAD_O + f"jpn,{YEAR_MIN - 1},milex,50,наблюдение,x\n")
     with pytest.raises(DataError, match="вне периода"):
         load_observations(p, agents)
 
 
 def test_пустое_значение_есть_ошибка(tmp_path, agents):
     """Отсутствие наблюдения обозначается отсутствием строки."""
-    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,milex,,x\n")
+    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,milex,,наблюдение,x\n")
     with pytest.raises(DataError, match="пустое значение"):
         load_observations(p, agents)
 
 
 def test_повтор_наблюдения_есть_ошибка(tmp_path, agents):
     p = _write(tmp_path, "o.csv", HEAD_O +
-               "jpn,2010,milex,50,x\njpn,2010,milex,51,x\n")
+               "jpn,2010,milex,50,наблюдение,x\n"
+               "jpn,2010,milex,51,наблюдение,x\n")
     with pytest.raises(DataError, match="дважды"):
         load_observations(p, agents)
 
 
 def test_нечисловое_значение_есть_ошибка(tmp_path, agents):
-    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,milex,много,x\n")
+    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,milex,много,наблюдение,x\n")
     with pytest.raises(DataError, match="не число"):
         load_observations(p, agents)
 
@@ -122,7 +123,7 @@ def test_нечисловое_значение_есть_ошибка(tmp_path, a
 # --- поведение при отсутствии наблюдения --------------------------------
 
 def test_отсутствующее_наблюдение_возвращается_как_пропуск(tmp_path, agents):
-    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,milex,50,x\n")
+    p = _write(tmp_path, "o.csv", HEAD_O + "jpn,2010,milex,50,наблюдение,x\n")
     obs = load_observations(p, agents)
     assert obs.get("jpn", 2010, "milex") == 50.0
     assert math.isnan(obs.get("jpn", 2011, "milex"))
@@ -131,7 +132,9 @@ def test_отсутствующее_наблюдение_возвращаетс�
 
 def test_ряд_по_годам_упорядочен(tmp_path, agents):
     p = _write(tmp_path, "o.csv", HEAD_O +
-               "jpn,2012,milex,52,x\njpn,2010,milex,50,x\njpn,2011,milex,51,x\n")
+               "jpn,2012,milex,52,наблюдение,x\n"
+               "jpn,2010,milex,50,наблюдение,x\n"
+               "jpn,2011,milex,51,наблюдение,x\n")
     obs = load_observations(p, agents)
     assert obs.years("jpn", "milex") == [2010, 2011, 2012]
     assert list(obs.series("jpn", "milex").values()) == [50.0, 51.0, 52.0]
@@ -145,7 +148,7 @@ def test_таблицы_репозитория_читаются_и_связны(
     assert len(ag) == 10, "участников должно быть десять"
     assert set(ag) == {"usa", "chn", "jpn", "twn", "kor",
                        "prk", "ind", "aus", "phl", "idn"}
-    assert len(obs.values) > 400
+    assert len(obs.values) > 1000
 
 
 def test_расходы_выгружены_по_девяти_агентам_из_десяти():
@@ -163,7 +166,7 @@ def test_ступень_потолка_японии_меняется_в_2013_г�
     obs = load_observations(OBS_CSV, ag)
     assert obs.get("jpn", 2012, "ceiling") == 3
     assert obs.get("jpn", 2013, "ceiling") == 2
-    assert obs.get("jpn", 2026, "ceiling") == 2
+    assert obs.get("jpn", 2025, "ceiling") == 2
 
 
 def test_снятые_запреты_японии_растут_ступенями():
