@@ -1,0 +1,515 @@
+agent,year,key,value,source
+usa,2001,milex,587.822,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2002,milex,660.012,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2003,milex,751.203,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2004,milex,818.751,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2005,milex,856.462,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2006,milex,868.803,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2007,milex,891.986,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2008,milex,956.872,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2009,milex,1032.168,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2010,milex,1061.674,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2011,milex,1049.103,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2012,milex,990.831,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2013,milex,914.617,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2014,milex,858.357,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2015,milex,838.865,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2016,milex,836.291,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2017,milex,827.674,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2018,milex,852.585,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2019,milex,901.032,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2020,milex,943.447,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2021,milex,933.334,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2022,milex,922.553,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2023,milex,943.033,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2024,milex,1004.901,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2025,milex,929.163,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2001,milex,49.635,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2002,milex,57.008,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2003,milex,61.696,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2004,milex,67.956,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2005,milex,74.625,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2006,milex,85.898,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2007,milex,94.425,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2008,milex,103.311,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2009,milex,125.361,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2010,milex,131.536,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2011,milex,141.206,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2012,milex,155.714,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2013,milex,168.375,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2014,milex,181.814,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2015,milex,196.088,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2016,milex,207.375,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2017,milex,220.129,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2018,milex,233.024,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2019,milex,244.376,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2020,milex,255.895,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2021,milex,262.559,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2022,milex,274.158,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2023,milex,292.221,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2024,milex,311.9,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2025,milex,335.018,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2001,milex,36.74,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2002,milex,36.923,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2003,milex,36.969,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2004,milex,36.822,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2005,milex,36.755,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2006,milex,36.287,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2007,milex,35.815,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2008,milex,35.47,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2009,milex,36.135,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2010,milex,36.264,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2011,milex,36.754,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2012,milex,36.309,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2013,milex,36.159,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2014,milex,36.546,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2015,milex,37.188,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2016,milex,36.967,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2017,milex,36.722,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2018,milex,38.571,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2019,milex,39.668,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2020,milex,39.328,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2021,milex,42.277,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2022,milex,39.766,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2023,milex,45.863,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2024,milex,54.245,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2025,milex,59.493,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2001,milex,11.058,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2002,milex,10.694,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2003,milex,10.593,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2004,milex,10.611,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2005,milex,10.209,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2006,milex,9.794,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2007,milex,10.364,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2008,milex,10.552,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2009,milex,11.366,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2010,milex,10.742,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2011,milex,10.845,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2012,milex,11.226,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2013,milex,10.602,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2014,milex,10.541,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2015,milex,11.109,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2016,milex,10.918,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2017,milex,11.105,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2018,milex,10.881,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2019,milex,11.603,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2020,milex,12.131,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2021,milex,13.061,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2022,milex,14.827,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2023,milex,16.202,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2024,milex,15.233,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2025,milex,17.341,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2001,milex,21.291,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2002,milex,21.878,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2003,milex,22.622,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2004,milex,23.616,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2005,milex,25.541,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2006,milex,26.462,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2007,milex,27.66,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2008,milex,29.47,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2009,milex,31.322,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2010,milex,31.583,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2011,milex,32.015,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2012,milex,32.831,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2013,milex,33.825,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2014,milex,35.156,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2015,milex,36.521,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2016,milex,37.437,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2017,milex,38.125,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2018,milex,40.059,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2019,milex,43.286,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2020,milex,45.563,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2021,milex,47.548,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2022,milex,46.55,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2023,milex,46.841,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2024,milex,47.605,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2025,milex,48.848,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2001,milex,33.264,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2002,milex,33.161,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2003,milex,33.902,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2004,milex,39.38,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2005,milex,41.909,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2006,milex,42.249,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2007,milex,42.759,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2008,milex,48.5,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2009,milex,57.101,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2010,milex,57.33,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2011,milex,57.857,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2012,milex,57.564,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2013,milex,57.602,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2014,milex,60.408,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2015,milex,60.982,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2016,milex,67.202,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2017,milex,71.936,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2018,milex,74.469,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2019,milex,79.726,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2020,milex,80.21,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2021,milex,79.701,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2022,milex,83.218,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2023,milex,85.233,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2024,milex,85.597,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2025,milex,93.255,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2001,milex,16.699,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2002,milex,17.417,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2003,milex,17.742,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2004,milex,18.473,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2005,milex,19.118,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2006,milex,20.14,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2007,milex,21.377,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2008,milex,22.157,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2009,milex,23.826,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2010,milex,24.103,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2011,milex,23.769,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2012,milex,22.936,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2013,milex,22.737,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2014,milex,24.677,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2015,milex,27.201,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2016,milex,29.787,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2017,milex,29.734,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2018,milex,29.024,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2019,milex,29.81,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2020,milex,31.268,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2021,milex,33.395,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2022,milex,33.625,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2023,milex,33.239,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2024,milex,34.231,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2025,milex,35.264,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2001,milex,2.378,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2002,milex,2.504,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2003,milex,2.79,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2004,milex,2.629,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2005,milex,2.679,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2006,milex,2.77,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2007,milex,3.034,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2008,milex,3.034,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2009,milex,2.918,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2010,milex,3.065,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2011,milex,3.114,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2012,milex,3.162,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2013,milex,3.609,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2014,milex,3.349,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2015,milex,3.664,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2016,milex,3.773,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2017,milex,4.483,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2018,milex,4.762,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2019,milex,4.747,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2020,milex,4.89,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2021,milex,5.517,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2022,milex,5.536,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2023,milex,5.154,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2024,milex,5.493,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2025,milex,6.3,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2001,milex,2.093,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2002,milex,2.53,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2003,milex,3.402,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2004,milex,3.804,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2005,milex,3.304,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2006,milex,3.355,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2007,milex,4.034,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2008,milex,3.748,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2009,milex,3.933,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2010,milex,4.619,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2011,milex,5.295,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2012,milex,6.079,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2013,milex,8.173,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2014,milex,7.201,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2015,milex,8.374,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2016,milex,7.815,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2017,milex,9.01,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2018,milex,7.921,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2019,milex,8.313,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2020,milex,9.678,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2021,milex,8.765,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2022,milex,10.051,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2023,milex,11.056,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2024,milex,12.012,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2025,milex,15.33,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2001,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2002,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2003,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2004,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2005,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2006,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2007,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2008,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2009,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2010,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2011,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2012,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2013,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2014,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2015,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2016,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2017,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2018,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2019,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2020,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2021,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2022,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2023,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2024,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2025,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+jpn,2026,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2001,ceiling,2,"Конституция РК, ст. 5"
+phl,2001,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2001,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2001,ceiling,0,Правового потолка на применение силы нет
+chn,2001,ceiling,0,Правового потолка на применение силы нет
+twn,2001,ceiling,0,Правового потолка на применение силы нет
+aus,2001,ceiling,0,Правового потолка на применение силы нет
+idn,2001,ceiling,0,Правового потолка на применение силы нет
+prk,2001,ceiling,0,Правового потолка на применение силы нет
+kor,2002,ceiling,2,"Конституция РК, ст. 5"
+phl,2002,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2002,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2002,ceiling,0,Правового потолка на применение силы нет
+chn,2002,ceiling,0,Правового потолка на применение силы нет
+twn,2002,ceiling,0,Правового потолка на применение силы нет
+aus,2002,ceiling,0,Правового потолка на применение силы нет
+idn,2002,ceiling,0,Правового потолка на применение силы нет
+prk,2002,ceiling,0,Правового потолка на применение силы нет
+kor,2003,ceiling,2,"Конституция РК, ст. 5"
+phl,2003,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2003,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2003,ceiling,0,Правового потолка на применение силы нет
+chn,2003,ceiling,0,Правового потолка на применение силы нет
+twn,2003,ceiling,0,Правового потолка на применение силы нет
+aus,2003,ceiling,0,Правового потолка на применение силы нет
+idn,2003,ceiling,0,Правового потолка на применение силы нет
+prk,2003,ceiling,0,Правового потолка на применение силы нет
+kor,2004,ceiling,2,"Конституция РК, ст. 5"
+phl,2004,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2004,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2004,ceiling,0,Правового потолка на применение силы нет
+chn,2004,ceiling,0,Правового потолка на применение силы нет
+twn,2004,ceiling,0,Правового потолка на применение силы нет
+aus,2004,ceiling,0,Правового потолка на применение силы нет
+idn,2004,ceiling,0,Правового потолка на применение силы нет
+prk,2004,ceiling,0,Правового потолка на применение силы нет
+kor,2005,ceiling,2,"Конституция РК, ст. 5"
+phl,2005,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2005,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2005,ceiling,0,Правового потолка на применение силы нет
+chn,2005,ceiling,0,Правового потолка на применение силы нет
+twn,2005,ceiling,0,Правового потолка на применение силы нет
+aus,2005,ceiling,0,Правового потолка на применение силы нет
+idn,2005,ceiling,0,Правового потолка на применение силы нет
+prk,2005,ceiling,0,Правового потолка на применение силы нет
+kor,2006,ceiling,2,"Конституция РК, ст. 5"
+phl,2006,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2006,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2006,ceiling,0,Правового потолка на применение силы нет
+chn,2006,ceiling,0,Правового потолка на применение силы нет
+twn,2006,ceiling,0,Правового потолка на применение силы нет
+aus,2006,ceiling,0,Правового потолка на применение силы нет
+idn,2006,ceiling,0,Правового потолка на применение силы нет
+prk,2006,ceiling,0,Правового потолка на применение силы нет
+kor,2007,ceiling,2,"Конституция РК, ст. 5"
+phl,2007,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2007,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2007,ceiling,0,Правового потолка на применение силы нет
+chn,2007,ceiling,0,Правового потолка на применение силы нет
+twn,2007,ceiling,0,Правового потолка на применение силы нет
+aus,2007,ceiling,0,Правового потолка на применение силы нет
+idn,2007,ceiling,0,Правового потолка на применение силы нет
+prk,2007,ceiling,0,Правового потолка на применение силы нет
+kor,2008,ceiling,2,"Конституция РК, ст. 5"
+phl,2008,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2008,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2008,ceiling,0,Правового потолка на применение силы нет
+chn,2008,ceiling,0,Правового потолка на применение силы нет
+twn,2008,ceiling,0,Правового потолка на применение силы нет
+aus,2008,ceiling,0,Правового потолка на применение силы нет
+idn,2008,ceiling,0,Правового потолка на применение силы нет
+prk,2008,ceiling,0,Правового потолка на применение силы нет
+kor,2009,ceiling,2,"Конституция РК, ст. 5"
+phl,2009,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2009,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2009,ceiling,0,Правового потолка на применение силы нет
+chn,2009,ceiling,0,Правового потолка на применение силы нет
+twn,2009,ceiling,0,Правового потолка на применение силы нет
+aus,2009,ceiling,0,Правового потолка на применение силы нет
+idn,2009,ceiling,0,Правового потолка на применение силы нет
+prk,2009,ceiling,0,Правового потолка на применение силы нет
+kor,2010,ceiling,2,"Конституция РК, ст. 5"
+phl,2010,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2010,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2010,ceiling,0,Правового потолка на применение силы нет
+chn,2010,ceiling,0,Правового потолка на применение силы нет
+twn,2010,ceiling,0,Правового потолка на применение силы нет
+aus,2010,ceiling,0,Правового потолка на применение силы нет
+idn,2010,ceiling,0,Правового потолка на применение силы нет
+prk,2010,ceiling,0,Правового потолка на применение силы нет
+kor,2011,ceiling,2,"Конституция РК, ст. 5"
+phl,2011,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2011,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2011,ceiling,0,Правового потолка на применение силы нет
+chn,2011,ceiling,0,Правового потолка на применение силы нет
+twn,2011,ceiling,0,Правового потолка на применение силы нет
+aus,2011,ceiling,0,Правового потолка на применение силы нет
+idn,2011,ceiling,0,Правового потолка на применение силы нет
+prk,2011,ceiling,0,Правового потолка на применение силы нет
+kor,2012,ceiling,2,"Конституция РК, ст. 5"
+phl,2012,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2012,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2012,ceiling,0,Правового потолка на применение силы нет
+chn,2012,ceiling,0,Правового потолка на применение силы нет
+twn,2012,ceiling,0,Правового потолка на применение силы нет
+aus,2012,ceiling,0,Правового потолка на применение силы нет
+idn,2012,ceiling,0,Правового потолка на применение силы нет
+prk,2012,ceiling,0,Правового потолка на применение силы нет
+kor,2013,ceiling,2,"Конституция РК, ст. 5"
+phl,2013,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2013,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2013,ceiling,0,Правового потолка на применение силы нет
+chn,2013,ceiling,0,Правового потолка на применение силы нет
+twn,2013,ceiling,0,Правового потолка на применение силы нет
+aus,2013,ceiling,0,Правового потолка на применение силы нет
+idn,2013,ceiling,0,Правового потолка на применение силы нет
+prk,2013,ceiling,0,Правового потолка на применение силы нет
+kor,2014,ceiling,2,"Конституция РК, ст. 5"
+phl,2014,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2014,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2014,ceiling,0,Правового потолка на применение силы нет
+chn,2014,ceiling,0,Правового потолка на применение силы нет
+twn,2014,ceiling,0,Правового потолка на применение силы нет
+aus,2014,ceiling,0,Правового потолка на применение силы нет
+idn,2014,ceiling,0,Правового потолка на применение силы нет
+prk,2014,ceiling,0,Правового потолка на применение силы нет
+kor,2015,ceiling,2,"Конституция РК, ст. 5"
+phl,2015,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2015,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2015,ceiling,0,Правового потолка на применение силы нет
+chn,2015,ceiling,0,Правового потолка на применение силы нет
+twn,2015,ceiling,0,Правового потолка на применение силы нет
+aus,2015,ceiling,0,Правового потолка на применение силы нет
+idn,2015,ceiling,0,Правового потолка на применение силы нет
+prk,2015,ceiling,0,Правового потолка на применение силы нет
+kor,2016,ceiling,2,"Конституция РК, ст. 5"
+phl,2016,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2016,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2016,ceiling,0,Правового потолка на применение силы нет
+chn,2016,ceiling,0,Правового потолка на применение силы нет
+twn,2016,ceiling,0,Правового потолка на применение силы нет
+aus,2016,ceiling,0,Правового потолка на применение силы нет
+idn,2016,ceiling,0,Правового потолка на применение силы нет
+prk,2016,ceiling,0,Правового потолка на применение силы нет
+kor,2017,ceiling,2,"Конституция РК, ст. 5"
+phl,2017,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2017,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2017,ceiling,0,Правового потолка на применение силы нет
+chn,2017,ceiling,0,Правового потолка на применение силы нет
+twn,2017,ceiling,0,Правового потолка на применение силы нет
+aus,2017,ceiling,0,Правового потолка на применение силы нет
+idn,2017,ceiling,0,Правового потолка на применение силы нет
+prk,2017,ceiling,0,Правового потолка на применение силы нет
+kor,2018,ceiling,2,"Конституция РК, ст. 5"
+phl,2018,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2018,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2018,ceiling,0,Правового потолка на применение силы нет
+chn,2018,ceiling,0,Правового потолка на применение силы нет
+twn,2018,ceiling,0,Правового потолка на применение силы нет
+aus,2018,ceiling,0,Правового потолка на применение силы нет
+idn,2018,ceiling,0,Правового потолка на применение силы нет
+prk,2018,ceiling,0,Правового потолка на применение силы нет
+kor,2019,ceiling,2,"Конституция РК, ст. 5"
+phl,2019,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2019,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2019,ceiling,0,Правового потолка на применение силы нет
+chn,2019,ceiling,0,Правового потолка на применение силы нет
+twn,2019,ceiling,0,Правового потолка на применение силы нет
+aus,2019,ceiling,0,Правового потолка на применение силы нет
+idn,2019,ceiling,0,Правового потолка на применение силы нет
+prk,2019,ceiling,0,Правового потолка на применение силы нет
+kor,2020,ceiling,2,"Конституция РК, ст. 5"
+phl,2020,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2020,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2020,ceiling,0,Правового потолка на применение силы нет
+chn,2020,ceiling,0,Правового потолка на применение силы нет
+twn,2020,ceiling,0,Правового потолка на применение силы нет
+aus,2020,ceiling,0,Правового потолка на применение силы нет
+idn,2020,ceiling,0,Правового потолка на применение силы нет
+prk,2020,ceiling,0,Правового потолка на применение силы нет
+kor,2021,ceiling,2,"Конституция РК, ст. 5"
+phl,2021,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2021,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2021,ceiling,0,Правового потолка на применение силы нет
+chn,2021,ceiling,0,Правового потолка на применение силы нет
+twn,2021,ceiling,0,Правового потолка на применение силы нет
+aus,2021,ceiling,0,Правового потолка на применение силы нет
+idn,2021,ceiling,0,Правового потолка на применение силы нет
+prk,2021,ceiling,0,Правового потолка на применение силы нет
+kor,2022,ceiling,2,"Конституция РК, ст. 5"
+phl,2022,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2022,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2022,ceiling,0,Правового потолка на применение силы нет
+chn,2022,ceiling,0,Правового потолка на применение силы нет
+twn,2022,ceiling,0,Правового потолка на применение силы нет
+aus,2022,ceiling,0,Правового потолка на применение силы нет
+idn,2022,ceiling,0,Правового потолка на применение силы нет
+prk,2022,ceiling,0,Правового потолка на применение силы нет
+kor,2023,ceiling,2,"Конституция РК, ст. 5"
+phl,2023,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2023,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2023,ceiling,0,Правового потолка на применение силы нет
+chn,2023,ceiling,0,Правового потолка на применение силы нет
+twn,2023,ceiling,0,Правового потолка на применение силы нет
+aus,2023,ceiling,0,Правового потолка на применение силы нет
+idn,2023,ceiling,0,Правового потолка на применение силы нет
+prk,2023,ceiling,0,Правового потолка на применение силы нет
+kor,2024,ceiling,2,"Конституция РК, ст. 5"
+phl,2024,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2024,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2024,ceiling,0,Правового потолка на применение силы нет
+chn,2024,ceiling,0,Правового потолка на применение силы нет
+twn,2024,ceiling,0,Правового потолка на применение силы нет
+aus,2024,ceiling,0,Правового потолка на применение силы нет
+idn,2024,ceiling,0,Правового потолка на применение силы нет
+prk,2024,ceiling,0,Правового потолка на применение силы нет
+kor,2025,ceiling,2,"Конституция РК, ст. 5"
+phl,2025,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2025,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2025,ceiling,0,Правового потолка на применение силы нет
+chn,2025,ceiling,0,Правового потолка на применение силы нет
+twn,2025,ceiling,0,Правового потолка на применение силы нет
+aus,2025,ceiling,0,Правового потолка на применение силы нет
+idn,2025,ceiling,0,Правового потолка на применение силы нет
+prk,2025,ceiling,0,Правового потолка на применение силы нет
+kor,2026,ceiling,2,"Конституция РК, ст. 5"
+phl,2026,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
+ind,2026,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2026,ceiling,0,Правового потолка на применение силы нет
+chn,2026,ceiling,0,Правового потолка на применение силы нет
+twn,2026,ceiling,0,Правового потолка на применение силы нет
+aus,2026,ceiling,0,Правового потолка на применение силы нет
+idn,2026,ceiling,0,Правового потолка на применение силы нет
+prk,2026,ceiling,0,Правового потолка на применение силы нет
+jpn,2001,categories,1,"Отправка за пределы территории, 2001"
+jpn,2002,categories,1,"Отправка за пределы территории, 2001"
+jpn,2003,categories,1,"Отправка за пределы территории, 2001"
+jpn,2004,categories,1,"Отправка за пределы территории, 2001"
+jpn,2005,categories,1,"Отправка за пределы территории, 2001"
+jpn,2006,categories,1,"Отправка за пределы территории, 2001"
+jpn,2007,categories,1,"Отправка за пределы территории, 2001"
+jpn,2008,categories,2,"Плюс военное использование космоса, 2008"
+jpn,2009,categories,2,"Плюс военное использование космоса, 2008"
+jpn,2010,categories,2,"Плюс военное использование космоса, 2008"
+jpn,2011,categories,2,"Плюс военное использование космоса, 2008"
+jpn,2012,categories,2,"Плюс военное использование космоса, 2008"
+jpn,2013,categories,2,"Плюс военное использование космоса, 2008"
+jpn,2014,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2015,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2016,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2017,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2018,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2019,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2020,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2021,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2022,categories,5,"Плюс средства поражения территории противника, 2022"
+jpn,2023,categories,5,"Плюс средства поражения территории противника, 2022"
+jpn,2024,categories,5,"Плюс средства поражения территории противника, 2022"
+jpn,2025,categories,5,"Плюс средства поражения территории противника, 2022"
+jpn,2026,categories,5,"Плюс средства поражения территории противника, 2022"
+jpn,2024,incidents,355,Доклад Береговой охраны Японии
+jpn,2025,incidents,357,"Доклад Береговой охраны Японии, рекорд"
+jpn,2013,dissent,76.9,"Итоги публичного обсуждения, 69 579 возражений из 90 480"
