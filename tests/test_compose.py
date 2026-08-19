@@ -23,7 +23,7 @@ AGENTS_CSV = ROOT / "data" / "agents.csv"
 OBS_CSV = ROOT / "data" / "observations.csv"
 
 HEAD_A = "code,name,adversary,guarantor,trust_type,note\n"
-HEAD_O = "agent,year,key,value,source\n"
+HEAD_O = "agent,year,key,value,quality,source\n"
 
 BASE_AGENTS = (HEAD_A +
                "jpn,Япония,chn,usa,treaty,x\n"
@@ -48,8 +48,8 @@ def test_доля_считается_от_наблюдённых_а_не_пре�
     делить следует на два, а не на три, иначе пропуск занижал бы значение.
     """
     agents, obs = _setup(tmp_path,
-                         "jpn,2014,ceiling,2,x\n"
-                         "jpn,2014,categories,4,x\n")
+                         "jpn,2014,ceiling,2,наблюдение,x\n"
+                         "jpn,2014,categories,4,наблюдение,x\n")
     t = compose_var(Var.EROSION, agents["jpn"], 2014, obs)
     # ceiling 2 из 4 разрядов с обращением даёт 1/3, categories 4 из 5 даёт 0,8
     assert t.value == pytest.approx((1 / 3 + 0.8) / 2)
@@ -58,7 +58,7 @@ def test_доля_считается_от_наблюдённых_а_не_пре�
 
 def test_полное_отсутствие_наблюдений_даёт_пропуск(tmp_path):
     """Пропуск не подменяется нулём, поскольку ноль есть значение шкалы."""
-    agents, obs = _setup(tmp_path, "jpn,2014,ceiling,2,x\n")
+    agents, obs = _setup(tmp_path, "jpn,2014,ceiling,2,наблюдение,x\n")
     t = compose_var(Var.THREAT, agents["jpn"], 2014, obs)
     assert math.isnan(t.value)
 
@@ -68,15 +68,15 @@ def test_полное_отсутствие_наблюдений_даёт_про�
 def test_доля_противника_берётся_из_ряда_противника(tmp_path):
     """Первичный противник Японии есть КНР, отсюда и берётся вторая величина."""
     agents, obs = _setup(tmp_path,
-                         "jpn,2020,milex,40,x\n"
-                         "chn,2020,milex,160,x\n")
+                         "jpn,2020,milex,40,наблюдение,x\n"
+                         "chn,2020,milex,160,наблюдение,x\n")
     t = compose_var(Var.THREAT, agents["jpn"], 2020, obs)
     assert t.parts["milex"][1] == pytest.approx(0.8)
     assert t.value == pytest.approx(0.8)
 
 
 def test_отсутствие_ряда_противника_даёт_пропуск_показателя(tmp_path):
-    agents, obs = _setup(tmp_path, "jpn,2020,milex,40,x\n")
+    agents, obs = _setup(tmp_path, "jpn,2020,milex,40,наблюдение,x\n")
     t = compose_var(Var.THREAT, agents["jpn"], 2020, obs)
     assert "milex" in t.missing
 
@@ -89,10 +89,10 @@ def test_несогласие_умножает_а_не_складывается(
     показатель в слагаемые не попадает.
     """
     agents, obs = _setup(tmp_path,
-                         "jpn,2013,ceiling,2,x\n"
-                         "jpn,2013,categories,4,x\n"
-                         "jpn,2013,commitments,0,x\n"
-                         "jpn,2013,dissent,100,x\n")
+                         "jpn,2013,ceiling,2,наблюдение,x\n"
+                         "jpn,2013,categories,4,наблюдение,x\n"
+                         "jpn,2013,commitments,0,наблюдение,x\n"
+                         "jpn,2013,dissent,100,наблюдение,x\n")
     t = compose_var(Var.EROSION, agents["jpn"], 2013, obs)
     plain = (1 / 3 + 0.8 + 0.0) / 3
     assert t.damper_factor == pytest.approx(1.0 - DAMPER_LIMIT)
@@ -102,10 +102,10 @@ def test_несогласие_умножает_а_не_складывается(
 
 def test_нулевое_несогласие_не_меняет_суммы(tmp_path):
     agents, obs = _setup(tmp_path,
-                         "jpn,2013,ceiling,2,x\n"
-                         "jpn,2013,categories,4,x\n"
-                         "jpn,2013,commitments,0,x\n"
-                         "jpn,2013,dissent,0,x\n")
+                         "jpn,2013,ceiling,2,наблюдение,x\n"
+                         "jpn,2013,categories,4,наблюдение,x\n"
+                         "jpn,2013,commitments,0,наблюдение,x\n"
+                         "jpn,2013,dissent,0,наблюдение,x\n")
     t = compose_var(Var.EROSION, agents["jpn"], 2013, obs)
     assert t.damper_factor == pytest.approx(1.0)
     assert t.value == pytest.approx((1 / 3 + 0.8 + 0.0) / 3)
@@ -113,9 +113,9 @@ def test_нулевое_несогласие_не_меняет_суммы(tmp_pa
 
 def test_отсутствие_несогласия_оставляет_сумму_без_множителя(tmp_path):
     agents, obs = _setup(tmp_path,
-                         "jpn,2013,ceiling,2,x\n"
-                         "jpn,2013,categories,4,x\n"
-                         "jpn,2013,commitments,0,x\n")
+                         "jpn,2013,ceiling,2,наблюдение,x\n"
+                         "jpn,2013,categories,4,наблюдение,x\n"
+                         "jpn,2013,commitments,0,наблюдение,x\n")
     t = compose_var(Var.EROSION, agents["jpn"], 2013, obs)
     assert t.damper_factor == pytest.approx(1.0)
 
@@ -123,9 +123,9 @@ def test_отсутствие_несогласия_оставляет_сумму
 def test_у_агента_без_потолка_множителя_нет(tmp_path):
     """КНР правового потолка не имеет, следовательно и множителя тоже."""
     agents, obs = _setup(tmp_path,
-                         "chn,2013,ceiling,0,x\n"
-                         "chn,2013,categories,5,x\n"
-                         "chn,2013,commitments,0,x\n")
+                         "chn,2013,ceiling,0,наблюдение,x\n"
+                         "chn,2013,categories,5,наблюдение,x\n"
+                         "chn,2013,commitments,0,наблюдение,x\n")
     t = compose_var(Var.EROSION, agents["chn"], 2013, obs)
     assert t.damper_factor == pytest.approx(1.0)
     assert math.isnan(t.damper_raw)
@@ -135,14 +135,14 @@ def test_у_агента_без_потолка_множителя_нет(tmp_pat
 
 def test_короткий_ряд_не_даёт_отклонения(tmp_path):
     """При ряде короче трёх наблюдений обычный уровень не определён."""
-    agents, obs = _setup(tmp_path, "jpn,2014,exercises,10,x\n")
+    agents, obs = _setup(tmp_path, "jpn,2014,exercises,10,наблюдение,x\n")
     assert baselines(obs, "jpn", "exercises") is None
     t = compose_var(Var.TRUST, agents["jpn"], 2014, obs)
     assert math.isnan(t.value)
 
 
 def test_значение_равное_обычному_уровню_даёт_середину(tmp_path):
-    rows = "".join(f"jpn,{y},exercises,{v},x\n"
+    rows = "".join(f"jpn,{y},exercises,{v},наблюдение,x\n"
                    for y, v in zip(range(2010, 2015), [8, 9, 10, 11, 12]))
     agents, obs = _setup(tmp_path, rows)
     b = baselines(obs, "jpn", "exercises")
@@ -152,7 +152,7 @@ def test_значение_равное_обычному_уровню_даёт_с
 
 
 def test_ухудшение_относительно_привычного_снижает_доверие(tmp_path):
-    rows = "".join(f"jpn,{y},exercises,{v},x\n"
+    rows = "".join(f"jpn,{y},exercises,{v},наблюдение,x\n"
                    for y, v in zip(range(2010, 2015), [8, 9, 10, 11, 12]))
     agents, obs = _setup(tmp_path, rows)
     low = compose_var(Var.TRUST, agents["jpn"], 2010, obs).value
@@ -164,9 +164,9 @@ def test_ухудшение_относительно_привычного_сни
 
 def test_объяснение_содержит_все_составляющие(tmp_path):
     agents, obs = _setup(tmp_path,
-                         "jpn,2013,ceiling,2,x\n"
-                         "jpn,2013,categories,4,x\n"
-                         "jpn,2013,dissent,76.9,x\n")
+                         "jpn,2013,ceiling,2,наблюдение,x\n"
+                         "jpn,2013,categories,4,наблюдение,x\n"
+                         "jpn,2013,dissent,76.9,наблюдение,x\n")
     text = compose_var(Var.EROSION, agents["jpn"], 2013, obs).explain()
     assert "ceiling" in text and "categories" in text
     assert "множитель" in text
@@ -226,25 +226,36 @@ def test_эрозия_японии_ниже_чем_у_агентов_без_по
     assert jpn < usa
 
 
-def test_у_кндр_восприятие_угрозы_не_вычисляется(real):
-    """Сведений о её расходах в международных базах нет за все годы."""
+def test_у_кндр_угроза_держится_на_одном_показателе(real):
+    """
+    Сведений о расходах КНДР в международных базах нет за все годы, отчего
+    доля пары не вычисляется. Переменная опирается на давление
+    противостоящей стороны, измеряемое числом её совместных учений.
+    """
     agents, obs = real
     t = compose_var(Var.THREAT, agents["prk"], 2015, obs)
-    assert math.isnan(t.value)
     assert "milex" in t.missing
+    assert set(t.parts) == {"incidents"}
+    assert not math.isnan(t.value)
 
 
-def test_доверие_пока_не_вычисляется_ни_у_кого(real):
-    """Ряды учений и поставок ещё не выгружены, и модуль это показывает."""
+def test_доверие_вычисляется_по_выгруженным_рядам(real):
+    """
+    Доля гаранта в импорте вооружений выгружена по всем десяти агентам,
+    совместные учения только по Республике Корея, отчего у неё переменная
+    опирается на два показателя, а у прочих на один.
+    """
     agents, obs = real
-    for code in agents:
-        t = compose_var(Var.TRUST, agents[code], 2015, obs)
-        assert math.isnan(t.value)
+    kor = compose_var(Var.TRUST, agents["kor"], 2015, obs)
+    assert set(kor.parts) == {"exercises", "arms_share"}
+    jpn = compose_var(Var.TRUST, agents["jpn"], 2015, obs)
+    assert set(jpn.parts) == {"arms_share"}
+    assert not math.isnan(jpn.value)
 
 
 def test_свёртка_всего_массива_воспроизводима(real):
     agents, obs = real
-    years = range(2001, 2027)
+    years = range(2001, 2026)
     a = compose_all(agents, obs, years)
     b = compose_all(agents, obs, years)
     assert list(a) == list(b)
