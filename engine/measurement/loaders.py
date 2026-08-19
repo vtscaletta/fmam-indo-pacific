@@ -18,8 +18,17 @@ guarantor код гаранта либо пусто, trust_type тип опор�
 
 observations.csv содержит наблюдения длинным видом. Одна строка на одно
 наблюдение. Столбцы, agent код агента, year год, key ключ показателя из
-реестра, value значение в собственных единицах показателя, source
-происхождение сведения.
+реестра либо вспомогательного ряда, value значение в собственных единицах
+показателя, quality качество сведения, source происхождение сведения.
+
+Качество принимает три значения. Наблюдение означает величину, взятую из
+источника прямо. Оценка означает величину, восстановленную по графику либо
+выведенную из косвенных данных. Перенос означает повторение последнего
+известного значения при отсутствии нового наблюдения.
+
+Различение введено ради того, чтобы доля оценок в каждой переменной была
+измерена и объявлена, а не скрыта. Величина, взятая оценкой, остаётся
+пригодной при условии, что таковой названа.
 
 Длинный вид выбран сознательно. При добавлении нового показателя таблица
 не перестраивается, а лишь пополняется строками, вследствие чего ни схема,
@@ -35,11 +44,17 @@ import csv
 from dataclasses import dataclass
 from pathlib import Path
 
-from engine.measurement.indicators import BY_KEY
+from engine.measurement.indicators import AUXILIARY, BY_KEY
 from engine.measurement.scales import NA
 
 YEAR_MIN = 2001
-YEAR_MAX = 2026
+YEAR_MAX = 2025
+"""
+Границы периода наблюдения. Верхняя определяется правилом, согласно
+которому период завершается последним полным календарным годом, поскольку
+статистика незавершённого года неполна и сопоставлению с прочими не
+подлежит. Годы после верхней границы принадлежат прогнозу.
+"""
 
 
 class DataError(ValueError):
@@ -67,6 +82,13 @@ class AgentPassport:
 
 
 TRUST_TYPES = {"treaty", "patronage", "hedging", "guarantor"}
+
+QUALITIES = {"наблюдение", "оценка", "перенос"}
+"""
+Качество сведения. Наблюдение взято из источника прямо, оценка
+восстановлена по графику либо косвенным путём, перенос повторяет последнее
+известное значение.
+"""
 
 
 def load_agents(path: str | Path) -> dict[str, AgentPassport]:
@@ -126,6 +148,7 @@ class Observations:
     """
     values: dict[tuple[str, int, str], float]
     sources: dict[tuple[str, int, str], str]
+    qualities: dict[tuple[str, int, str], str]
 
     def get(self, agent: str, year: int, key: str) -> float:
         """Наблюдение либо NA при его отсутствии."""
@@ -134,6 +157,26 @@ class Observations:
     def source_of(self, agent: str, year: int, key: str) -> str:
         """Происхождение наблюдения либо пустая строка."""
         return self.sources.get((agent, year, key), "")
+
+    def quality_of(self, agent: str, year: int, key: str) -> str:
+        """Качество сведения либо пустая строка при его отсутствии."""
+        return self.qualities.get((agent, year, key), "")
+
+    def quality_share(self, keys: list[str] | None = None) -> dict[str, float]:
+        """
+        Доля сведений каждого качества среди отобранных показателей.
+
+        Служит для отчёта о том, какая часть параметризации опирается на
+        наблюдения, а какая на оценки и переносы.
+        """
+        cells = [c for c in self.values if keys is None or c[2] in keys]
+        if not cells:
+            return {}
+        counts: dict[str, int] = {}
+        for c in cells:
+            q = self.qualities.get(c, "")
+            counts[q] = counts.get(q, 0) + 1
+        return {q: n / len(cells) for q, n in sorted(counts.items())}
 
     def years(self, agent: str, key: str) -> list[int]:
         """Годы, за которые наблюдение есть, по возрастанию."""
@@ -168,9 +211,11 @@ def load_observations(path: str | Path,
     наблюдения, что значение читается как число и что одно и то же
     наблюдение не встречается дважды.
     """
-    rows = _read_csv(path, {"agent", "year", "key", "value", "source"})
+    rows = _read_csv(path, {"agent", "year", "key", "value", "quality",
+                            "source"})
     values: dict[tuple[str, int, str], float] = {}
     sources: dict[tuple[str, int, str], str] = {}
+    qualities: dict[tuple[str, int, str], str] = {}
 
     for i, r in enumerate(rows, start=2):
         agent = r["agent"].strip()
@@ -180,10 +225,11 @@ def load_observations(path: str | Path,
 
         if agent not in agents:
             raise DataError(f"{path}, строка {i}, неизвестный агент {agent!r}")
-        if key not in BY_KEY:
+        if key not in BY_KEY and key not in AUXILIARY:
             raise DataError(f"{path}, строка {i}, показатель {key!r} "
-                            f"в реестре не объявлен")
-        if not BY_KEY[key].covers(agent):
+                            f"не объявлен ни в реестре, ни среди "
+                            f"вспомогательных рядов")
+        if key in BY_KEY and not BY_KEY[key].covers(agent):
             raise DataError(f"{path}, строка {i}, показатель {key!r} "
                             f"к агенту {agent!r} не применяется")
         try:
@@ -207,10 +253,15 @@ def load_observations(path: str | Path,
         if cell in values:
             raise DataError(f"{path}, строка {i}, наблюдение {cell} "
                             f"встречается дважды")
+        quality = r["quality"].strip()
+        if quality not in QUALITIES:
+            raise DataError(f"{path}, строка {i}, качество {quality!r} "
+                            f"неизвестно, допустимы {sorted(QUALITIES)}")
         values[cell] = value
         sources[cell] = r["source"].strip()
+        qualities[cell] = quality
 
-    return Observations(values=values, sources=sources)
+    return Observations(values=values, sources=sources, qualities=qualities)
 
 
 def _read_csv(path: str | Path, required: set[str]) -> list[dict[str, str]]:
