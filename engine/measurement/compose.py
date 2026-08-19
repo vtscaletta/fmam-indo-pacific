@@ -107,14 +107,23 @@ def baselines(obs: Observations, agent: str,
     выбросам, разбросом половина межквартильного размаха. При ряде короче
     трёх наблюдений отклонение не определено и переменная по этому
     показателю не вычисляется.
+
+    Межквартильный размах обращается в ноль там, где ряд почти постоянен и
+    отклоняется лишь в единичных годах. Разброс в таком случае берётся
+    средним квадратическим, поскольку нулевой разброс обратил бы все годы
+    ряда в середину шкалы и стёр бы единственные наблюдаемые отклонения.
     """
     series = list(obs.series(agent, key).values())
     series = [v for v in series if not math.isnan(v)]
     if len(series) < 3:
         return None
     center = statistics.median(series)
-    q = statistics.quantiles(series, n=4) if len(series) >= 4 else None
-    spread = (q[2] - q[0]) / 2 if q else statistics.pstdev(series)
+    spread = 0.0
+    if len(series) >= 4:
+        q = statistics.quantiles(series, n=4)
+        spread = (q[2] - q[0]) / 2
+    if spread <= 0.0:
+        spread = statistics.pstdev(series)
     return Baseline(center=center, spread=spread)
 
 
