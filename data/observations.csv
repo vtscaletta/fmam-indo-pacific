@@ -1,515 +1,1230 @@
-agent,year,key,value,source
-usa,2001,milex,587.822,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2002,milex,660.012,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2003,milex,751.203,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2004,milex,818.751,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2005,milex,856.462,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2006,milex,868.803,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2007,milex,891.986,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2008,milex,956.872,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2009,milex,1032.168,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2010,milex,1061.674,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2011,milex,1049.103,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2012,milex,990.831,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2013,milex,914.617,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2014,milex,858.357,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2015,milex,838.865,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2016,milex,836.291,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2017,milex,827.674,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2018,milex,852.585,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2019,milex,901.032,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2020,milex,943.447,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2021,milex,933.334,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2022,milex,922.553,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2023,milex,943.033,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2024,milex,1004.901,"SIPRI Milex 1949-2025, Constant (2024) US$"
-usa,2025,milex,929.163,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2001,milex,49.635,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2002,milex,57.008,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2003,milex,61.696,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2004,milex,67.956,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2005,milex,74.625,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2006,milex,85.898,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2007,milex,94.425,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2008,milex,103.311,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2009,milex,125.361,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2010,milex,131.536,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2011,milex,141.206,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2012,milex,155.714,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2013,milex,168.375,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2014,milex,181.814,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2015,milex,196.088,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2016,milex,207.375,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2017,milex,220.129,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2018,milex,233.024,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2019,milex,244.376,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2020,milex,255.895,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2021,milex,262.559,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2022,milex,274.158,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2023,milex,292.221,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2024,milex,311.9,"SIPRI Milex 1949-2025, Constant (2024) US$"
-chn,2025,milex,335.018,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2001,milex,36.74,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2002,milex,36.923,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2003,milex,36.969,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2004,milex,36.822,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2005,milex,36.755,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2006,milex,36.287,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2007,milex,35.815,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2008,milex,35.47,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2009,milex,36.135,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2010,milex,36.264,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2011,milex,36.754,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2012,milex,36.309,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2013,milex,36.159,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2014,milex,36.546,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2015,milex,37.188,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2016,milex,36.967,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2017,milex,36.722,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2018,milex,38.571,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2019,milex,39.668,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2020,milex,39.328,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2021,milex,42.277,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2022,milex,39.766,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2023,milex,45.863,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2024,milex,54.245,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2025,milex,59.493,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2001,milex,11.058,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2002,milex,10.694,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2003,milex,10.593,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2004,milex,10.611,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2005,milex,10.209,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2006,milex,9.794,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2007,milex,10.364,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2008,milex,10.552,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2009,milex,11.366,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2010,milex,10.742,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2011,milex,10.845,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2012,milex,11.226,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2013,milex,10.602,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2014,milex,10.541,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2015,milex,11.109,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2016,milex,10.918,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2017,milex,11.105,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2018,milex,10.881,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2019,milex,11.603,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2020,milex,12.131,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2021,milex,13.061,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2022,milex,14.827,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2023,milex,16.202,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2024,milex,15.233,"SIPRI Milex 1949-2025, Constant (2024) US$"
-twn,2025,milex,17.341,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2001,milex,21.291,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2002,milex,21.878,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2003,milex,22.622,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2004,milex,23.616,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2005,milex,25.541,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2006,milex,26.462,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2007,milex,27.66,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2008,milex,29.47,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2009,milex,31.322,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2010,milex,31.583,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2011,milex,32.015,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2012,milex,32.831,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2013,milex,33.825,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2014,milex,35.156,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2015,milex,36.521,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2016,milex,37.437,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2017,milex,38.125,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2018,milex,40.059,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2019,milex,43.286,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2020,milex,45.563,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2021,milex,47.548,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2022,milex,46.55,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2023,milex,46.841,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2024,milex,47.605,"SIPRI Milex 1949-2025, Constant (2024) US$"
-kor,2025,milex,48.848,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2001,milex,33.264,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2002,milex,33.161,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2003,milex,33.902,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2004,milex,39.38,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2005,milex,41.909,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2006,milex,42.249,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2007,milex,42.759,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2008,milex,48.5,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2009,milex,57.101,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2010,milex,57.33,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2011,milex,57.857,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2012,milex,57.564,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2013,milex,57.602,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2014,milex,60.408,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2015,milex,60.982,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2016,milex,67.202,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2017,milex,71.936,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2018,milex,74.469,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2019,milex,79.726,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2020,milex,80.21,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2021,milex,79.701,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2022,milex,83.218,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2023,milex,85.233,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2024,milex,85.597,"SIPRI Milex 1949-2025, Constant (2024) US$"
-ind,2025,milex,93.255,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2001,milex,16.699,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2002,milex,17.417,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2003,milex,17.742,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2004,milex,18.473,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2005,milex,19.118,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2006,milex,20.14,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2007,milex,21.377,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2008,milex,22.157,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2009,milex,23.826,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2010,milex,24.103,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2011,milex,23.769,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2012,milex,22.936,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2013,milex,22.737,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2014,milex,24.677,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2015,milex,27.201,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2016,milex,29.787,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2017,milex,29.734,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2018,milex,29.024,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2019,milex,29.81,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2020,milex,31.268,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2021,milex,33.395,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2022,milex,33.625,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2023,milex,33.239,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2024,milex,34.231,"SIPRI Milex 1949-2025, Constant (2024) US$"
-aus,2025,milex,35.264,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2001,milex,2.378,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2002,milex,2.504,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2003,milex,2.79,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2004,milex,2.629,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2005,milex,2.679,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2006,milex,2.77,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2007,milex,3.034,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2008,milex,3.034,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2009,milex,2.918,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2010,milex,3.065,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2011,milex,3.114,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2012,milex,3.162,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2013,milex,3.609,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2014,milex,3.349,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2015,milex,3.664,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2016,milex,3.773,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2017,milex,4.483,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2018,milex,4.762,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2019,milex,4.747,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2020,milex,4.89,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2021,milex,5.517,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2022,milex,5.536,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2023,milex,5.154,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2024,milex,5.493,"SIPRI Milex 1949-2025, Constant (2024) US$"
-phl,2025,milex,6.3,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2001,milex,2.093,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2002,milex,2.53,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2003,milex,3.402,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2004,milex,3.804,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2005,milex,3.304,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2006,milex,3.355,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2007,milex,4.034,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2008,milex,3.748,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2009,milex,3.933,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2010,milex,4.619,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2011,milex,5.295,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2012,milex,6.079,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2013,milex,8.173,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2014,milex,7.201,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2015,milex,8.374,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2016,milex,7.815,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2017,milex,9.01,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2018,milex,7.921,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2019,milex,8.313,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2020,milex,9.678,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2021,milex,8.765,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2022,milex,10.051,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2023,milex,11.056,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2024,milex,12.012,"SIPRI Milex 1949-2025, Constant (2024) US$"
-idn,2025,milex,15.33,"SIPRI Milex 1949-2025, Constant (2024) US$"
-jpn,2001,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2002,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2003,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2004,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2005,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2006,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2007,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2008,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2009,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2010,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2011,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2012,ceiling,3,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2013,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2014,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2015,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2016,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2017,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2018,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2019,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2020,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2021,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2022,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2023,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2024,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2025,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-jpn,2026,ceiling,2,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
-kor,2001,ceiling,2,"Конституция РК, ст. 5"
-phl,2001,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2001,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2001,ceiling,0,Правового потолка на применение силы нет
-chn,2001,ceiling,0,Правового потолка на применение силы нет
-twn,2001,ceiling,0,Правового потолка на применение силы нет
-aus,2001,ceiling,0,Правового потолка на применение силы нет
-idn,2001,ceiling,0,Правового потолка на применение силы нет
-prk,2001,ceiling,0,Правового потолка на применение силы нет
-kor,2002,ceiling,2,"Конституция РК, ст. 5"
-phl,2002,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2002,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2002,ceiling,0,Правового потолка на применение силы нет
-chn,2002,ceiling,0,Правового потолка на применение силы нет
-twn,2002,ceiling,0,Правового потолка на применение силы нет
-aus,2002,ceiling,0,Правового потолка на применение силы нет
-idn,2002,ceiling,0,Правового потолка на применение силы нет
-prk,2002,ceiling,0,Правового потолка на применение силы нет
-kor,2003,ceiling,2,"Конституция РК, ст. 5"
-phl,2003,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2003,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2003,ceiling,0,Правового потолка на применение силы нет
-chn,2003,ceiling,0,Правового потолка на применение силы нет
-twn,2003,ceiling,0,Правового потолка на применение силы нет
-aus,2003,ceiling,0,Правового потолка на применение силы нет
-idn,2003,ceiling,0,Правового потолка на применение силы нет
-prk,2003,ceiling,0,Правового потолка на применение силы нет
-kor,2004,ceiling,2,"Конституция РК, ст. 5"
-phl,2004,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2004,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2004,ceiling,0,Правового потолка на применение силы нет
-chn,2004,ceiling,0,Правового потолка на применение силы нет
-twn,2004,ceiling,0,Правового потолка на применение силы нет
-aus,2004,ceiling,0,Правового потолка на применение силы нет
-idn,2004,ceiling,0,Правового потолка на применение силы нет
-prk,2004,ceiling,0,Правового потолка на применение силы нет
-kor,2005,ceiling,2,"Конституция РК, ст. 5"
-phl,2005,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2005,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2005,ceiling,0,Правового потолка на применение силы нет
-chn,2005,ceiling,0,Правового потолка на применение силы нет
-twn,2005,ceiling,0,Правового потолка на применение силы нет
-aus,2005,ceiling,0,Правового потолка на применение силы нет
-idn,2005,ceiling,0,Правового потолка на применение силы нет
-prk,2005,ceiling,0,Правового потолка на применение силы нет
-kor,2006,ceiling,2,"Конституция РК, ст. 5"
-phl,2006,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2006,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2006,ceiling,0,Правового потолка на применение силы нет
-chn,2006,ceiling,0,Правового потолка на применение силы нет
-twn,2006,ceiling,0,Правового потолка на применение силы нет
-aus,2006,ceiling,0,Правового потолка на применение силы нет
-idn,2006,ceiling,0,Правового потолка на применение силы нет
-prk,2006,ceiling,0,Правового потолка на применение силы нет
-kor,2007,ceiling,2,"Конституция РК, ст. 5"
-phl,2007,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2007,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2007,ceiling,0,Правового потолка на применение силы нет
-chn,2007,ceiling,0,Правового потолка на применение силы нет
-twn,2007,ceiling,0,Правового потолка на применение силы нет
-aus,2007,ceiling,0,Правового потолка на применение силы нет
-idn,2007,ceiling,0,Правового потолка на применение силы нет
-prk,2007,ceiling,0,Правового потолка на применение силы нет
-kor,2008,ceiling,2,"Конституция РК, ст. 5"
-phl,2008,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2008,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2008,ceiling,0,Правового потолка на применение силы нет
-chn,2008,ceiling,0,Правового потолка на применение силы нет
-twn,2008,ceiling,0,Правового потолка на применение силы нет
-aus,2008,ceiling,0,Правового потолка на применение силы нет
-idn,2008,ceiling,0,Правового потолка на применение силы нет
-prk,2008,ceiling,0,Правового потолка на применение силы нет
-kor,2009,ceiling,2,"Конституция РК, ст. 5"
-phl,2009,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2009,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2009,ceiling,0,Правового потолка на применение силы нет
-chn,2009,ceiling,0,Правового потолка на применение силы нет
-twn,2009,ceiling,0,Правового потолка на применение силы нет
-aus,2009,ceiling,0,Правового потолка на применение силы нет
-idn,2009,ceiling,0,Правового потолка на применение силы нет
-prk,2009,ceiling,0,Правового потолка на применение силы нет
-kor,2010,ceiling,2,"Конституция РК, ст. 5"
-phl,2010,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2010,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2010,ceiling,0,Правового потолка на применение силы нет
-chn,2010,ceiling,0,Правового потолка на применение силы нет
-twn,2010,ceiling,0,Правового потолка на применение силы нет
-aus,2010,ceiling,0,Правового потолка на применение силы нет
-idn,2010,ceiling,0,Правового потолка на применение силы нет
-prk,2010,ceiling,0,Правового потолка на применение силы нет
-kor,2011,ceiling,2,"Конституция РК, ст. 5"
-phl,2011,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2011,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2011,ceiling,0,Правового потолка на применение силы нет
-chn,2011,ceiling,0,Правового потолка на применение силы нет
-twn,2011,ceiling,0,Правового потолка на применение силы нет
-aus,2011,ceiling,0,Правового потолка на применение силы нет
-idn,2011,ceiling,0,Правового потолка на применение силы нет
-prk,2011,ceiling,0,Правового потолка на применение силы нет
-kor,2012,ceiling,2,"Конституция РК, ст. 5"
-phl,2012,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2012,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2012,ceiling,0,Правового потолка на применение силы нет
-chn,2012,ceiling,0,Правового потолка на применение силы нет
-twn,2012,ceiling,0,Правового потолка на применение силы нет
-aus,2012,ceiling,0,Правового потолка на применение силы нет
-idn,2012,ceiling,0,Правового потолка на применение силы нет
-prk,2012,ceiling,0,Правового потолка на применение силы нет
-kor,2013,ceiling,2,"Конституция РК, ст. 5"
-phl,2013,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2013,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2013,ceiling,0,Правового потолка на применение силы нет
-chn,2013,ceiling,0,Правового потолка на применение силы нет
-twn,2013,ceiling,0,Правового потолка на применение силы нет
-aus,2013,ceiling,0,Правового потолка на применение силы нет
-idn,2013,ceiling,0,Правового потолка на применение силы нет
-prk,2013,ceiling,0,Правового потолка на применение силы нет
-kor,2014,ceiling,2,"Конституция РК, ст. 5"
-phl,2014,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2014,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2014,ceiling,0,Правового потолка на применение силы нет
-chn,2014,ceiling,0,Правового потолка на применение силы нет
-twn,2014,ceiling,0,Правового потолка на применение силы нет
-aus,2014,ceiling,0,Правового потолка на применение силы нет
-idn,2014,ceiling,0,Правового потолка на применение силы нет
-prk,2014,ceiling,0,Правового потолка на применение силы нет
-kor,2015,ceiling,2,"Конституция РК, ст. 5"
-phl,2015,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2015,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2015,ceiling,0,Правового потолка на применение силы нет
-chn,2015,ceiling,0,Правового потолка на применение силы нет
-twn,2015,ceiling,0,Правового потолка на применение силы нет
-aus,2015,ceiling,0,Правового потолка на применение силы нет
-idn,2015,ceiling,0,Правового потолка на применение силы нет
-prk,2015,ceiling,0,Правового потолка на применение силы нет
-kor,2016,ceiling,2,"Конституция РК, ст. 5"
-phl,2016,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2016,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2016,ceiling,0,Правового потолка на применение силы нет
-chn,2016,ceiling,0,Правового потолка на применение силы нет
-twn,2016,ceiling,0,Правового потолка на применение силы нет
-aus,2016,ceiling,0,Правового потолка на применение силы нет
-idn,2016,ceiling,0,Правового потолка на применение силы нет
-prk,2016,ceiling,0,Правового потолка на применение силы нет
-kor,2017,ceiling,2,"Конституция РК, ст. 5"
-phl,2017,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2017,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2017,ceiling,0,Правового потолка на применение силы нет
-chn,2017,ceiling,0,Правового потолка на применение силы нет
-twn,2017,ceiling,0,Правового потолка на применение силы нет
-aus,2017,ceiling,0,Правового потолка на применение силы нет
-idn,2017,ceiling,0,Правового потолка на применение силы нет
-prk,2017,ceiling,0,Правового потолка на применение силы нет
-kor,2018,ceiling,2,"Конституция РК, ст. 5"
-phl,2018,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2018,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2018,ceiling,0,Правового потолка на применение силы нет
-chn,2018,ceiling,0,Правового потолка на применение силы нет
-twn,2018,ceiling,0,Правового потолка на применение силы нет
-aus,2018,ceiling,0,Правового потолка на применение силы нет
-idn,2018,ceiling,0,Правового потолка на применение силы нет
-prk,2018,ceiling,0,Правового потолка на применение силы нет
-kor,2019,ceiling,2,"Конституция РК, ст. 5"
-phl,2019,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2019,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2019,ceiling,0,Правового потолка на применение силы нет
-chn,2019,ceiling,0,Правового потолка на применение силы нет
-twn,2019,ceiling,0,Правового потолка на применение силы нет
-aus,2019,ceiling,0,Правового потолка на применение силы нет
-idn,2019,ceiling,0,Правового потолка на применение силы нет
-prk,2019,ceiling,0,Правового потолка на применение силы нет
-kor,2020,ceiling,2,"Конституция РК, ст. 5"
-phl,2020,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2020,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2020,ceiling,0,Правового потолка на применение силы нет
-chn,2020,ceiling,0,Правового потолка на применение силы нет
-twn,2020,ceiling,0,Правового потолка на применение силы нет
-aus,2020,ceiling,0,Правового потолка на применение силы нет
-idn,2020,ceiling,0,Правового потолка на применение силы нет
-prk,2020,ceiling,0,Правового потолка на применение силы нет
-kor,2021,ceiling,2,"Конституция РК, ст. 5"
-phl,2021,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2021,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2021,ceiling,0,Правового потолка на применение силы нет
-chn,2021,ceiling,0,Правового потолка на применение силы нет
-twn,2021,ceiling,0,Правового потолка на применение силы нет
-aus,2021,ceiling,0,Правового потолка на применение силы нет
-idn,2021,ceiling,0,Правового потолка на применение силы нет
-prk,2021,ceiling,0,Правового потолка на применение силы нет
-kor,2022,ceiling,2,"Конституция РК, ст. 5"
-phl,2022,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2022,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2022,ceiling,0,Правового потолка на применение силы нет
-chn,2022,ceiling,0,Правового потолка на применение силы нет
-twn,2022,ceiling,0,Правового потолка на применение силы нет
-aus,2022,ceiling,0,Правового потолка на применение силы нет
-idn,2022,ceiling,0,Правового потолка на применение силы нет
-prk,2022,ceiling,0,Правового потолка на применение силы нет
-kor,2023,ceiling,2,"Конституция РК, ст. 5"
-phl,2023,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2023,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2023,ceiling,0,Правового потолка на применение силы нет
-chn,2023,ceiling,0,Правового потолка на применение силы нет
-twn,2023,ceiling,0,Правового потолка на применение силы нет
-aus,2023,ceiling,0,Правового потолка на применение силы нет
-idn,2023,ceiling,0,Правового потолка на применение силы нет
-prk,2023,ceiling,0,Правового потолка на применение силы нет
-kor,2024,ceiling,2,"Конституция РК, ст. 5"
-phl,2024,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2024,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2024,ceiling,0,Правового потолка на применение силы нет
-chn,2024,ceiling,0,Правового потолка на применение силы нет
-twn,2024,ceiling,0,Правового потолка на применение силы нет
-aus,2024,ceiling,0,Правового потолка на применение силы нет
-idn,2024,ceiling,0,Правового потолка на применение силы нет
-prk,2024,ceiling,0,Правового потолка на применение силы нет
-kor,2025,ceiling,2,"Конституция РК, ст. 5"
-phl,2025,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2025,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2025,ceiling,0,Правового потолка на применение силы нет
-chn,2025,ceiling,0,Правового потолка на применение силы нет
-twn,2025,ceiling,0,Правового потолка на применение силы нет
-aus,2025,ceiling,0,Правового потолка на применение силы нет
-idn,2025,ceiling,0,Правового потолка на применение силы нет
-prk,2025,ceiling,0,Правового потолка на применение силы нет
-kor,2026,ceiling,2,"Конституция РК, ст. 5"
-phl,2026,ceiling,2,"Конституция Филиппин, ст. II разд. 2"
-ind,2026,ceiling,1,"Доктрина неприменения ядерного оружия первой, 2003"
-usa,2026,ceiling,0,Правового потолка на применение силы нет
-chn,2026,ceiling,0,Правового потолка на применение силы нет
-twn,2026,ceiling,0,Правового потолка на применение силы нет
-aus,2026,ceiling,0,Правового потолка на применение силы нет
-idn,2026,ceiling,0,Правового потолка на применение силы нет
-prk,2026,ceiling,0,Правового потолка на применение силы нет
-jpn,2001,categories,1,"Отправка за пределы территории, 2001"
-jpn,2002,categories,1,"Отправка за пределы территории, 2001"
-jpn,2003,categories,1,"Отправка за пределы территории, 2001"
-jpn,2004,categories,1,"Отправка за пределы территории, 2001"
-jpn,2005,categories,1,"Отправка за пределы территории, 2001"
-jpn,2006,categories,1,"Отправка за пределы территории, 2001"
-jpn,2007,categories,1,"Отправка за пределы территории, 2001"
-jpn,2008,categories,2,"Плюс военное использование космоса, 2008"
-jpn,2009,categories,2,"Плюс военное использование космоса, 2008"
-jpn,2010,categories,2,"Плюс военное использование космоса, 2008"
-jpn,2011,categories,2,"Плюс военное использование космоса, 2008"
-jpn,2012,categories,2,"Плюс военное использование космоса, 2008"
-jpn,2013,categories,2,"Плюс военное использование космоса, 2008"
-jpn,2014,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2015,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2016,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2017,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2018,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2019,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2020,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2021,categories,4,"Плюс коллективная самооборона и экспорт вооружений, 2014"
-jpn,2022,categories,5,"Плюс средства поражения территории противника, 2022"
-jpn,2023,categories,5,"Плюс средства поражения территории противника, 2022"
-jpn,2024,categories,5,"Плюс средства поражения территории противника, 2022"
-jpn,2025,categories,5,"Плюс средства поражения территории противника, 2022"
-jpn,2026,categories,5,"Плюс средства поражения территории противника, 2022"
-jpn,2024,incidents,355,Доклад Береговой охраны Японии
-jpn,2025,incidents,357,"Доклад Береговой охраны Японии, рекорд"
-jpn,2013,dissent,76.9,"Итоги публичного обсуждения, 69 579 возражений из 90 480"
+agent,year,key,value,quality,source
+usa,2001,milex,587.822,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2002,milex,660.012,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2003,milex,751.203,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2004,milex,818.751,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2005,milex,856.462,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2006,milex,868.803,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2007,milex,891.986,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2008,milex,956.872,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2009,milex,1032.168,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2010,milex,1061.674,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2011,milex,1049.103,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2012,milex,990.831,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2013,milex,914.617,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2014,milex,858.357,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2015,milex,838.865,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2016,milex,836.291,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2017,milex,827.674,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2018,milex,852.585,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2019,milex,901.032,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2020,milex,943.447,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2021,milex,933.334,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2022,milex,922.553,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2023,milex,943.033,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2024,milex,1004.901,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2025,milex,929.163,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2001,milex,49.635,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2002,milex,57.008,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2003,milex,61.696,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2004,milex,67.956,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2005,milex,74.625,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2006,milex,85.898,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2007,milex,94.425,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2008,milex,103.311,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2009,milex,125.361,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2010,milex,131.536,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2011,milex,141.206,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2012,milex,155.714,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2013,milex,168.375,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2014,milex,181.814,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2015,milex,196.088,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2016,milex,207.375,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2017,milex,220.129,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2018,milex,233.024,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2019,milex,244.376,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2020,milex,255.895,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2021,milex,262.559,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2022,milex,274.158,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2023,milex,292.221,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2024,milex,311.9,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+chn,2025,milex,335.018,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2001,milex,36.74,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2002,milex,36.923,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2003,milex,36.969,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2004,milex,36.822,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2005,milex,36.755,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2006,milex,36.287,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2007,milex,35.815,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2008,milex,35.47,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2009,milex,36.135,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2010,milex,36.264,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2011,milex,36.754,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2012,milex,36.309,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2013,milex,36.159,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2014,milex,36.546,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2015,milex,37.188,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2016,milex,36.967,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2017,milex,36.722,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2018,milex,38.571,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2019,milex,39.668,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2020,milex,39.328,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2021,milex,42.277,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2022,milex,39.766,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2023,milex,45.863,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2024,milex,54.245,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+jpn,2025,milex,59.493,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2001,milex,21.291,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2002,milex,21.878,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2003,milex,22.622,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2004,milex,23.616,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2005,milex,25.541,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2006,milex,26.462,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2007,milex,27.66,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2008,milex,29.47,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2009,milex,31.322,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2010,milex,31.583,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2011,milex,32.015,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2012,milex,32.831,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2013,milex,33.825,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2014,milex,35.156,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2015,milex,36.521,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2016,milex,37.437,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2017,milex,38.125,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2018,milex,40.059,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2019,milex,43.286,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2020,milex,45.563,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2021,milex,47.548,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2022,milex,46.55,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2023,milex,46.841,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2024,milex,47.605,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+kor,2025,milex,48.848,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2001,milex,33.264,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2002,milex,33.161,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2003,milex,33.902,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2004,milex,39.38,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2005,milex,41.909,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2006,milex,42.249,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2007,milex,42.759,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2008,milex,48.5,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2009,milex,57.101,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2010,milex,57.33,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2011,milex,57.857,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2012,milex,57.564,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2013,milex,57.602,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2014,milex,60.408,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2015,milex,60.982,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2016,milex,67.202,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2017,milex,71.936,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2018,milex,74.469,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2019,milex,79.726,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2020,milex,80.21,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2021,milex,79.701,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2022,milex,83.218,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2023,milex,85.233,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2024,milex,85.597,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+ind,2025,milex,93.255,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2001,milex,16.699,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2002,milex,17.417,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2003,milex,17.742,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2004,milex,18.473,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2005,milex,19.118,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2006,milex,20.14,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2007,milex,21.377,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2008,milex,22.157,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2009,milex,23.826,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2010,milex,24.103,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2011,milex,23.769,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2012,milex,22.936,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2013,milex,22.737,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2014,milex,24.677,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2015,milex,27.201,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2016,milex,29.787,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2017,milex,29.734,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2018,milex,29.024,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2019,milex,29.81,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2020,milex,31.268,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2021,milex,33.395,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2022,milex,33.625,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2023,milex,33.239,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2024,milex,34.231,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+aus,2025,milex,35.264,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2001,milex,2.378,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2002,milex,2.504,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2003,milex,2.79,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2004,milex,2.629,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2005,milex,2.679,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2006,milex,2.77,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2007,milex,3.034,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2008,milex,3.034,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2009,milex,2.918,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2010,milex,3.065,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2011,milex,3.114,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2012,milex,3.162,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2013,milex,3.609,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2014,milex,3.349,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2015,milex,3.664,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2016,milex,3.773,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2017,milex,4.483,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2018,milex,4.762,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2019,milex,4.747,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2020,milex,4.89,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2021,milex,5.517,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2022,milex,5.536,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2023,milex,5.154,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2024,milex,5.493,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+phl,2025,milex,6.3,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2001,milex,2.093,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2002,milex,2.53,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2003,milex,3.402,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2004,milex,3.804,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2005,milex,3.304,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2006,milex,3.355,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2007,milex,4.034,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2008,milex,3.748,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2009,milex,3.933,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2010,milex,4.619,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2011,milex,5.295,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2012,milex,6.079,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2013,milex,8.173,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2014,milex,7.201,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2015,milex,8.374,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2016,milex,7.815,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2017,milex,9.01,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2018,milex,7.921,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2019,milex,8.313,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2020,milex,9.678,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2021,milex,8.765,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2022,milex,10.051,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2023,milex,11.056,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2024,milex,12.012,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+idn,2025,milex,15.33,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2001,milex,11.058,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2002,milex,10.694,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2003,milex,10.593,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2004,milex,10.611,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2005,milex,10.209,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2006,milex,9.794,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2007,milex,10.364,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2008,milex,10.552,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2009,milex,11.366,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2010,milex,10.742,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2011,milex,10.845,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2012,milex,11.226,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2013,milex,10.602,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2014,milex,10.541,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2015,milex,11.109,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2016,milex,10.918,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2017,milex,11.105,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2018,milex,10.881,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2019,milex,11.603,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2020,milex,12.131,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2021,milex,13.061,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2022,milex,14.827,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2023,milex,16.202,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2024,milex,15.233,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+twn,2025,milex,17.341,наблюдение,"SIPRI Milex 1949-2025, Constant (2024) US$"
+usa,2001,cinc,0.14166,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2002,cinc,0.15374,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2003,cinc,0.15207,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2004,cinc,0.15169,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2005,cinc,0.15659,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2006,cinc,0.15447,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2007,cinc,0.14972,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2008,cinc,0.1478,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2009,cinc,0.14587,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2010,cinc,0.14787,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2011,cinc,0.14314,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2012,cinc,0.13922,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2013,cinc,0.13293,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2014,cinc,0.12974,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2015,cinc,0.13336,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2016,cinc,0.13325,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2017,cinc,0.12165,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2018,cinc,0.11991,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2019,cinc,0.12605,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2020,cinc,0.12438,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2021,cinc,0.1211,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2022,cinc,0.12357,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2001,cinc,0.16543,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2002,cinc,0.15354,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2003,cinc,0.16033,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2004,cinc,0.16799,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2005,cinc,0.17189,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2006,cinc,0.1794,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2007,cinc,0.18688,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2008,cinc,0.19062,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2009,cinc,0.20947,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2010,cinc,0.20922,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2011,cinc,0.2142,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2012,cinc,0.22036,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2013,cinc,0.22824,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2014,cinc,0.22897,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2015,cinc,0.23141,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2016,cinc,0.23083,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2017,cinc,0.22204,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2018,cinc,0.226,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2019,cinc,0.22909,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2020,cinc,0.23797,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2021,cinc,0.23292,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+chn,2022,cinc,0.2341,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2001,cinc,0.01042,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2002,cinc,0.00928,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2003,cinc,0.00815,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2004,cinc,0.00801,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2005,cinc,0.00778,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2006,cinc,0.00759,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2007,cinc,0.00765,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2008,cinc,0.00746,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2009,cinc,0.00691,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2010,cinc,0.00694,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2011,cinc,0.00693,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2012,cinc,0.00699,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2013,cinc,0.00748,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2014,cinc,0.00749,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2015,cinc,0.00745,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2016,cinc,0.00681,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2017,cinc,0.00678,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2018,cinc,0.00664,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2019,cinc,0.00595,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2020,cinc,0.00608,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2021,cinc,0.0064,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+twn,2022,cinc,0.00605,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2001,cinc,0.01098,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2002,cinc,0.01235,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2003,cinc,0.01237,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2004,cinc,0.01253,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2005,cinc,0.0127,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2006,cinc,0.01275,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2007,cinc,0.01276,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2008,cinc,0.01259,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2009,cinc,0.01236,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2010,cinc,0.01218,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2011,cinc,0.01316,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2012,cinc,0.01324,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2013,cinc,0.01323,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2014,cinc,0.0132,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2015,cinc,0.01331,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2016,cinc,0.01348,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2017,cinc,0.01423,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2018,cinc,0.01505,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2019,cinc,0.01499,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2020,cinc,0.0148,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2021,cinc,0.01487,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+prk,2022,cinc,0.01409,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2001,cinc,0.02321,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2002,cinc,0.02415,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2003,cinc,0.02349,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2004,cinc,0.02316,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2005,cinc,0.02344,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2006,cinc,0.02318,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2007,cinc,0.02301,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2008,cinc,0.02252,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2009,cinc,0.02195,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2010,cinc,0.02244,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2011,cinc,0.0233,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2012,cinc,0.02315,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2013,cinc,0.02271,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2014,cinc,0.02327,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2015,cinc,0.02349,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2016,cinc,0.02326,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2017,cinc,0.02298,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2018,cinc,0.02261,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2019,cinc,0.02188,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2020,cinc,0.02109,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2021,cinc,0.02108,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+kor,2022,cinc,0.01995,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2001,cinc,0.04705,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2002,cinc,0.04856,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2003,cinc,0.04698,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2004,cinc,0.045,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2005,cinc,0.04326,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2006,cinc,0.04143,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2007,cinc,0.03987,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2008,cinc,0.0393,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2009,cinc,0.03603,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2010,cinc,0.03695,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2011,cinc,0.03612,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2012,cinc,0.03553,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2013,cinc,0.03547,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2014,cinc,0.03358,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2015,cinc,0.03258,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2016,cinc,0.03302,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2017,cinc,0.02978,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2018,cinc,0.0283,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2019,cinc,0.0272,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2020,cinc,0.02536,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2021,cinc,0.02577,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+jpn,2022,cinc,0.02471,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2001,cinc,0.07008,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2002,cinc,0.07306,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2003,cinc,0.07354,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2004,cinc,0.07393,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2005,cinc,0.07614,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2006,cinc,0.07644,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2007,cinc,0.07725,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2008,cinc,0.07812,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2009,cinc,0.08086,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2010,cinc,0.07956,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2011,cinc,0.08043,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2012,cinc,0.08098,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2013,cinc,0.0818,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2014,cinc,0.084,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2015,cinc,0.08567,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2016,cinc,0.08729,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2017,cinc,0.09749,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2018,cinc,0.09767,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2019,cinc,0.09754,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2020,cinc,0.09608,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2021,cinc,0.09787,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+ind,2022,cinc,0.0994,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2001,cinc,0.00563,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2002,cinc,0.00537,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2003,cinc,0.00522,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2004,cinc,0.00518,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2005,cinc,0.00521,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2006,cinc,0.00526,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2007,cinc,0.00533,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2008,cinc,0.00538,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2009,cinc,0.00539,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2010,cinc,0.00558,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2011,cinc,0.00561,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2012,cinc,0.00564,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2013,cinc,0.00598,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2014,cinc,0.00597,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2015,cinc,0.00607,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2016,cinc,0.00617,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2017,cinc,0.00648,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2018,cinc,0.00645,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2019,cinc,0.00668,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2020,cinc,0.00671,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2021,cinc,0.0068,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+phl,2022,cinc,0.00684,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2001,cinc,0.0145,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2002,cinc,0.01491,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2003,cinc,0.01483,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2004,cinc,0.015,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2005,cinc,0.01412,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2006,cinc,0.0142,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2007,cinc,0.01431,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2008,cinc,0.01443,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2009,cinc,0.01434,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2010,cinc,0.01423,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2011,cinc,0.01435,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2012,cinc,0.0142,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2013,cinc,0.01522,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2014,cinc,0.01522,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2015,cinc,0.01577,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2016,cinc,0.01597,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2017,cinc,0.01978,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2018,cinc,0.01987,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2019,cinc,0.02027,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2020,cinc,0.02042,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2021,cinc,0.02039,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+idn,2022,cinc,0.02086,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2001,cinc,0.00689,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2002,cinc,0.00749,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2003,cinc,0.00751,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2004,cinc,0.00739,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2005,cinc,0.00751,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2006,cinc,0.00751,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2007,cinc,0.0076,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2008,cinc,0.00749,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2009,cinc,0.00689,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2010,cinc,0.00735,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2011,cinc,0.00725,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2012,cinc,0.00728,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2013,cinc,0.00698,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2014,cinc,0.00652,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2015,cinc,0.00669,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2016,cinc,0.00681,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2017,cinc,0.0062,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2018,cinc,0.00603,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2019,cinc,0.00626,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2020,cinc,0.00635,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2021,cinc,0.0064,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+aus,2022,cinc,0.006,наблюдение,"Correlates of War, National Material Capabilities v7.0"
+usa,2023,cinc,0.12357,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+usa,2024,cinc,0.12357,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+usa,2025,cinc,0.12357,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+chn,2023,cinc,0.2341,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+chn,2024,cinc,0.2341,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+chn,2025,cinc,0.2341,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+twn,2023,cinc,0.00605,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+twn,2024,cinc,0.00605,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+twn,2025,cinc,0.00605,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+prk,2023,cinc,0.01409,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+prk,2024,cinc,0.01409,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+prk,2025,cinc,0.01409,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+kor,2023,cinc,0.01995,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+kor,2024,cinc,0.01995,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+kor,2025,cinc,0.01995,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+jpn,2023,cinc,0.02471,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+jpn,2024,cinc,0.02471,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+jpn,2025,cinc,0.02471,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+ind,2023,cinc,0.0994,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+ind,2024,cinc,0.0994,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+ind,2025,cinc,0.0994,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+phl,2023,cinc,0.00684,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+phl,2024,cinc,0.00684,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+phl,2025,cinc,0.00684,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+idn,2023,cinc,0.02086,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+idn,2024,cinc,0.02086,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+idn,2025,cinc,0.02086,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+aus,2023,cinc,0.006,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+aus,2024,cinc,0.006,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+aus,2025,cinc,0.006,перенос,"Перенос значения 2022 года, версия набора обрывается на нём"
+jpn,2001,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2001,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2001,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2001,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2001,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2001,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2001,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2001,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2001,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2001,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2002,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2002,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2002,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2002,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2002,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2002,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2002,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2002,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2002,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2002,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2003,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2003,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2003,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2003,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2003,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2003,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2003,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2003,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2003,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2003,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2004,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2004,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2004,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2004,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2004,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2004,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2004,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2004,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2004,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2004,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2005,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2005,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2005,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2005,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2005,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2005,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2005,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2005,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2005,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2005,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2006,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2006,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2006,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2006,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2006,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2006,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2006,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2006,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2006,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2006,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2007,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2007,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2007,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2007,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2007,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2007,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2007,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2007,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2007,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2007,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2008,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2008,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2008,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2008,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2008,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2008,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2008,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2008,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2008,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2008,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2009,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2009,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2009,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2009,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2009,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2009,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2009,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2009,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2009,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2009,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2010,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2010,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2010,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2010,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2010,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2010,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2010,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2010,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2010,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2010,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2011,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2011,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2011,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2011,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2011,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2011,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2011,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2011,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2011,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2011,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2012,ceiling,3,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2012,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2012,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2012,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2012,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2012,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2012,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2012,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2012,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2012,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2013,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2013,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2013,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2013,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2013,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2013,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2013,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2013,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2013,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2013,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2014,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2014,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2014,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2014,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2014,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2014,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2014,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2014,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2014,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2014,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2015,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2015,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2015,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2015,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2015,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2015,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2015,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2015,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2015,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2015,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2016,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2016,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2016,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2016,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2016,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2016,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2016,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2016,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2016,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2016,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2017,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2017,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2017,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2017,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2017,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2017,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2017,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2017,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2017,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2017,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2018,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2018,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2018,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2018,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2018,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2018,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2018,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2018,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2018,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2018,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2019,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2019,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2019,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2019,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2019,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2019,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2019,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2019,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2019,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2019,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2020,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2020,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2020,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2020,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2020,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2020,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2020,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2020,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2020,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2020,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2021,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2021,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2021,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2021,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2021,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2021,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2021,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2021,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2021,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2021,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2022,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2022,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2022,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2022,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2022,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2022,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2022,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2022,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2022,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2022,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2023,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2023,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2023,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2023,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2023,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2023,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2023,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2023,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2023,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2023,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2024,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2024,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2024,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2024,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2024,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2024,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2024,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2024,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2024,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2024,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2025,ceiling,2,наблюдение,Кадровая конвенция Бюро законодательства нарушена 08.08.2013
+kor,2025,ceiling,2,наблюдение,"Конституция Республики Корея, статья 5"
+phl,2025,ceiling,2,наблюдение,"Конституция Филиппин, статья II раздел 2"
+ind,2025,ceiling,1,наблюдение,"Доктрина неприменения ядерного оружия первой, 2003"
+usa,2025,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+chn,2025,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+twn,2025,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+aus,2025,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+idn,2025,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+prk,2025,ceiling,0,наблюдение,Правового потолка на применение силы не установлено
+jpn,2001,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2002,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2003,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2004,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2005,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2006,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2007,categories,1,наблюдение,"Отправка за пределы территории, 2001"
+jpn,2008,categories,2,наблюдение,"Плюс военное использование космоса, 2008"
+jpn,2009,categories,2,наблюдение,"Плюс военное использование космоса, 2008"
+jpn,2010,categories,2,наблюдение,"Плюс военное использование космоса, 2008"
+jpn,2011,categories,2,наблюдение,"Плюс военное использование космоса, 2008"
+jpn,2012,categories,2,наблюдение,"Плюс военное использование космоса, 2008"
+jpn,2013,categories,2,наблюдение,"Плюс военное использование космоса, 2008"
+jpn,2014,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2015,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2016,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2017,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2018,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2019,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2020,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2021,categories,4,наблюдение,"Плюс коллективная самооборона и экспорт вооружений, 2014"
+jpn,2022,categories,5,наблюдение,"Плюс средства поражения территории противника, 2022"
+jpn,2023,categories,5,наблюдение,"Плюс средства поражения территории противника, 2022"
+jpn,2024,categories,5,наблюдение,"Плюс средства поражения территории противника, 2022"
+jpn,2025,categories,5,наблюдение,"Плюс средства поражения территории противника, 2022"
+usa,2001,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2001,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2001,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2001,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2001,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2001,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2002,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2002,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2002,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2002,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2002,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2002,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2003,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2003,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2003,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2003,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2003,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2003,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2004,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2004,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2004,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2004,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2004,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2004,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2005,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2005,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2005,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2005,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2005,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2005,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2006,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2006,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2006,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2006,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2006,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2006,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2007,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2007,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2007,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2007,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2007,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2007,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2008,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2008,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2008,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2008,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2008,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2008,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2009,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2009,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2009,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2009,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2009,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2009,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2010,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2010,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2010,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2010,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2010,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2010,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2011,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2011,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2011,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2011,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2011,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2011,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2012,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2012,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2012,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2012,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2012,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2012,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2013,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2013,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2013,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2013,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2013,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2013,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2014,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2014,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2014,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2014,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2014,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2014,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2015,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2015,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2015,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2015,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2015,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2015,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2016,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2016,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2016,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2016,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2016,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2016,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2017,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2017,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2017,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2017,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2017,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2017,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2018,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2018,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2018,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2018,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2018,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2018,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2019,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2019,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2019,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2019,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2019,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2019,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2020,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2020,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2020,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2020,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2020,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2020,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2021,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2021,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2021,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2021,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2021,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2021,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2022,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2022,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2022,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2022,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2022,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2022,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2023,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2023,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2023,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2023,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2023,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2023,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2024,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2024,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2024,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2024,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2024,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2024,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+usa,2025,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+chn,2025,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+twn,2025,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+aus,2025,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+idn,2025,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+prk,2025,categories,5,наблюдение,"Ограничений не установлено, все категории допустимы"
+jpn,2008,incidents,0.5,оценка,"Береговая охрана Японии. Единственный инцидент 8 декабря, 2 судна, 9 часов, не системное присутствие"
+jpn,2009,incidents,0.5,оценка,"Береговая охрана Японии. Данные из сводного графика неоднозначны при разбивке по годам, системного присутствия не было"
+jpn,2010,incidents,24.0,оценка,"Береговая охрана Японии. После инцидента со столкновением рыболовецкого судна 7 сентября, точная цифра из графика неоднозначна"
+jpn,2011,incidents,9.0,оценка,"Береговая охрана Японии. Инцидент в августе, 2 судна; точная цифра из графика неоднозначна"
+jpn,2012,incidents,91.0,наблюдение,Береговая охрана Японии. Подтверждено Ocean Newsletter №538. Системное присутствие началось 14 сентября
+jpn,2013,incidents,232.0,наблюдение,Береговая охрана Японии. Подтверждено сводным графиком Канцелярии Кабинета министров
+jpn,2014,incidents,243.0,наблюдение,Береговая охрана Японии. Подтверждено Белой книгой MLIT и сводным графиком (тогда рекорд)
+jpn,2015,incidents,240.0,наблюдение,Береговая охрана Японии. Подтверждено сводным графиком Канцелярии Кабинета министров
+jpn,2016,incidents,211.0,наблюдение,Береговая охрана Японии. Подтверждено сводным графиком Канцелярии Кабинета министров
+jpn,2017,incidents,171.0,наблюдение,Береговая охрана Японии. Подтверждено сводным графиком Канцелярии Кабинета министров
+jpn,2018,incidents,159.0,наблюдение,Береговая охрана Японии. Подтверждено сводным графиком Канцелярии Кабинета министров
+jpn,2019,incidents,282.0,наблюдение,Береговая охрана Японии. Подтверждено Белой книгой MLIT (рекорд на тот момент)
+jpn,2020,incidents,333.0,наблюдение,"Береговая охрана Японии. Подтверждено официальным документом Береговой охраны, декабрь 2020"
+jpn,2021,incidents,332.0,наблюдение,Береговая охрана Японии. Подтверждено Ocean Newsletter №538 и документом Канцелярии Кабинета министров
+jpn,2022,incidents,336.0,наблюдение,Береговая охрана Японии. Подтверждено сводным графиком Канцелярии Кабинета министров
+jpn,2023,incidents,352.0,наблюдение,Береговая охрана Японии. Подтверждено Nikkei и трекером Asset Management Consulting
+jpn,2024,incidents,355.0,наблюдение,"Береговая охрана Японии. Подтверждено Nikkei и трекером Asset Management Consulting, рекорд на тот момент"
+jpn,2025,incidents,357.0,наблюдение,"Береговая охрана Японии. Подтверждено трекером Asset Management Consulting, полный год, новый рекорд"
+kor,2001,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2002,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2003,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2004,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2005,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2006,incidents,7.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2007,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2008,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2009,incidents,8.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2010,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2011,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2012,incidents,2.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2013,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2014,incidents,11.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2015,incidents,2.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2016,incidents,23.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2017,incidents,17.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2018,incidents,0.0,наблюдение,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2019,incidents,25.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2020,incidents,8.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2021,incidents,6.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2022,incidents,59.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2023,incidents,25.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2024,incidents,22.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+kor,2025,incidents,5.0,оценка,"防衛白書 令和8年版, число пусков КНДР за год"
+prk,2001,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2001,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2002,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2002,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2003,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2003,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2004,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2004,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2005,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2005,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2006,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2006,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2007,incidents,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+kor,2007,exercises,2,наблюдение,"Открытые сообщения сторон. RSOI / Foal Eagle (весна), Ulchi Focus Lens (конец лета)"
+prk,2008,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2008,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2009,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2009,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2010,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2010,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2011,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2011,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2012,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2012,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2013,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2013,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2014,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2014,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2015,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2015,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2016,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2016,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2017,incidents,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+kor,2017,exercises,2,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна), Ulchi Freedom Guardian (август)"
+prk,2018,incidents,1,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна, усеченные). Осенние UFG отменены"
+kor,2018,exercises,1,наблюдение,"Открытые сообщения сторон. Key Resolve / Foal Eagle (весна, усеченные). Осенние UFG отменены"
+prk,2019,incidents,1,наблюдение,Открытые сообщения сторон. Только компьютерные КШУ CCPT (19-1 и 19-2). Полевые маневры ликвидированы
+kor,2019,exercises,1,наблюдение,Открытые сообщения сторон. Только компьютерные КШУ CCPT (19-1 и 19-2). Полевые маневры ликвидированы
+prk,2020,incidents,1,наблюдение,Открытые сообщения сторон. Только осенние CCPT. Весенние отменены из-за вспышки COVID-19
+kor,2020,exercises,1,наблюдение,Открытые сообщения сторон. Только осенние CCPT. Весенние отменены из-за вспышки COVID-19
+prk,2021,incidents,1,наблюдение,Открытые сообщения сторон. Только штабные симуляции CCPT (21-1 и 21-2) без привлечения техники
+kor,2021,exercises,1,наблюдение,Открытые сообщения сторон. Только штабные симуляции CCPT (21-1 и 21-2) без привлечения техники
+prk,2022,incidents,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна, штабные + полевые), Ulchi Freedom Shield (август)"
+kor,2022,exercises,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна, штабные + полевые), Ulchi Freedom Shield (август)"
+prk,2023,incidents,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна, штабные + полевые), Ulchi Freedom Shield (август)"
+kor,2023,exercises,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна, штабные + полевые), Ulchi Freedom Shield (август)"
+prk,2024,incidents,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна, штабные + полевые), Ulchi Freedom Shield (август)"
+kor,2024,exercises,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна, штабные + полевые), Ulchi Freedom Shield (август)"
+prk,2025,incidents,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна), Ulchi Freedom Shield (сдвинуты на сентябрь)"
+kor,2025,exercises,2,наблюдение,"Открытые сообщения сторон. Freedom Shield (весна), Ulchi Freedom Shield (сдвинуты на сентябрь)"
+jpn,2001,arms_share,0.9321,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2002,arms_share,0.9072,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2003,arms_share,0.9017,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2004,arms_share,0.9073,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2005,arms_share,0.928,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2006,arms_share,0.8742,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2007,arms_share,0.9693,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2008,arms_share,0.9758,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2009,arms_share,0.9657,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2010,arms_share,0.9271,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2011,arms_share,0.9067,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2012,arms_share,0.8828,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2013,arms_share,0.8563,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2014,arms_share,0.9272,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2015,arms_share,0.9271,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2016,arms_share,0.9337,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2017,arms_share,0.9507,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2018,arms_share,0.9686,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2019,arms_share,0.9657,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2020,arms_share,0.9957,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2021,arms_share,0.9891,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2022,arms_share,0.9563,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2023,arms_share,0.9683,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2024,arms_share,0.9223,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2025,arms_share,0.9137,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+usa,2001,arms_share,0.378,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2002,arms_share,0.3107,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2003,arms_share,0.2873,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2004,arms_share,0.3272,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2005,arms_share,0.2955,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2006,arms_share,0.2875,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2007,arms_share,0.2922,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2008,arms_share,0.313,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2009,arms_share,0.3024,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2010,arms_share,0.193,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2011,arms_share,0.1889,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2012,arms_share,0.2074,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2013,arms_share,0.2295,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2014,arms_share,0.2148,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2015,arms_share,0.4004,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2016,arms_share,0.1902,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2017,arms_share,0.1964,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2018,arms_share,0.2401,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2019,arms_share,0.4263,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2020,arms_share,0.2233,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2021,arms_share,0.1887,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2022,arms_share,0.2293,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2023,arms_share,0.1886,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2024,arms_share,0.283,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+usa,2025,arms_share,0.1799,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2001,arms_share,0.894,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2002,arms_share,0.8901,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2003,arms_share,0.8955,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2004,arms_share,0.8971,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2005,arms_share,0.8872,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2006,arms_share,0.8672,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2007,arms_share,0.8064,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2008,arms_share,0.8145,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2009,arms_share,0.7945,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2010,arms_share,0.6947,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2011,arms_share,0.7173,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2012,arms_share,0.4099,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2013,arms_share,0.5168,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2014,arms_share,0.5431,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2015,arms_share,0.6101,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2016,arms_share,0.6137,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2017,arms_share,0.7904,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2018,arms_share,0.8456,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2019,arms_share,0.8415,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2020,arms_share,0.7058,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2021,arms_share,0.6818,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2022,arms_share,0.7724,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2023,arms_share,0.764,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2024,arms_share,0.4225,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+chn,2025,arms_share,0.4058,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+prk,2001,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2002,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2003,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2004,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2005,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2006,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2007,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2008,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2009,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+prk,2010,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из China в общем импорте"
+kor,2001,arms_share,0.6003,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2002,arms_share,0.5125,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2003,arms_share,0.7927,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2004,arms_share,0.8285,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2005,arms_share,0.7728,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2006,arms_share,0.8197,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2007,arms_share,0.696,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2008,arms_share,0.6617,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2009,arms_share,0.2581,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2010,arms_share,0.9507,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2011,arms_share,0.9426,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2012,arms_share,0.9081,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2013,arms_share,0.582,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2014,arms_share,0.4717,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2015,arms_share,0.6381,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2016,arms_share,0.5202,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2017,arms_share,0.5447,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2018,arms_share,0.6796,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2019,arms_share,0.5427,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2020,arms_share,0.7306,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2021,arms_share,0.8966,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2022,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2023,arms_share,0.7248,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2024,arms_share,0.969,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+kor,2025,arms_share,0.9505,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+idn,2001,arms_share,0.7273,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2002,arms_share,0.3582,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2003,arms_share,0.6516,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2004,arms_share,0.3766,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2005,arms_share,0.3939,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2006,arms_share,0.4921,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2007,arms_share,0.5242,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2008,arms_share,0.636,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2009,arms_share,0.3725,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2010,arms_share,0.8507,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2011,arms_share,0.463,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2012,arms_share,0.216,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2013,arms_share,0.4286,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2014,arms_share,0.5029,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2015,arms_share,0.2055,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2016,arms_share,0.321,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2017,arms_share,0.4193,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2018,arms_share,0.4146,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2019,arms_share,0.3556,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2020,arms_share,0.3216,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2021,arms_share,0.4071,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2022,arms_share,0.2093,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2023,arms_share,0.3103,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2024,arms_share,0.4486,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+idn,2025,arms_share,0.7204,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+twn,2001,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2002,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2003,arms_share,0.9643,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2004,arms_share,0.9842,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2005,arms_share,0.9281,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2006,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2007,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2008,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2009,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2010,arms_share,0.493,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2011,arms_share,0.7919,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2012,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2013,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2014,arms_share,0.9945,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2015,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2016,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2017,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2018,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2019,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2020,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2021,arms_share,0.962,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2022,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2023,arms_share,0.9561,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2024,arms_share,0.9373,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+twn,2025,arms_share,0.9698,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+ind,2001,arms_share,0.76,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2002,arms_share,0.8785,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2003,arms_share,0.7716,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2004,arms_share,0.667,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2005,arms_share,0.5732,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2006,arms_share,0.6241,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2007,arms_share,0.7709,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2008,arms_share,0.8071,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2009,arms_share,0.7385,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2010,arms_share,0.7901,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2011,arms_share,0.6919,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2012,arms_share,0.8691,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2013,arms_share,0.7148,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2014,arms_share,0.4994,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2015,arms_share,0.6747,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2016,arms_share,0.6654,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2017,arms_share,0.4974,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2018,arms_share,0.613,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2019,arms_share,0.3807,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2020,arms_share,0.4363,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2021,arms_share,0.4816,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2022,arms_share,0.421,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2023,arms_share,0.3825,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2024,arms_share,0.5596,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+ind,2025,arms_share,0.4233,наблюдение,"SIPRI Arms Transfers, доля ведущего поставщика в импорте"
+aus,2001,arms_share,0.0708,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2002,arms_share,0.1646,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2003,arms_share,0.2118,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2004,arms_share,0.2506,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2005,arms_share,0.2183,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2006,arms_share,0.4424,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2007,arms_share,0.8026,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2008,arms_share,0.6651,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2009,arms_share,0.7714,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2010,arms_share,0.9121,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2011,arms_share,0.6441,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2012,arms_share,0.6112,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2013,arms_share,0.4773,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2014,arms_share,0.2783,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2015,arms_share,0.5647,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2016,arms_share,0.8646,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2017,arms_share,0.5655,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2018,arms_share,0.5763,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2019,arms_share,0.8619,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2020,arms_share,0.6887,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2021,arms_share,0.7742,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2022,arms_share,0.9753,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2023,arms_share,0.8404,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2024,arms_share,0.8932,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+aus,2025,arms_share,0.7663,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2001,arms_share,0.9,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2002,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2003,arms_share,0.3,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2004,arms_share,0.5882,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2005,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2006,arms_share,0.5652,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2007,arms_share,0.75,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2008,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2009,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2010,arms_share,0.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2011,arms_share,0.9524,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2012,arms_share,0.2857,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2013,arms_share,0.6627,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2014,arms_share,1.0,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2015,arms_share,0.3007,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2016,arms_share,0.3596,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2017,arms_share,0.0827,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2018,arms_share,0.1176,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2019,arms_share,0.0524,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2020,arms_share,0.1584,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2021,arms_share,0.2493,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2022,arms_share,0.0143,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2023,arms_share,0.1667,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2024,arms_share,0.282,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+phl,2025,arms_share,0.1052,наблюдение,"SIPRI Arms Transfers, доля поставок из United States в общем импорте"
+jpn,2013,dissent,76.9,наблюдение,"Итоги публичного обсуждения, 69 579 возражений из 90 480"
