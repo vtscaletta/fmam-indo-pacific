@@ -109,6 +109,39 @@ CALIBRATION_WINDOW = range(2001, 2020)
 """
 
 
+def share_baseline(obs: Observations, agent: AgentPassport, key: str,
+                   window: range = CALIBRATION_WINDOW) -> Baseline | None:
+    """
+    Обычный уровень доли противника в паре по калибровочному окну.
+
+    Вычисляется так же, как обычный уровень прочих рядов, но по величине,
+    которая сама получается делением, а не берётся из таблицы напрямую.
+    """
+    vals = []
+    for y in window:
+        own = obs.get(agent.code, y, key)
+        other = obs.get(agent.adversary, y, key) if agent.adversary else sc.NA
+        v = sc.share(own, other)
+        if not math.isnan(v):
+            vals.append(v)
+    return _baseline_from(vals)
+
+
+def _baseline_from(series: list[float]) -> Baseline | None:
+    """Середина и разброс ряда либо отсутствие при слишком коротком ряде."""
+    series = [v for v in series if not math.isnan(v)]
+    if len(series) < 3:
+        return None
+    center = statistics.median(series)
+    spread = 0.0
+    if len(series) >= 4:
+        q = statistics.quantiles(series, n=4)
+        spread = (q[2] - q[0]) / 2
+    if spread <= 0.0:
+        spread = statistics.pstdev(series)
+    return Baseline(center=center, spread=spread)
+
+
 def baselines(obs: Observations, agent: str, key: str,
               window: range = CALIBRATION_WINDOW) -> Baseline | None:
     """
@@ -125,18 +158,7 @@ def baselines(obs: Observations, agent: str, key: str,
     ряда в середину шкалы и стёр бы единственные наблюдаемые отклонения.
     """
     full = obs.series(agent, key)
-    series = [v for y, v in full.items()
-              if y in window and not math.isnan(v)]
-    if len(series) < 3:
-        return None
-    center = statistics.median(series)
-    spread = 0.0
-    if len(series) >= 4:
-        q = statistics.quantiles(series, n=4)
-        spread = (q[2] - q[0]) / 2
-    if spread <= 0.0:
-        spread = statistics.pstdev(series)
-    return Baseline(center=center, spread=spread)
+    return _baseline_from([v for y, v in full.items() if y in window])
 
 
 def normalize(ind: Indicator, agent: AgentPassport, year: int,
@@ -154,6 +176,14 @@ def normalize(ind: Indicator, agent: AgentPassport, year: int,
         other = obs.get(agent.adversary, year, ind.key) if agent.adversary \
             else sc.NA
         return raw, sc.share(raw, other)
+
+    if ind.kind is Kind.SHARE_DEV:
+        other = obs.get(agent.adversary, year, ind.key) if agent.adversary \
+            else sc.NA
+        pair = sc.share(raw, other)
+        if base is None:
+            return pair, sc.NA
+        return pair, sc.deviation_from_baseline(pair, base.center, base.spread)
 
     if ind.kind is Kind.LINEAR:
         return raw, sc.linear(raw, ind.low, ind.high)
@@ -189,8 +219,11 @@ def compose_var(var: Var, agent: AgentPassport, year: int,
     missing: list[str] = []
 
     for ind in additive(var, agent.code):
-        base = baselines(obs, agent.code, ind.key) \
-            if ind.kind is Kind.DEVIATION else None
+        base = None
+        if ind.kind is Kind.DEVIATION:
+            base = baselines(obs, agent.code, ind.key)
+        elif ind.kind is Kind.SHARE_DEV:
+            base = share_baseline(obs, agent, ind.key)
         raw, unit = normalize(ind, agent, year, obs, base)
         if math.isnan(unit):
             missing.append(ind.key)
