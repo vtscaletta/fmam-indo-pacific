@@ -1,69 +1,136 @@
 """
-Симулятор. Сборка всех уровней модели в единый цикл по времени.
+Симулятор. Сборка уровней модели в единый цикл по времени.
 
-Один шаг от года t к году t+1 проходит шесть стадий.
-    1. Сценарий вносит шоки текущего года в состояния агентов.
-    2. Каждый агент прогоняется через нечёткий контроллер и порождает вектор
-       стратегического действия.
-    3. Матрица влияния превращает действия в приращения угрозы и доверия.
-    4. Состояния агентов обновляются по трём согласованным законам.
-    5. Связка уровней сворачивает действия в системное напряжение с памятью.
-    6. Марковское ядро продвигает распределение по режимам.
+Устройство шага. Один шаг от года к следующему проходит пять стадий.
 
-Законы обновления состояний содержательно различны и повторяют логику
-дифференцированной памяти. Восприятие угрозы растёт от давления противников,
-но в покое спадает к исходному уровню, страх не вечен. Доверие к союзнику
-подтачивается риторикой противника, но альянс инерционен и тянет доверие
-обратно. Нормативная эрозия есть храповик и здесь: накопленный
-институциональный дрейф поднимает её и не отпускает назад.
+    1. Нормативная эрозия каждого агента берётся извне, из наблюдений либо
+       из сценария, и подставляется в состояние.
+    2. Каждый агент прогоняется через нечёткий контроллер и порождает
+       вектор стратегического действия.
+    3. Матрица влияния превращает действия в приращения восприятия угрозы
+       и доверия у прочих агентов.
+    4. Связка уровней сворачивает действия в системное напряжение с памятью.
+    5. Марковское ядро продвигает распределение по фазовым режимам.
 
-Модель полностью детерминирована. Марковское ядро продвигает распределение
-вероятностей, а не разыгрывает исход, поэтому одинаковый сценарий всегда даёт
-одну и ту же траекторию. Слой случайной выборки сознательно исключён.
+Разделение заданного и возникающего. Нормативная эрозия приходит извне,
+поскольку она есть запись датированных решений. Восприятие угрозы и доверие
+берутся из наблюдений однократно, на первом году, и далее возникают из
+взаимного влияния. Наблюдаемые ряды отношения расходов в модель не
+подаются и служат мишенью проверки.
+
+Законы обновления. Восприятие угрозы растёт от давления прочих и в покое
+спадает к исходному уровню, поскольку страх не вечен. Доверие подтачивается
+риторикой главного источника угрозы и тянется обратно инерцией союза.
+Нормативная эрозия эндогенного закона не имеет вовсе, она приходит извне.
+
+Определённость. Модель полностью детерминирована. Марковское ядро продвигает
+распределение вероятностей, а не разыгрывает исход, вследствие чего
+одинаковые входы всегда дают одинаковую траекторию. Слой случайной выборки
+сознательно исключён.
+
+Свойство выходной шкалы. Дефаззификация методом центра тяжести на
+ограниченной области определения даёт достижимый размах примерно от 0,166
+до 0,834, симметричный относительно середины. Порядок и относительные
+различия при этом сохраняются, а коэффициенты синтез-формулы поглощают
+масштаб, отчего пересчёт к полному отрезку не производится.
 """
-
 from __future__ import annotations
+
+import math
 from dataclasses import dataclass, field
+from typing import Callable, Protocol
 
 import numpy as np
 
-from engine.fuzzy_agent import FuzzyAgent, JAPAN_CONFIG
-from engine.influence import InfluenceMatrix, INFLUENCE, CODES
-from engine.synthesis import LevelCoupling, aggregate
-from engine.markov import MarkovCore, MARKOV, INITIAL_DISTRIBUTION
+from engine.fuzzy_agent import STANDARD_CONFIG, FuzzyAgent
+from engine.influence import InfluenceMatrix
+from engine.markov import INITIAL_DISTRIBUTION, MARKOV, MarkovCore
+from engine.measurement.inputs import ModelInputs
+from engine.measurement.loaders import AgentPassport
+from engine.synthesis import LevelCoupling, aggregate, influence_weights
 
 
 def _clip(x: float) -> float:
     return max(0.0, min(1.0, x))
 
 
+class ErosionSource(Protocol):
+    """
+    Источник нормативной эрозии.
+
+    Возвращает значение переменной для данного агента и года. В
+    ретроспективном прогоне читает наблюдения, в сценарном берёт из
+    заданной траектории.
+    """
+
+    def __call__(self, agent: str, year: int) -> float: ...
+
+
+class ObservedErosion:
+    """Эрозия из наблюдений. Применяется в ретроспективном прогоне."""
+
+    def __init__(self, inputs: ModelInputs):
+        self.inputs = inputs
+
+    def __call__(self, agent: str, year: int) -> float:
+        return self.inputs.erosion_at(agent, year)
+
+
+class FixedErosion:
+    """
+    Эрозия, замороженная на уровне последнего наблюдённого года.
+
+    Применяется в сценарии, где предполагается отсутствие новых решений о
+    расширении допустимого.
+    """
+
+    def __init__(self, inputs: ModelInputs, last_year: int):
+        self.values = {c: inputs.erosion_at(c, last_year)
+                       for c in inputs.erosion}
+
+    def __call__(self, agent: str, year: int) -> float:
+        return self.values.get(agent, float("nan"))
+
+
 @dataclass(frozen=True)
 class DynamicsParams:
-    """Параметры законов обновления состояний агентов."""
-    rho_threat: float = 0.45    # реверсия восприятия угрозы к базису
-    rho_trust: float = 0.4      # реверсия доверия к базису
-    kappa_erosion: float = 0.15  # накопление нормативной эрозии
-    drift_neutral: float = 0.5  # нейтральный уровень дрейфа, выше которого эрозия растёт
+    """
+    Параметры законов обновления состояний.
+
+    rho_threat  скорость возврата восприятия угрозы к исходному уровню
+    rho_trust   скорость возврата доверия к исходному уровню
+
+    Обе величины подбираются на калибровочном интервале и входят в число
+    настраиваемых параметров модели. Закона накопления эрозии здесь нет,
+    поскольку она приходит извне.
+    """
+    rho_threat: float = 0.45
+    rho_trust: float = 0.40
 
 
 @dataclass
 class Trajectory:
-    """Полная история прогона. Структура удобна для графиков и отчётов."""
-    scenario: str
-    base_year: int
-    years: list = field(default_factory=list)
-    tension: list = field(default_factory=list)
-    dominant: list = field(default_factory=list)
+    """Полная история прогона, пригодная для отчётов и графиков."""
+    label: str
+    years: list[int] = field(default_factory=list)
+    tension: list[float] = field(default_factory=list)
+    dominant: list[str] = field(default_factory=list)
     regime_dist: list = field(default_factory=list)
-    agent_states: dict = field(default_factory=dict)   # код -> список [z1, z2, z3]
-    agent_actions: dict = field(default_factory=dict)  # код -> список векторов действия
-    events_log: list = field(default_factory=list)     # (год, описание)
-    event_vars: list = field(default_factory=list)     # переменная z по порядку events_log
+    agent_states: dict[str, list[list[float]]] = field(default_factory=dict)
+    agent_actions: dict[str, list[dict]] = field(default_factory=dict)
+    notes: list[str] = field(default_factory=list)
+
+    def state_series(self, agent: str, index: int) -> list[float]:
+        """Ряд одной переменной агента по годам. Индекс 0, 1 либо 2."""
+        return [s[index] for s in self.agent_states[agent]]
+
+    def action_series(self, agent: str, key: str) -> list[float]:
+        """Ряд одного выхода агента по годам."""
+        return [a[key] for a in self.agent_actions[agent]]
 
     def to_dict(self) -> dict:
         return {
-            "scenario": self.scenario,
-            "base_year": self.base_year,
+            "label": self.label,
             "years": list(self.years),
             "tension": [float(t) for t in self.tension],
             "dominant": list(self.dominant),
@@ -72,65 +139,100 @@ class Trajectory:
                              for c, v in self.agent_states.items()},
             "agent_actions": {c: [dict(a) for a in v]
                               for c, v in self.agent_actions.items()},
-            "events_log": list(self.events_log),
-            "event_vars": list(self.event_vars),
+            "notes": list(self.notes),
         }
 
 
 class Simulator:
-    """Оркестратор. Прогоняет сценарий на заданный горизонт."""
+    """
+    Оркестратор. Прогоняет заданный интервал лет на заданном наборе агентов.
 
-    def __init__(self, controller: FuzzyAgent = None, influence: InfluenceMatrix = None,
-                 markov: MarkovCore = None, dynamics: DynamicsParams = None):
-        self.controller = controller or FuzzyAgent(JAPAN_CONFIG)
-        self.influence = influence or INFLUENCE
+    Собственного состояния между прогонами не хранит. Связка уровней с её
+    памятью создаётся заново на каждый прогон, вследствие чего повторный
+    вызов с теми же входами даёт тот же результат.
+    """
+
+    def __init__(self, agents: dict[str, AgentPassport],
+                 influence: InfluenceMatrix,
+                 controller: FuzzyAgent | None = None,
+                 markov: MarkovCore | None = None,
+                 dynamics: DynamicsParams | None = None):
+        self.agents = agents
+        self.codes = tuple(sorted(agents))
+        self.influence = influence
+        self.controller = controller or FuzzyAgent(STANDARD_CONFIG)
         self.markov = markov or MARKOV
         self.dynamics = dynamics or DynamicsParams()
 
-    def run(self, scenario, agents: dict, horizon: int = 10, base_year: int = 2026) -> Trajectory:
+    def run(self, years: range,
+            initial: dict[str, tuple[float, float, float]],
+            erosion: ErosionSource,
+            incidents: Callable[[str, int], float] | None = None,
+            label: str = "ретроспектива") -> Trajectory:
         """
-        Прогоняет сценарий. agents суть словарь код -> объект состояния с
-        атрибутами z1, z2, z3. horizon в годах.
+        Прогоняет интервал.
+
+        initial суть начальные значения трёх переменных на первом году.
+        erosion суть источник нормативной эрозии на каждый год.
+        incidents суть источник наблюдаемой составляющей восприятия угрозы,
+        складываемой с возникающей из взаимного влияния равной долей.
+
+        Агенты, у которых начальное восприятие угрозы либо доверие не
+        вычислено, из прогона исключаются с записью причины, поскольку
+        подстановка произвольного числа исказила бы взаимное влияние.
         """
         d = self.dynamics
-        states = {c: [agents[c].z1, agents[c].z2, agents[c].z3] for c in CODES}
-        base = {c: list(states[c]) for c in CODES}
+        traj = Trajectory(label=label)
 
-        # Свежая связка с собственной памятью на каждый прогон. Память
-        # инициализируется поведением базового года, чтобы снять холодный старт.
-        coupling = LevelCoupling()
-        warm = {c: self.controller.step(*states[c]) for c in CODES}
-        coupling.memory.seed(aggregate(warm, coupling.weights))
+        active = []
+        for c in self.codes:
+            z1, z2, z3 = initial[c]
+            if math.isnan(z1) or math.isnan(z2):
+                traj.notes.append(
+                    f"{c}, исключён из прогона, начальное состояние "
+                    f"не вычислено")
+                continue
+            active.append(c)
+
+        states = {c: list(initial[c]) for c in active}
+        base = {c: list(initial[c]) for c in active}
+        traj.agent_states = {c: [] for c in active}
+        traj.agent_actions = {c: [] for c in active}
+
+        first = min(years)
+        weights = influence_weights(self.influence, first, active)
+        coupling = LevelCoupling(weights=weights)
+        warm = {c: self.controller.step(*self._inputs(states[c]))
+                for c in active}
+        coupling.memory.seed(aggregate(warm, weights))
         regime = INITIAL_DISTRIBUTION.copy()
-        traj = Trajectory(scenario=scenario.name, base_year=base_year)
-        traj.agent_states = {c: [] for c in CODES}
-        traj.agent_actions = {c: [] for c in CODES}
 
-        for k in range(horizon):
-            year = base_year + k
-
-            # Стадия 1. Шоки сценария в состояния текущего года.
-            applied = scenario.apply(k, states)
-            for desc, var in applied:
-                traj.events_log.append((year, desc))
-                traj.event_vars.append(var)
+        for year in years:
+            # Стадия 1. Эрозия приходит извне.
+            for c in active:
+                e = erosion(c, year)
+                if not math.isnan(e):
+                    states[c][2] = e
 
             # Стадия 2. Действия агентов.
-            actions = {c: self.controller.step(*states[c]) for c in CODES}
+            actions = {c: self.controller.step(*self._inputs(states[c]))
+                       for c in active}
 
-            # Стадия 3. Межагентные приращения.
-            td = self.influence.threat_delta(actions)
-            tr = self.influence.trust_delta(actions)
-
-            # Запись состояния и действий до обновления, это снимок года.
-            for c in CODES:
+            # Снимок года до обновления.
+            for c in active:
                 traj.agent_states[c].append(list(states[c]))
                 traj.agent_actions[c].append(dict(actions[c]))
 
-            # Стадия 5. Системное напряжение с памятью и конфигурацией состояний.
+            # Стадия 3. Приращения от взаимного влияния.
+            td = self.influence.threat_delta(actions, year)
+            tr = self.influence.trust_delta(actions, year)
+
+            # Стадия 4. Системное напряжение с памятью. Веса пересчитываются
+            # на каждый год, поскольку мощь участников меняется.
+            coupling.weights = influence_weights(self.influence, year, active)
             tau = coupling.tension(actions, states)
 
-            # Стадия 6. Продвижение режима.
+            # Стадия 5. Продвижение режима.
             regime = self.markov.step(regime, tau)
 
             traj.years.append(year)
@@ -138,15 +240,32 @@ class Simulator:
             traj.regime_dist.append(np.asarray(regime, dtype=float))
             traj.dominant.append(self.markov.dominant_regime(regime))
 
-            # Стадия 4. Обновление состояний к следующему году.
-            for c in CODES:
+            # Обновление к следующему году. Эрозия не обновляется, она
+            # придёт извне на следующем шаге.
+            nxt = year + 1
+            for c in active:
                 z1, z2, z3 = states[c]
-                z1 = _clip(z1 + td[c] - d.rho_threat * (z1 - base[c][0]))
-                z2 = _clip(z2 + tr[c] + d.rho_trust * (base[c][1] - z2))
-                z3 = _clip(z3 + max(0.0, d.kappa_erosion * (actions[c]["drift"] - d.drift_neutral)))
+                z1 = _clip(z1 + td.get(c, 0.0)
+                           - d.rho_threat * (z1 - base[c][0]))
+                if incidents is not None:
+                    obs_inc = incidents(c, nxt)
+                    if not math.isnan(obs_inc):
+                        z1 = _clip(0.5 * z1 + 0.5 * obs_inc)
+                z2 = _clip(z2 + tr.get(c, 0.0)
+                           + d.rho_trust * (base[c][1] - z2))
                 states[c] = [z1, z2, z3]
 
         return traj
 
+    @staticmethod
+    def _inputs(state: list[float]) -> tuple[float, float, float]:
+        """Состояние в вид, принимаемый контроллером."""
+        z1, z2, z3 = state
+        return (z1, z2, 0.5 if math.isnan(z3) else z3)
 
-SIMULATOR = Simulator()
+
+def build_simulator(agents: dict[str, AgentPassport],
+                    influence: InfluenceMatrix,
+                    dynamics: DynamicsParams | None = None) -> Simulator:
+    """Собирает симулятор со стандартной разметкой и марковским ядром."""
+    return Simulator(agents=agents, influence=influence, dynamics=dynamics)
