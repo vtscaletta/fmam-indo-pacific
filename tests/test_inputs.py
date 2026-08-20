@@ -83,32 +83,44 @@ def test_доверие_вычисляется_из_рядов_поставок(
     computed = [c for c in agents
                 if inp.initial[c][1] != PROVISIONAL_TRUST[agents[c].trust_type]]
     assert len(computed) >= 8, "доверие должно вычисляться у большинства"
+    for c in agents:
+        assert not math.isnan(inp.initial[c][1]), c
 
 
-def test_кндр_не_имеет_ряда_расходов_и_это_объявлено(prepared):
-    """Сведений о расходах КНДР в международных базах нет за все годы."""
+def test_кндр_входит_в_прогон_через_уровень_враждебности(prepared):
+    """
+    Сведений о расходах КНДР в международных базах нет за все годы, отчего
+    доля пары не вычисляется и мишень проверки пуста. Восприятие угрозы при
+    этом вычисляется по уровню враждебности, взятому из набора о
+    милитаризованных спорах, вследствие чего агент из прогона не выпадает.
+    """
     _, _, inp = prepared
     assert inp.targets["prk"] == {}
-    assert math.isnan(inp.initial["prk"][0])
-    assert any("prk" in n and "восприятие угрозы" in n for n in inp.notes)
+    assert not math.isnan(inp.initial["prk"][0])
 
 
-def test_корея_не_вычисляется_из_за_противника(prepared):
+def test_корея_входит_в_прогон_несмотря_на_отсутствие_пары(prepared):
     """
     Первичный противник Республики Корея есть КНДР, расходов которой нет,
-    отчего отношение пары не определено. Дыра одна, а не две.
+    отчего отношение пары не определено, а восприятие угрозы вычисляется по
+    уровню враждебности.
     """
     _, _, inp = prepared
     assert inp.targets["kor"] == {}
-    assert math.isnan(inp.initial["kor"][0])
+    assert not math.isnan(inp.initial["kor"][0])
 
 
-def test_всякое_допущение_попадает_в_перечень(prepared):
-    """Величина, взятая не из наблюдения, обязана быть названа."""
-    _, _, inp = prepared
-    assert inp.notes
-    for code in ("prk", "kor"):
-        assert any(code in n for n in inp.notes)
+def test_обычный_уровень_вычислен_по_калибровочному_окну(prepared):
+    """
+    Точкой возврата служит обычный уровень агента, а не значение первого
+    года, вследствие чего система не тратит первые годы на приближение к
+    равновесию.
+    """
+    agents, _, inp = prepared
+    assert set(inp.typical) == set(agents)
+    for code, (t1, t2) in inp.typical.items():
+        assert 0.0 <= t1 <= 1.0, code
+        assert 0.0 <= t2 <= 1.0, code
 
 
 # --- перенос значения при пропуске года ----------------------------------
@@ -152,10 +164,9 @@ def test_эрозия_японии_растёт_а_у_прочих_стоит(pr
     assert chn[2024] == pytest.approx(chn[2001])
 
 
-def test_отчёт_о_готовности_называет_все_допущения(prepared):
+def test_отчёт_о_готовности_называет_всех_агентов(prepared):
     agents, _, inp = prepared
     text = readiness_report(inp, agents)
-    assert "величины, взятые допущением" in text
     for code in sorted(agents):
         assert code in text
 
