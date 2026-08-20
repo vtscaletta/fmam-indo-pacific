@@ -42,7 +42,11 @@ import math
 from dataclasses import dataclass, field
 
 from engine.measurement import scales as sc
-from engine.measurement.compose import Trace, compose_var
+import statistics
+
+from engine.measurement.compose import (
+    CALIBRATION_WINDOW, Baseline, Trace, compose_var,
+)
 from engine.measurement.indicators import BY_KEY, Var
 from engine.measurement.loaders import AgentPassport, Observations
 
@@ -109,11 +113,39 @@ def observed_threat_share(agent: AgentPassport, year: int,
     Наблюдаемое отношение расходов, доля первичного противника в паре.
 
     Служит мишенью проверки и в модель не подаётся, за исключением первого
-    года интервала, где образует начальное значение.
+    года интервала, где по нему вычисляется начальное значение.
     """
     own = obs.get(agent.code, year, "milex")
     other = obs.get(agent.adversary, year, "milex") if agent.adversary else sc.NA
     return sc.share(own, other)
+
+
+def share_baseline(agent: AgentPassport, obs: Observations,
+                   window: range) -> Baseline | None:
+    """
+    Обычный уровень отношения расходов для данной пары.
+
+    Постоянная асимметрия сил не означает постоянной угрозы. Малое
+    государство, живущее рядом с большим десятилетиями, не пребывает в
+    непрерывном кризисе, вследствие чего восприятие измеряется отклонением
+    от привычного положения, а не самим уровнем. Правило то же, что и для
+    инцидентов и для доверия.
+    """
+    vals = []
+    for y in window:
+        v = observed_threat_share(agent, y, obs)
+        if not math.isnan(v):
+            vals.append(v)
+    if len(vals) < 3:
+        return None
+    center = statistics.median(vals)
+    spread = 0.0
+    if len(vals) >= 4:
+        q = statistics.quantiles(vals, n=4)
+        spread = (q[2] - q[0]) / 2
+    if spread <= 0.0:
+        spread = statistics.pstdev(vals)
+    return Baseline(center=center, spread=spread)
 
 
 def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
@@ -161,9 +193,12 @@ def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
             if not math.isnan(share):
                 targets[code][year] = share
 
-        z1 = targets[code].get(first, sc.NA)
-        if math.isnan(z1):
+        raw_share = targets[code].get(first, sc.NA)
+        sb = share_baseline(agent, obs, CALIBRATION_WINDOW)
+        if math.isnan(raw_share) or sb is None:
             z1 = _fallback_threat(agent, obs, first, notes)
+        else:
+            z1 = sc.deviation_from_baseline(raw_share, sb.center, sb.spread)
 
         z2_trace = compose_var(Var.TRUST, agent, first, obs)
         traces[(code, first, Var.TRUST)] = z2_trace
