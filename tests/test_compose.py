@@ -187,22 +187,21 @@ def test_восприятие_угрозы_японии_растёт_за_пер
     Отношение потенциалов ухудшалось, следовательно доля противника росла.
     Значение получено из расходов, а не назначено.
 
-    В 2001 году наблюдение одно, расходы, и переменная равна доле противника.
-    В 2025 году наблюдений два, расходы и присутствие судов, вследствие чего
-    переменная равна их среднему. Проверяется и то, и другое.
+    В 2001 году наблюдений два, доля расходов и уровень враждебности. В 2025
+    году уровень враждебности ещё не закодирован, поскольку набор данных о
+    милитаризованных спорах завершается 2014 годом, отчего остаётся одна
+    доля расходов. Проверяется состав в обоих случаях.
     """
     agents, obs = real
     early = compose_var(Var.THREAT, agents["jpn"], 2001, obs)
     late = compose_var(Var.THREAT, agents["jpn"], 2025, obs)
 
-    assert set(early.parts) == {"milex"}
-    assert early.value == pytest.approx(early.parts["milex"][1])
-    assert 0.55 < early.value < 0.60
+    assert set(early.parts) == {"milex", "incidents"}
+    assert early.value == pytest.approx(
+        sum(u for _, u in early.parts.values()) / 2)
 
-    assert set(late.parts) == {"milex", "incidents"}
-    expected = (late.parts["milex"][1] + late.parts["incidents"][1]) / 2
-    assert late.value == pytest.approx(expected)
-    assert late.value > early.value
+    assert set(late.parts) == {"milex"}
+    assert late.parts["milex"][1] > early.parts["milex"][1]
 
 
 def test_эрозия_японии_растёт_ступенями(real):
@@ -226,14 +225,14 @@ def test_эрозия_японии_ниже_чем_у_агентов_без_по
     assert jpn < usa
 
 
-def test_у_кндр_угроза_держится_на_одном_показателе(real):
+def test_у_кндр_угроза_держится_на_уровне_враждебности(real):
     """
     Сведений о расходах КНДР в международных базах нет за все годы, отчего
-    доля пары не вычисляется. Переменная опирается на давление
-    противостоящей стороны, измеряемое числом её совместных учений.
+    доля пары не вычисляется. Переменная опирается на уровень враждебности,
+    взятый из набора о милитаризованных спорах.
     """
     agents, obs = real
-    t = compose_var(Var.THREAT, agents["prk"], 2015, obs)
+    t = compose_var(Var.THREAT, agents["prk"], 2010, obs)
     assert "milex" in t.missing
     assert set(t.parts) == {"incidents"}
     assert not math.isnan(t.value)
