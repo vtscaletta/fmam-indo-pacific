@@ -85,8 +85,17 @@ class ModelInputs:
     incidents: dict[str, dict[int, float]]
     initial: dict[str, tuple[float, float, float]]
     targets: dict[str, dict[int, float]]
+    typical: dict[str, tuple[float, float]] = field(default_factory=dict)
     traces: dict[tuple[str, int, Var], Trace] = field(default_factory=dict)
     notes: tuple[str, ...] = ()
+
+    """
+    typical суть обычный уровень восприятия угрозы и доверия по
+    калибровочному окну. Служит точкой возврата в законах обновления
+    состояний. Возврат к значению первого года заставлял бы систему первые
+    годы двигаться к равновесию независимо от событий, отчего ранняя смена
+    режима возникала бы при любых данных.
+    """
 
     def incident_at(self, agent: str, year: int) -> float:
         """
@@ -193,12 +202,12 @@ def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
             if not math.isnan(share):
                 targets[code][year] = share
 
-        raw_share = targets[code].get(first, sc.NA)
-        sb = share_baseline(agent, obs, CALIBRATION_WINDOW)
-        if math.isnan(raw_share) or sb is None:
-            z1 = _fallback_threat(agent, obs, first, notes)
-        else:
-            z1 = sc.deviation_from_baseline(raw_share, sb.center, sb.spread)
+        z1_trace = compose_var(Var.THREAT, agent, first, obs)
+        traces[(code, first, Var.THREAT)] = z1_trace
+        z1 = z1_trace.value
+        if math.isnan(z1):
+            notes.append(f"{code}, восприятие угрозы на {first} год не "
+                         f"вычислено, наблюдений нет ни по одному показателю")
 
         z2_trace = compose_var(Var.TRUST, agent, first, obs)
         traces[(code, first, Var.TRUST)] = z2_trace
@@ -214,8 +223,23 @@ def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
 
         initial[code] = (z1, z2, z3)
 
+    typical: dict[str, tuple[float, float]] = {}
+    for code in sorted(agents):
+        agent = agents[code]
+        t1 = [compose_var(Var.THREAT, agent, y, obs).value
+              for y in CALIBRATION_WINDOW]
+        t2 = [compose_var(Var.TRUST, agent, y, obs).value
+              for y in CALIBRATION_WINDOW]
+        t1 = [v for v in t1 if not math.isnan(v)]
+        t2 = [v for v in t2 if not math.isnan(v)]
+        typical[code] = (
+            statistics.median(t1) if t1 else initial[code][0],
+            statistics.median(t2) if t2 else initial[code][1],
+        )
+
     return ModelInputs(
         first_year=first,
+        typical=typical,
         years=tuple(years),
         erosion=erosion,
         incidents=incidents,
