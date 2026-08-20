@@ -168,6 +168,7 @@ class Simulator:
             initial: dict[str, tuple[float, float, float]],
             erosion: ErosionSource,
             incidents: Callable[[str, int], float] | None = None,
+            typical: dict[str, tuple[float, float]] | None = None,
             label: str = "ретроспектива") -> Trajectory:
         """
         Прогоняет интервал.
@@ -195,7 +196,11 @@ class Simulator:
             active.append(c)
 
         states = {c: list(initial[c]) for c in active}
-        base = {c: list(initial[c]) for c in active}
+        # Точкой возврата служит обычный уровень агента, а не значение
+        # первого года. Возврат к первому году заставлял бы систему первые
+        # годы двигаться к равновесию независимо от событий.
+        base = {c: list(typical[c]) if typical and c in typical
+                else list(initial[c][:2]) for c in active}
         traj.agent_states = {c: [] for c in active}
         traj.agent_actions = {c: [] for c in active}
 
