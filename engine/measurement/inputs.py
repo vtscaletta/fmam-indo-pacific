@@ -12,11 +12,20 @@
 суть события внешнего мира, а не следствия взаимодействия агентов внутри
 модели, вследствие чего подавать их из наблюдений правомерно.
 
-Восприятие угрозы и доверие к гаранту берутся из наблюдений однократно, на
-первом году интервала, и далее производятся моделью. Основание в том, что
-обе величины возникают из взаимного влияния, каковое и составляет предмет
-агентного моделирования. Подача их на каждом шаге обратила бы модель в
-пересчёт таблицы, а взаимное влияние агентов сделала бы излишним.
+Восприятие угрозы складывается из двух составляющих. Одна возникает из
+взаимного влияния и производится моделью, другая приходит из наблюдений в
+виде частотности инцидентов в зоне соприкосновения. Инцидент есть событие
+внешнего мира в том же смысле, в каком им является правительственное
+решение, вследствие чего исключать его из шага оснований нет. Составляющие
+складываются равными долями.
+
+Доверие к гаранту берётся из наблюдений однократно, на первом году
+интервала, и далее производится моделью, поскольку оно возникает из
+взаимного влияния целиком.
+
+Доля первичного противника в расходах пары в модель не подаётся ни на одном
+шаге, за исключением первого года, где образует начальное значение, и
+служит мишенью проверки.
 
 Наблюдаемые ряды отношения расходов в модель не подаются вовсе и образуют
 мишень проверки. Модель, ведомая датированными решениями, обязана
@@ -60,6 +69,7 @@ class ModelInputs:
     Три набора величин, готовых к подаче в симулятор.
 
     erosion   нормативная эрозия по агентам и годам, внешнее воздействие
+    incidents наблюдаемая частотность инцидентов по агентам и годам
     initial   начальные значения трёх переменных на первом году интервала
     targets   наблюдаемое отношение расходов, мишень проверки
     traces    записи хода вычисления для отчёта о происхождении чисел
@@ -68,10 +78,21 @@ class ModelInputs:
     first_year: int
     years: tuple[int, ...]
     erosion: dict[str, dict[int, float]]
+    incidents: dict[str, dict[int, float]]
     initial: dict[str, tuple[float, float, float]]
     targets: dict[str, dict[int, float]]
     traces: dict[tuple[str, int, Var], Trace] = field(default_factory=dict)
     notes: tuple[str, ...] = ()
+
+    def incident_at(self, agent: str, year: int) -> float:
+        """
+        Наблюдаемая составляющая восприятия угрозы за год.
+
+        Отсутствие наблюдения возвращается пропуском и нулём не
+        подменяется, поскольку отсутствие сведений об инцидентах не есть
+        сведение об их отсутствии.
+        """
+        return self.incidents.get(agent, {}).get(year, sc.NA)
 
     def erosion_at(self, agent: str, year: int) -> float:
         """Эрозия агента за год либо перенос последнего известного значения."""
@@ -107,6 +128,7 @@ def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
     """
     first = min(years)
     erosion: dict[str, dict[int, float]] = {}
+    incidents: dict[str, dict[int, float]] = {}
     initial: dict[str, tuple[float, float, float]] = {}
     targets: dict[str, dict[int, float]] = {}
     traces: dict[tuple[str, int, Var], Trace] = {}
@@ -115,13 +137,25 @@ def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
     for code in sorted(agents):
         agent = agents[code]
         erosion[code] = {}
+        incidents[code] = {}
         targets[code] = {}
+        ind = BY_KEY["incidents"]
+        base_inc = None
+        if ind.covers(code):
+            from engine.measurement.compose import baselines
+            base_inc = baselines(obs, code, "incidents")
 
         for year in years:
             tr = compose_var(Var.EROSION, agent, year, obs)
             traces[(code, year, Var.EROSION)] = tr
             if not math.isnan(tr.value):
                 erosion[code][year] = tr.value
+
+            if base_inc is not None:
+                from engine.measurement.compose import normalize
+                _, unit = normalize(ind, agent, year, obs, base_inc)
+                if not math.isnan(unit):
+                    incidents[code][year] = unit
 
             share = observed_threat_share(agent, year, obs)
             if not math.isnan(share):
@@ -149,6 +183,7 @@ def build_inputs(agents: dict[str, AgentPassport], obs: Observations,
         first_year=first,
         years=tuple(years),
         erosion=erosion,
+        incidents=incidents,
         initial=initial,
         targets=targets,
         traces=traces,
