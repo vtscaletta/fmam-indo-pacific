@@ -36,26 +36,42 @@
 from __future__ import annotations
 import numpy as np
 
-from engine.influence import INFLUENCE, CODES
 
 
 COMPONENTS = ("milex", "rhet", "drift")
 
 
-def influence_weights() -> dict:
-    """Веса агрегации из исходящей силы влияния агентов, нормированные."""
-    strength = {i: sum(INFLUENCE.W[i][j] for j in CODES) for i in CODES}
+def influence_weights(matrix, year: int, codes=None) -> dict:
+    """
+    Веса агрегации из исходящей силы влияния агентов за данный год.
+
+    Вес агента в системном итоге пропорционален сумме его исходящих весов
+    влияния, поскольку участник, чьи действия сильнее сказываются на прочих,
+    сильнее сказывается и на состоянии системы. Веса пересчитываются на
+    каждый год вместе с матрицей.
+    """
+    codes = tuple(codes) if codes is not None else tuple(matrix.codes)
+    W = matrix.weights(year)
+    strength = {i: sum(W[i][j] for j in codes if j != i) for i in codes}
     total = sum(strength.values())
-    return {i: strength[i] / total for i in CODES}
+    if total <= 0:
+        return {i: 1.0 / len(codes) for i in codes}
+    return {i: strength[i] / total for i in codes}
 
 
-def aggregate(actions: dict, weights: dict = None) -> dict:
+def aggregate(actions: dict, weights: dict) -> dict:
     """
-    Сворачивает действия агентов в три системных компонента. actions суть
-    словарь код -> вектор действия. weights по умолчанию из силы влияния.
+    Сворачивает действия агентов в три системных компонента.
+
+    actions суть словарь кода агента и вектора его действий, weights суть
+    доли участников в системном итоге. Свёртка идёт по тем агентам, что
+    присутствуют в обоих словарях, вследствие чего исключение агента из
+    прогона не нарушает нормировки.
     """
-    w = weights or influence_weights()
-    return {c: sum(w[i] * actions[i][c] for i in CODES) for c in COMPONENTS}
+    codes = [i for i in weights if i in actions]
+    total = sum(weights[i] for i in codes) or 1.0
+    return {c: sum(weights[i] * actions[i][c] for i in codes) / total
+            for c in COMPONENTS}
 
 
 def _sigmoid(x: float) -> float:
@@ -64,9 +80,11 @@ def _sigmoid(x: float) -> float:
     return 1.0 / (1.0 + np.exp(-x))
 
 
-# Веса перцептивного давления по трём измерениям безопасности.
-# Восприятие угрозы, дефицит доверия, нормативный распад.
-PRESSURE_WEIGHTS = {"threat": 0.40, "distrust": 0.25, "erosion": 0.35}
+# Веса перцептивного давления по трём измерениям безопасности, а именно
+# восприятию угрозы, дефициту доверия и нормативному распаду. Теоретическая
+# рамка указывает, что существенны все три, и не указывает, во сколько раз
+# одно существеннее другого, вследствие чего доли берутся равными.
+PRESSURE_WEIGHTS = {"threat": 1 / 3, "distrust": 1 / 3, "erosion": 1 / 3}
 
 
 def perceptual_pressure(states: dict, weights: dict = None) -> float:
@@ -80,14 +98,16 @@ def perceptual_pressure(states: dict, weights: dict = None) -> float:
     и тем, насколько остра сама конфигурация угроз. Восприятие меняется
     мгновенно, расходы медленно, оттого контур быстрый и без памяти.
     """
-    w = weights or influence_weights()
+    w = weights
     pw = PRESSURE_WEIGHTS
+    codes = [i for i in w if i in states]
+    total = sum(w[i] for i in codes) or 1.0
     return sum(
         w[i] * (pw["threat"] * states[i][0]
                 + pw["distrust"] * (1.0 - states[i][1])
                 + pw["erosion"] * states[i][2])
-        for i in CODES
-    )
+        for i in codes
+    ) / total
 
 
 class DifferentialMemory:
@@ -159,10 +179,11 @@ class LevelCoupling:
     конфигурацию состояний.
     """
 
-    def __init__(self, beta: dict = None, memory: DifferentialMemory = None, weights: dict = None):
+    def __init__(self, weights: dict, beta: dict = None,
+                 memory: DifferentialMemory = None):
         self.beta = beta or dict(DEFAULT_BETA)
         self.memory = memory or DifferentialMemory()
-        self.weights = weights or influence_weights()
+        self.weights = weights
 
     def _arg(self, smoothed: dict, states: dict) -> float:
         b = self.beta
@@ -241,4 +262,6 @@ def phase_thresholds(markov, grid: int = 2000) -> dict:
 
 
 # Готовая связка со стандартными параметрами.
-COUPLING = LevelCoupling()
+# Готового экземпляра со стандартными весами более не существует, поскольку
+# веса зависят от состава агентов и от года. Связка создаётся симулятором на
+# каждый прогон.
