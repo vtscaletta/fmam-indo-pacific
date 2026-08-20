@@ -66,13 +66,22 @@ def test_полное_отсутствие_наблюдений_даёт_про�
 # --- доля в паре --------------------------------------------------------
 
 def test_доля_противника_берётся_из_ряда_противника(tmp_path):
-    """Первичный противник Японии есть КНР, отсюда и берётся вторая величина."""
-    agents, obs = _setup(tmp_path,
-                         "jpn,2020,milex,40,наблюдение,x\n"
-                         "chn,2020,milex,160,наблюдение,x\n")
-    t = compose_var(Var.THREAT, agents["jpn"], 2020, obs)
-    assert t.parts["milex"][1] == pytest.approx(0.8)
-    assert t.value == pytest.approx(0.8)
+    """
+    Первичный противник Японии есть КНР, отсюда и берётся вторая величина.
+    Доля приводится отклонением от обычного уровня пары, вследствие чего
+    для вычисления требуется ряд не короче трёх лет.
+    """
+    rows = "".join(
+        f"jpn,{y},milex,40,наблюдение,x\nchn,{y},milex,{m},наблюдение,x\n"
+        for y, m in zip(range(2010, 2016), [80, 100, 120, 140, 160, 180]))
+    agents, obs = _setup(tmp_path, rows)
+    early = compose_var(Var.THREAT, agents["jpn"], 2010, obs)
+    late = compose_var(Var.THREAT, agents["jpn"], 2015, obs)
+    # наблюдённая доля растёт вместе с расходами противника
+    assert early.parts["milex"][0] == pytest.approx(80 / 120)
+    assert late.parts["milex"][0] == pytest.approx(180 / 220)
+    # приведённое значение растёт вместе с ней
+    assert late.parts["milex"][1] > early.parts["milex"][1]
 
 
 def test_отсутствие_ряда_противника_даёт_пропуск_показателя(tmp_path):
