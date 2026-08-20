@@ -98,8 +98,19 @@ def _fmt(x: float) -> str:
     return "нет" if math.isnan(x) else f"{x:.3f}"
 
 
-def baselines(obs: Observations, agent: str,
-              key: str) -> Baseline | None:
+CALIBRATION_WINDOW = range(2001, 2020)
+"""
+Окно, по которому вычисляется обычный уровень рядов.
+
+Ограничено калибровочным интервалом намеренно. Вычисление обычного уровня
+по всему периоду наблюдения означало бы заглядывание в отложенный отрезок,
+вследствие чего проверка на нём перестала бы быть проверкой вне обучающей
+выборки.
+"""
+
+
+def baselines(obs: Observations, agent: str, key: str,
+              window: range = CALIBRATION_WINDOW) -> Baseline | None:
     """
     Обычный уровень и разброс ряда по всему интервалу наблюдения.
 
@@ -113,8 +124,9 @@ def baselines(obs: Observations, agent: str,
     средним квадратическим, поскольку нулевой разброс обратил бы все годы
     ряда в середину шкалы и стёр бы единственные наблюдаемые отклонения.
     """
-    series = list(obs.series(agent, key).values())
-    series = [v for v in series if not math.isnan(v)]
+    full = obs.series(agent, key)
+    series = [v for y, v in full.items()
+              if y in window and not math.isnan(v)]
     if len(series) < 3:
         return None
     center = statistics.median(series)
