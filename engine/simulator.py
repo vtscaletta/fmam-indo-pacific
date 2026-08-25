@@ -169,6 +169,7 @@ class Simulator:
             erosion: ErosionSource,
             incidents: Callable[[str, int], float] | None = None,
             typical: dict[str, tuple[float, float]] | None = None,
+            cutoff: int | None = None,
             label: str = "ретроспектива") -> Trajectory:
         """
         Прогоняет интервал.
@@ -178,12 +179,24 @@ class Simulator:
         incidents суть источник наблюдаемой составляющей восприятия угрозы,
         складываемой с возникающей из взаимного влияния равной долей.
 
+        cutoff суть последний год, наблюдения за который модель видит. Годы
+        после отсечки проходятся вслепую, а именно нормативная эрозия
+        замораживается на уровне года отсечки, наблюдаемая составляющая
+        восприятия угрозы не подаётся вовсе, и состояния производятся одной
+        лишь внутренней динамикой. Отсечка обращает прогон в обратную
+        проверку, при которой известный отрезок предсказывается моделью, не
+        видевшей его данных.
+
         Агенты, у которых начальное восприятие угрозы либо доверие не
         вычислено, из прогона исключаются с записью причины, поскольку
         подстановка произвольного числа исказила бы взаимное влияние.
         """
         d = self.dynamics
         traj = Trajectory(label=label)
+        if cutoff is not None:
+            traj.notes.append(
+                f"отсечка наблюдений на {cutoff} годе, последующие годы "
+                f"пройдены вслепую")
 
         active = []
         for c in self.codes:
@@ -212,10 +225,19 @@ class Simulator:
         coupling.memory.seed(aggregate(warm, weights))
         regime = INITIAL_DISTRIBUTION.copy()
 
+        frozen: dict[str, float] = {}
         for year in years:
-            # Стадия 1. Эрозия приходит извне.
+            blind = cutoff is not None and year > cutoff
+
+            # Стадия 1. Эрозия приходит извне. За отсечкой замораживается на
+            # уровне последнего видимого года.
             for c in active:
-                e = erosion(c, year)
+                if blind:
+                    e = frozen.get(c, float("nan"))
+                else:
+                    e = erosion(c, year)
+                    if not math.isnan(e):
+                        frozen[c] = e
                 if not math.isnan(e):
                     states[c][2] = e
 
@@ -252,7 +274,8 @@ class Simulator:
                 z1, z2, z3 = states[c]
                 z1 = _clip(z1 + td.get(c, 0.0)
                            - d.rho_threat * (z1 - base[c][0]))
-                if incidents is not None:
+                blind_next = cutoff is not None and nxt > cutoff
+                if incidents is not None and not blind_next:
                     obs_inc = incidents(c, nxt)
                     if not math.isnan(obs_inc):
                         z1 = _clip(0.5 * z1 + 0.5 * obs_inc)
