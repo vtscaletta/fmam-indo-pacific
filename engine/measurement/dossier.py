@@ -6,10 +6,38 @@
 хранятся события и собирается досье по единицам кодирования.
 
 Устройство хранилища. Таблица событий длинным видом. Одна строка на одно
-задокументированное действие. Столбцы, date дата в виде года и месяца либо
-одного года, agent_a и agent_b коды участников, action краткое обозначение
-действия, description изложение в одну-две строки, source наименование
-источника, url постоянная ссылка.
+задокументированное действие. Столбцы, date дата в виде года, года с месяцем
+либо диапазона лет, agent_a и agent_b коды участников, action краткое
+обозначение действия, description изложение в одну-две строки, source
+наименование источника, url постоянная ссылка, event_type разряд записи,
+note примечание составителя.
+
+Разряды записи и их назначение.
+
+    incident        физическое действие с датой и проверяемым источником,
+                    а именно таран, водомёт, обстрел, опасный перехват.
+                    Образует ядро кодирования.
+    pattern         режим либо длящийся порядок без единичной даты, а
+                    именно непрерывное присутствие, циклы облётов.
+    legal           правовое либо демонстративное событие без прямого
+                    физического соприкосновения.
+    uncertain       случай, где принадлежность действия, дата либо разряд
+                    установлены не окончательно.
+    confirmed_zero  единица, по которой отсутствие событий подтверждено
+                    двойной проверкой.
+    unresolved_gap  единица, по которой поиск признан недостаточным и
+                    которая кодированию не подлежит.
+
+Ядро кодирования составляют разряды incident, pattern, legal и uncertain,
+поскольку по ним есть что кодировать. Разряд confirmed_zero даёт нулевой
+уровень без обращения к кодировщику. Разряд unresolved_gap выводит единицу
+из набора вовсе, отчего переменная данного агента за данный год опирается
+на прочие показатели.
+
+Различение разрядов введено ради того, чтобы калибровка модели велась на
+сильном сигнале. Смешение единичного физического действия с годовым
+обобщением портит калибровку, поскольку второе не имеет ни даты, ни
+величины.
 
 Событие относится к обоим участникам одновременно, поскольку государство
 выступает участником спора независимо от того, действовало ли оно само либо
@@ -36,9 +64,19 @@ CODING_YEARS = range(2015, 2026)
 """
 
 
+EVENT_TYPES = ("incident", "pattern", "legal", "uncertain",
+               "confirmed_zero", "unresolved_gap")
+
+CODEABLE = ("incident", "pattern", "legal", "uncertain")
+"""Разряды, по которым кодировщику есть что кодировать."""
+
+CORE = ("incident",)
+"""Разряд, образующий ядро калибровки."""
+
+
 @dataclass(frozen=True)
 class Event:
-    """Одно задокументированное действие."""
+    """Одна запись таблицы событий."""
     date: str
     agent_a: str
     agent_b: str
@@ -46,13 +84,37 @@ class Event:
     description: str
     source: str
     url: str
+    event_type: str = "incident"
+    note: str = ""
+
+    @property
+    def years(self) -> tuple[int, ...]:
+        """
+        Годы, к которым относится запись.
+
+        Дата вида 2019-06 даёт один год, дата вида 2015-2018 даёт весь
+        диапазон, поскольку длящийся порядок относится к каждому году, в
+        котором он наблюдался.
+        """
+        s = self.date.strip()
+        if len(s) == 9 and s[4] == "-" and s[:4].isdigit() and s[5:].isdigit():
+            return tuple(range(int(s[:4]), int(s[5:]) + 1))
+        return (int(s[:4]),)
 
     @property
     def year(self) -> int:
-        return int(self.date[:4])
+        return self.years[0]
 
     def involves(self, code: str) -> bool:
         return code in (self.agent_a, self.agent_b)
+
+    @property
+    def is_core(self) -> bool:
+        return self.event_type in CORE
+
+    @property
+    def is_codeable(self) -> bool:
+        return self.event_type in CODEABLE
 
 
 def load_events(path: str | Path, agents: dict) -> list[Event]:
@@ -70,7 +132,7 @@ def load_events(path: str | Path, agents: dict) -> list[Event]:
     with p.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
         need = {"date", "agent_a", "agent_b", "action", "description",
-                "source", "url"}
+                "source", "url", "event_type"}
         missing = need - set(reader.fieldnames or [])
         if missing:
             raise DataError(f"{p}, отсутствуют столбцы {sorted(missing)}")
@@ -88,27 +150,91 @@ def load_events(path: str | Path, agents: dict) -> list[Event]:
                                 f"кодирования")
             if not r["description"].strip():
                 raise DataError(f"{p}, строка {i}, изложение пусто")
-            if not r["source"].strip():
-                raise DataError(f"{p}, строка {i}, источник не указан")
+            etype = r["event_type"].strip()
+            if etype not in EVENT_TYPES:
+                raise DataError(f"{p}, строка {i}, разряд {etype!r} неизвестен, "
+                                f"допустимы {list(EVENT_TYPES)}")
+            if etype in CODEABLE and not r["source"].strip():
+                raise DataError(f"{p}, строка {i}, источник не указан. "
+                                f"Записи разрядов {list(CODEABLE)} без "
+                                f"источника непроверяемы и недопустимы")
             out.append(Event(
                 date=date, agent_a=a, agent_b=b,
                 action=r["action"].strip(),
                 description=r["description"].strip(),
                 source=r["source"].strip(),
                 url=r["url"].strip(),
+                event_type=etype,
+                note=r.get("note", "").strip(),
             ))
     return sorted(out, key=lambda e: (e.date, e.agent_a, e.agent_b))
 
 
-def by_unit(events: list[Event], agents: dict) -> dict[tuple[str, int],
-                                                       list[Event]]:
-    """Досье по единицам кодирования. Ключ есть код агента и год."""
+def by_unit(events: list[Event], agents: dict, *,
+            only: tuple[str, ...] | None = None
+            ) -> dict[tuple[str, int], list[Event]]:
+    """
+    Досье по единицам кодирования. Ключ есть код агента и год.
+
+    Аргумент only отбирает разряды записей. По умолчанию берутся все, что
+    позволяет видеть полную картину. Передача CORE даёт ядро калибровки,
+    передача CODEABLE даёт набор, предъявляемый кодировщикам.
+    """
     out: dict[tuple[str, int], list[Event]] = defaultdict(list)
     for code in sorted(agents):
         for year in CODING_YEARS:
-            out[(code, year)] = [e for e in events
-                                 if e.involves(code) and e.year == year]
+            out[(code, year)] = [
+                e for e in events
+                if e.involves(code) and year in e.years
+                and (only is None or e.event_type in only)]
     return dict(out)
+
+
+def unit_status(events: list[Event], agents: dict) -> dict[tuple[str, int], str]:
+    """
+    Состояние каждой единицы.
+
+    Возвращает одно из четырёх, а именно ядро при наличии физических
+    инцидентов, серая зона при наличии лишь фона, правовых либо
+    неопределённых записей, подтверждённый ноль и объявленный пробел.
+    Единица без единой записи получает объявленный пробел, поскольку
+    отсутствие отметки не есть подтверждение отсутствия событий.
+    """
+    units = by_unit(events, agents)
+    out: dict[tuple[str, int], str] = {}
+    for key, evs in units.items():
+        types = {e.event_type for e in evs}
+        if "incident" in types:
+            out[key] = "ядро"
+        elif types & {"pattern", "legal", "uncertain"}:
+            out[key] = "серая зона"
+        elif "confirmed_zero" in types:
+            out[key] = "подтверждённый ноль"
+        else:
+            out[key] = "объявленный пробел"
+    return out
+
+
+def composition(events: list[Event], agents: dict) -> str:
+    """Состав набора по разрядам и состояниям единиц."""
+    st = unit_status(events, agents)
+    order = ["ядро", "серая зона", "подтверждённый ноль", "объявленный пробел"]
+    counts = {k: sum(1 for v in st.values() if v == k) for k in order}
+    total = len(st)
+    lines = ["Состояние единиц кодирования"]
+    for k in order:
+        lines.append(f"  {k:22} {counts[k]:>4}  ({counts[k] / total * 100:.0f} %)")
+    lines.append("")
+    lines.append("Записи по разрядам")
+    for t in EVENT_TYPES:
+        n = sum(1 for e in events if e.event_type == t)
+        if n:
+            lines.append(f"  {t:16} {n:>4}")
+    codeable = counts["ядро"] + counts["серая зона"] + counts["подтверждённый ноль"]
+    lines.append("")
+    lines.append(f"Кодированию подлежат {codeable} единиц из {total}, "
+                 f"исключены {counts['объявленный пробел']}")
+    return "\n".join(lines)
 
 
 def coverage(units: dict[tuple[str, int], list[Event]],
