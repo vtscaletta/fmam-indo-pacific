@@ -35,8 +35,10 @@ def prepared():
 def test_эрозия_подаётся_на_каждый_год(prepared):
     """Эрозия есть запись датированных решений и приходит извне всегда."""
     _, _, inp = prepared
-    for code in inp.erosion:
+    for code in ("jpn", "kor", "phl", "ind"):
         assert len(inp.erosion[code]) == len(YEARS), code
+    for code in ("usa", "chn", "twn", "aus", "idn", "prk"):
+        assert inp.erosion[code] == {}, code
 
 
 def test_начальные_значения_заданы_только_на_первый_год(prepared):
@@ -148,8 +150,8 @@ def test_до_первого_известного_года_значение_от
 def test_эрозия_японии_ниже_чем_у_агентов_без_потолка(prepared):
     """Япония начинает движение снизу, прочие стоят в верхней части шкалы."""
     _, _, inp = prepared
-    assert inp.erosion["jpn"][2005] < inp.erosion["chn"][2005]
-    assert inp.erosion["jpn"][2005] < inp.erosion["usa"][2005]
+    for code in ("kor", "phl", "ind"):
+        assert inp.erosion["jpn"][2005] < inp.erosion[code][2005], code
 
 
 def test_эрозия_японии_растёт_а_у_прочих_стоит(prepared):
@@ -158,10 +160,10 @@ def test_эрозия_японии_растёт_а_у_прочих_стоит(pr
     исследования. У государств без потолка эрозии некуда расти.
     """
     _, _, inp = prepared
-    jpn = inp.erosion["jpn"]
-    chn = inp.erosion["chn"]
-    assert jpn[2024] > jpn[2001]
-    assert chn[2024] == pytest.approx(chn[2001])
+    assert inp.erosion["jpn"][2024] > inp.erosion["jpn"][2001]
+    for code in ("kor", "phl"):
+        assert inp.erosion[code][2024] == pytest.approx(
+            inp.erosion[code][2001]), code
 
 
 def test_отчёт_о_готовности_называет_всех_агентов(prepared):
