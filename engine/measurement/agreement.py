@@ -26,8 +26,31 @@ import numpy as np
 
 SEED = 20260101
 BOOTSTRAP = 5000
-THRESHOLD = 0.70
-"""Порог приемлемости, объявленный до расчёта."""
+
+GRADATION = (
+    (0.81, "почти полное"),
+    (0.61, "существенное"),
+    (0.41, "умеренное"),
+    (0.21, "слабое"),
+    (0.00, "незначительное"),
+)
+"""
+Разряды согласия по принятой градации.
+
+Порог приемлемости не объявляется намеренно. Объявленный порог обращает
+измерение в состязание, где значение ниже порога требует оправдания, а выше
+порога прекращает разбор. Каппа приводится поэтому с доверительным
+интервалом и долями совпадений, а истолкование даётся по разряду, к которому
+значение относится.
+"""
+
+
+def grade(kappa: float) -> str:
+    """Разряд согласия, к которому относится значение каппы."""
+    for bound, name in GRADATION:
+        if kappa >= bound:
+            return name
+    return "отрицательное"
 
 
 @dataclass(frozen=True)
@@ -42,8 +65,13 @@ class Agreement:
     exact: float
     within_one: float
 
-    def verdict(self, threshold: float = THRESHOLD) -> str:
-        return "принято" if self.kappa >= threshold else "не принято"
+    def verdict(self) -> str:
+        """
+        Истолкование значения по принятой градации.
+
+        Ни принятия, ни отклонения не выносит, поскольку порог не объявлен.
+        """
+        return grade(self.kappa)
 
 
 def _weights(k: int) -> np.ndarray:
@@ -156,7 +184,7 @@ def report(ids: list[str], coders: dict[str, list[int]],
     lines.append("")
     lines.append("Попарное согласие")
     lines.append(f"{'пара':28}{'каппа':>8}{'интервал':>18}"
-                 f"{'точных':>9}{'в пределах 1':>14}{'вердикт':>12}")
+                 f"{'точных':>9}{'в пределах 1':>14}{'разряд':>16}")
     for i in range(len(names)):
         for j in range(i + 1, len(names)):
             g = compare(names[i], coders[names[i]],
@@ -166,5 +194,5 @@ def report(ids: list[str], coders: dict[str, list[int]],
                 f"{pair:28}{g.kappa:>8.3f}"
                 f"{f'[{g.lower:.2f}, {g.upper:.2f}]':>18}"
                 f"{g.exact * 100:>8.0f}%{g.within_one * 100:>13.0f}%"
-                f"{g.verdict():>12}")
+                f"{g.verdict():>16}")
     return "\n".join(lines)
