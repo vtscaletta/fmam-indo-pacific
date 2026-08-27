@@ -34,6 +34,8 @@
 """
 
 from __future__ import annotations
+
+import math
 import numpy as np
 
 
@@ -102,12 +104,22 @@ def perceptual_pressure(states: dict, weights: dict = None) -> float:
     pw = PRESSURE_WEIGHTS
     codes = [i for i in w if i in states]
     total = sum(w[i] for i in codes) or 1.0
-    return sum(
-        w[i] * (pw["threat"] * states[i][0]
-                + pw["distrust"] * (1.0 - states[i][1])
-                + pw["erosion"] * states[i][2])
-        for i in codes
-    ) / total
+
+    # Нормативная эрозия определена лишь у тех агентов, чьё ограничение
+    # существовало. Государству, у которого правового потолка не было,
+    # разрушать нечего, вследствие чего величина для него не определена и
+    # заглушкой не подменяется. Составляющая давления считается поэтому по
+    # своему подмножеству агентов, а её доля перераспределяется между
+    # прочими составляющими там, где она отсутствует.
+    def blend(st) -> float:
+        z1, z2, z3 = st[0], st[1], st[2]
+        if math.isnan(z3):
+            share = pw["threat"] + pw["distrust"]
+            return (pw["threat"] * z1 + pw["distrust"] * (1.0 - z2)) / share
+        return (pw["threat"] * z1 + pw["distrust"] * (1.0 - z2)
+                + pw["erosion"] * z3)
+
+    return sum(w[i] * blend(states[i]) for i in codes) / total
 
 
 class DifferentialMemory:
