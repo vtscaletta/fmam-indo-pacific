@@ -196,10 +196,10 @@ def test_восприятие_угрозы_японии_растёт_за_пер
     Отношение потенциалов ухудшалось, следовательно доля противника росла.
     Значение получено из расходов, а не назначено.
 
-    В 2001 году наблюдений два, доля расходов и уровень враждебности. В 2025
-    году уровень враждебности ещё не закодирован, поскольку набор данных о
-    милитаризованных спорах завершается 2014 годом, отчего остаётся одна
-    доля расходов. Проверяется состав в обоих случаях.
+    В обоих годах наблюдений два, доля расходов и уровень враждебности.
+    Уровень за 2001 год взят из набора о милитаризованных спорах, за 2025
+    год получен собственным кодированием по тем же правилам, поскольку
+    набор завершается 2014 годом.
     """
     agents, obs = real
     early = compose_var(Var.THREAT, agents["jpn"], 2001, obs)
@@ -209,8 +209,10 @@ def test_восприятие_угрозы_японии_растёт_за_пер
     assert early.value == pytest.approx(
         sum(u for _, u in early.parts.values()) / 2)
 
-    assert set(late.parts) == {"milex"}
+    assert set(late.parts) == {"milex", "incidents"}
     assert late.parts["milex"][1] > early.parts["milex"][1]
+    assert obs.quality_of("jpn", 2001, "incidents") == "наблюдение"
+    assert obs.quality_of("jpn", 2025, "incidents") == "оценка"
 
 
 def test_эрозия_японии_растёт_ступенями(real):
@@ -221,17 +223,19 @@ def test_эрозия_японии_растёт_ступенями(real):
     assert vals[2005] < vals[2010] < vals[2016] < vals[2024]
 
 
-def test_эрозия_японии_ниже_чем_у_агентов_без_потолка(real):
+def test_эрозия_не_определена_у_агентов_без_потолка(real):
     """
-    Япония начинает движение снизу, тогда как государства без потолка стоят
-    в верхней части шкалы. Различие видно лишь при общей шкале.
+    Переменная измеряет разрушение действующего ограничения. Государству,
+    у которого ограничения не было, разрушать нечего, вследствие чего
+    величина для него не определена и заглушкой не подменяется.
     """
     agents, obs = real
-    jpn = compose_var(Var.EROSION, agents["jpn"], 2005, obs).value
-    chn = compose_var(Var.EROSION, agents["chn"], 2005, obs).value
-    usa = compose_var(Var.EROSION, agents["usa"], 2005, obs).value
-    assert jpn < chn
-    assert jpn < usa
+    for code in ("usa", "chn", "twn", "aus", "idn", "prk"):
+        assert math.isnan(
+            compose_var(Var.EROSION, agents[code], 2005, obs).value), code
+    for code in ("jpn", "kor", "phl", "ind"):
+        assert not math.isnan(
+            compose_var(Var.EROSION, agents[code], 2005, obs).value), code
 
 
 def test_у_кндр_угроза_держится_на_уровне_враждебности(real):
