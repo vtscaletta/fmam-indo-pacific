@@ -1,145 +1,157 @@
 """
-Тесты симулятора и сценариев.
+Проверки симулятора.
 
-Запуск из корня проекта:
-    pytest -v
+Переписаны при вычистке беты. Прежний состав прогонял вымышленных агентов по
+готовым сценариям снятого поколения и обращался к общему образцу симулятора,
+которого более не существует. Существо проверок сохранено, прогон же ведётся
+теперь по действительным наблюдениям из таблиц.
+
+Проверяются свойства, обязанные выполняться при всяком наборе данных, а
+именно длины рядов, пребывание состояний в отрезке, нормировка распределения
+по режимам, повторяемость прогона и необратимость нормативной эрозии.
+Величин предметной области проверки не назначают, поскольку те следуют из
+данных и при их пополнении меняются.
+
+Запуск из корня хранилища.
+
+    pytest tests/test_simulator.py -v
 """
+from __future__ import annotations
 
-import numpy as np
-from engine.simulator import Simulator, SIMULATOR, Trajectory
-from engine.scenarios import (
-    INERTIAL, ARTICLE9_REVISION, TAIWAN_CRISIS, ALLIANCE_WEAKENING, ALL_SCENARIOS,
-)
-from engine.agents import AGENTS
-from engine.influence import CODES
+import math
 
+import pytest
 
-def _run(scenario, horizon=10):
-    return SIMULATOR.run(scenario, AGENTS, horizon=horizon)
+from engine.influence import build_influence
+from engine.measurement.inputs import build_inputs
+from engine.measurement.loaders import load_agents, load_observations
+from engine.simulator import ObservedErosion, Simulator
 
-
-def test_trajectory_shape():
-    """Траектория имеет длину горизонта по всем рядам."""
-    t = _run(INERTIAL, horizon=10)
-    assert len(t.years) == 10
-    assert len(t.tension) == 10
-    assert len(t.dominant) == 10
-    for c in CODES:
-        assert len(t.agent_states[c]) == 10
-        assert len(t.agent_actions[c]) == 10
+YEARS = range(2001, 2026)
+CUTOFF = 2019
 
 
-def test_states_stay_in_unit_interval():
-    """Состояния всех агентов остаются в [0, 1] на всём горизонте."""
-    t = _run(INERTIAL, horizon=15)
-    for c in CODES:
-        for s in t.agent_states[c]:
-            for z in s:
-                assert 0.0 <= z <= 1.0
+@pytest.fixture(scope="module")
+def setup():
+    """Общая для всех проверок сборка движка на действительных данных."""
+    agents = load_agents("data/agents.csv")
+    obs = load_observations("data/observations.csv", agents)
+    inputs = build_inputs(agents, obs, YEARS)
+    influence = build_influence(agents, obs, "data/relations.csv")
+    sim = Simulator(agents, influence)
+    return agents, inputs, sim
 
 
-def test_regime_distributions_normalized():
+def _run(setup, cutoff=None):
+    agents, inputs, sim = setup
+    return sim.run(YEARS, inputs.initial, ObservedErosion(inputs),
+                   inputs.incident_at, inputs.typical, cutoff=cutoff)
+
+
+# --- Устройство траектории ----------------------------------------------
+
+def test_trajectory_lengths_match_period(setup):
+    """Все ряды траектории имеют длину периода наблюдения."""
+    traj = _run(setup)
+    n = len(YEARS)
+    assert len(traj.years) == n
+    assert len(traj.tension) == n
+    assert len(traj.dominant) == n
+    for code in traj.agent_states:
+        assert len(traj.agent_states[code]) == n
+        assert len(traj.agent_actions[code]) == n
+
+
+def test_tension_within_unit_interval(setup):
+    """Напряжение остаётся в отрезке на всём периоде."""
+    traj = _run(setup)
+    for tau in traj.tension:
+        assert 0.0 <= tau <= 1.0
+
+
+def test_states_within_unit_interval(setup):
+    """
+    Состояния остаются в отрезке. Неопределённая эрозия исключается из
+    проверки, поскольку отсутствие величины отрезку не принадлежит и подмене
+    не подлежит.
+    """
+    traj = _run(setup)
+    for code, series in traj.agent_states.items():
+        for state in series:
+            for z in state:
+                if math.isnan(z):
+                    continue
+                assert 0.0 <= z <= 1.0, f"{code} вне отрезка"
+
+
+def test_regime_distribution_normalized(setup):
     """Распределение по режимам нормировано на каждом шаге."""
-    t = _run(TAIWAN_CRISIS)
-    for d in t.regime_dist:
-        assert abs(sum(d) - 1.0) < 1e-9
+    traj = _run(setup)
+    for dist in traj.regime_dist:
+        assert abs(sum(dist) - 1.0) < 1e-9
 
 
-def test_inertial_stays_in_confrontation():
-    """Без шоков система держится в холодной конфронтации, не срываясь."""
-    t = _run(INERTIAL, horizon=10)
-    assert t.dominant[-1] == "S2"
+def test_dominant_regime_from_known_set(setup):
+    """Господствующий режим взят из объявленного перечня."""
+    traj = _run(setup)
+    for regime in traj.dominant:
+        assert regime in ("S1", "S2", "S3")
 
 
-def test_determinism():
-    """Один сценарий, прогнанный дважды, даёт идентичные траектории."""
-    a = _run(TAIWAN_CRISIS)
-    b = _run(TAIWAN_CRISIS)
+# --- Повторяемость ------------------------------------------------------
+
+def test_run_is_deterministic(setup):
+    """
+    Два прогона на одних данных дают тождественные траектории. Случайности в
+    движке нет ни одной, отчего повторяемость обязана быть точной, а не
+    приблизительной.
+    """
+    a = _run(setup)
+    b = _run(setup)
     assert a.tension == b.tension
     assert a.dominant == b.dominant
 
 
-def test_erosion_is_ratchet():
-    """Нормативная эрозия не убывает по траектории ни у одного агента."""
-    t = _run(INERTIAL, horizon=12)
-    for c in CODES:
-        z3 = [s[2] for s in t.agent_states[c]]
-        for i in range(1, len(z3)):
-            assert z3[i] >= z3[i - 1] - 1e-9
+# --- Необратимость эрозии -----------------------------------------------
 
-
-def test_taiwan_crisis_raises_tension_above_inertial():
-    """Тайваньский кризис поднимает напряжение выше инерционного фона."""
-    base = _run(INERTIAL)
-    crisis = _run(TAIWAN_CRISIS)
-    assert max(crisis.tension[3:]) > max(base.tension[3:]) + 0.02
-
-
-def test_taiwan_crisis_breaches_collapse_threshold():
-    """В разгар кризиса напряжение пробивает порог дестабилизации 0.676."""
-    crisis = _run(TAIWAN_CRISIS)
-    assert max(crisis.tension) > 0.676
-
-
-def test_scenarios_ordered_by_collapse_mass():
+def test_erosion_never_decreases(setup):
     """
-    Итоговая масса дестабилизации упорядочена по тяжести сценария: инерционный
-    дрейф мягче ревизии, та мягче ослабления альянса, кризис тяжелее всех.
+    Нормативная эрозия по траектории не убывает ни у одного агента. Свойство
+    следует из природы величины, поскольку снятое ограничение обратно не
+    возвращается, и потому обязано выполняться при всяком наборе данных.
     """
-    s3 = {k: _run(s).regime_dist[-1][2]
-          for k, s in (("inertial", INERTIAL), ("article9", ARTICLE9_REVISION),
-                       ("alliance", ALLIANCE_WEAKENING), ("taiwan", TAIWAN_CRISIS))}
-    assert s3["inertial"] <= s3["article9"] <= s3["alliance"] <= s3["taiwan"]
-    assert s3["taiwan"] > s3["inertial"] + 0.04
+    traj = _run(setup)
+    for code, series in traj.agent_states.items():
+        z3 = [s[2] for s in series]
+        known = [(i, v) for i, v in enumerate(z3) if not math.isnan(v)]
+        for k in range(1, len(known)):
+            prev, cur = known[k - 1][1], known[k][1]
+            assert cur >= prev - 1e-9, f"{code} эрозия убыла"
 
 
-def test_article9_revision_lifts_japanese_erosion():
-    """Ревизия девятой статьи поднимает эрозию Японии выше инерционной."""
-    base = _run(INERTIAL)
-    rev = _run(ARTICLE9_REVISION)
-    base_z3 = base.agent_states["jpn"][-1][2]
-    rev_z3 = rev.agent_states["jpn"][-1][2]
-    assert rev_z3 > base_z3 + 0.1
+# --- Отсечка ------------------------------------------------------------
 
-
-def test_alliance_weakening_drops_ally_trust():
-    """Ослабление альянса роняет доверие союзников ниже инерционного."""
-    base = _run(INERTIAL)
-    weak = _run(ALLIANCE_WEAKENING)
-    for c in ("jpn", "kor", "twn"):
-        assert weak.agent_states[c][-1][1] < base.agent_states[c][-1][1]
-
-
-def test_crisis_more_likely_to_reach_collapse():
+def test_cutoff_matches_until_cutoff_year(setup):
     """
-    Тайваньский кризис накапливает больше вероятностной массы в режиме
-    дестабилизации, чем инерционный фон.
+    До года отсечки слепой прогон совпадает с полным, поскольку до отсечки оба
+    получают одни и те же наблюдения. Расхождение начинается лишь после.
     """
-    base = _run(INERTIAL)
-    crisis = _run(TAIWAN_CRISIS)
-    base_s3 = base.regime_dist[-1][2]
-    crisis_s3 = crisis.regime_dist[-1][2]
-    assert crisis_s3 > base_s3
+    full = _run(setup)
+    blind = _run(setup, cutoff=CUTOFF)
+    idx = full.years.index(CUTOFF)
+    for i in range(idx + 1):
+        assert abs(full.tension[i] - blind.tension[i]) < 1e-9
 
 
-def test_events_logged():
-    """Сработавшие шоки попадают в журнал событий с годом."""
-    from engine.agents import BASE_YEAR
-    t = _run(TAIWAN_CRISIS)
-    assert len(t.events_log) > 0
-    # Все годы журнала лежат в пределах горизонта от базового года.
-    for year, _desc in t.events_log:
-        assert year >= BASE_YEAR
-
-
-def test_scenario_registry_complete():
-    """Реестр сценариев содержит все четыре прогностических сценария."""
-    assert set(ALL_SCENARIOS) == {"inertial", "article9", "taiwan", "alliance"}
-
-
-def test_to_dict_serializable():
-    """Траектория сериализуется в простые типы."""
-    import json
-    t = _run(ARTICLE9_REVISION, horizon=5)
-    s = json.dumps(t.to_dict())
-    assert isinstance(s, str) and len(s) > 0
+def test_cutoff_diverges_after_cutoff_year(setup):
+    """
+    После отсечки слепой прогон расходится с полным. Совпадение означало бы,
+    что наблюдения за отсечкой в модель всё же поступают, то есть протекание
+    отложенного отрезка.
+    """
+    full = _run(setup)
+    blind = _run(setup, cutoff=CUTOFF)
+    idx = full.years.index(CUTOFF)
+    diffs = [abs(full.tension[i] - blind.tension[i])
+             for i in range(idx + 1, len(full.years))]
+    assert max(diffs) > 1e-6, "отложенный отрезок не является слепым"
